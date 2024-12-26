@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button onclick="alert('버튼클릭!!')">인라인</button><br>
+  <button onclick="display()">함수호출</button><br>
+  <button id="callback">콜백함수</button><br>
+  <button id="arrow">화살표함수</button><br>
+
+  <script>
+    function display() {
+      alert("버튼을 클릭했습니다!");
+    }
+
+    const btn = document.querySelector('#callback');
+    btn.addEventListener('click', display);
+    
+    const btn1 = document.querySelector('#arrow');
+    // btn1.addEventListener('click', function display() {
+    //   alert("1. 버튼을 클릭했습니다!");
+    // });
+    // btn1.addEventListener('click', () => {
+    //   alert("2. 버튼을 클릭했습니다!");
+    // });
+    // btn1.addEventListener('click', () => alert("3. 버튼을 클릭했습니다!") );
+
+    btn1.addEventListener('click', () => {
+      document.write('실행문1<br>');
+      document.write('실행문2<br>');
+      document.write('실행문3<br>');
+      document.write('실행문4<br>');
+    });
+
+
+  </script>
+</body>
+</html>

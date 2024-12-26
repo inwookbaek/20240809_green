@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<button class="btnGenerateJWT">JWT 문자열 생성</button>
+	
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script>
+		document.querySelector(".btnGenerateJWT").addEventListener("click", () => {
+			
+			const data = {mid: "apiuser10", mpw:"12345"}
+			
+			// post방식으로 data(mid/mpw)를 JSON문자열로 전송
+			axios.post("http://localhost:8090/generateToken", data)
+			     .then(res => {
+			    	 const accessToken = res.data.accessToken
+			    	 const refreshToken = res.data.refreshToken
+			    	 
+			    	 localStorage.setItem("accessToken", accessToken)
+			    	 localStorage.setItem("refreshToken", refreshToken)
+			     })
+		}, false)
+	
+	</script>	
+	
+</body>
+</html>

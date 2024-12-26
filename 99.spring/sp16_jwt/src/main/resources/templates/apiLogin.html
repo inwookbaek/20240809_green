@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<button class="btn1">generateToken</button>
+	
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+	
+	    document.querySelector(".btn1").addEventListener("click",()=> {
+	
+	        const data = {mid:"apiuser10", mpw:"1111"}
+	        axios.post("http://localhost:8090/generateToken", data).then(res => {
+	        	
+	        	console.log('token --> ' + res.data.accessToken);
+	            const accessToken = res.data.accessToken
+	            const refreshToken = res.data.refreshToken
+
+	            localStorage.setItem("accessToken", accessToken)
+	            localStorage.setItem("refreshToken", refreshToken)
+
+	        })
+	
+	    }, false)
+	</script>
+</body>
+</html>

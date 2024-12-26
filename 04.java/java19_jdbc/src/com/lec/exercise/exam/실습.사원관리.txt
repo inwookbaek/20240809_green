@@ -1,0 +1,13 @@
+실습. mysql에 scott의 emp/dept 동일하게 테이블 생성
+1. reverse engineering 테이블생성 
+2. 하드코딩
+3. InsertMain.java
+   SelectMain.java
+   UpdateMain.java
+   DeleteMain.java
+   
+mysql 접속정보
+1. mysql jdbc를 add build path
+2. url : jdbc:mysql://localhost/board
+   usr : root
+   pwd : 12345

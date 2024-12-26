@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /*
+      BOM(Browser Object Model, 브라우저객체모델)
+
+      BOM은 웹브라우저와 관련된 객체의 집합객체를 의미한다.
+      BOM은 window > screen, locaion, navigator, history, document가 있다.
+      간단하게 문서객체모델(DOM, Document Object Model)이라 통칭한다.
+    */
+    // window.alert('window.alert');
+    // alert('alert');
+
+    document.write(typeof window + " = " + window + '<br>');
+
+    window.onclick = function() {}
+    for(let key in window) {
+      document.write(`${key} = ${window[key]} <br>`);
+    }
+    /*
+      window객체는 브라우저 기반의 모델에서 최상위 객체이다.
+      alert, prompt등은 window객체의 메서드이다.
+
+      window객체의 메서드
+
+      1. open : 새로운 윈도우 객체를 생성
+        ... url, width, height, child, 
+        ... location, menubar, resizable, status, toolbar -> yes,no,1,0
+      2. moveBy(x, y) : window객체를 상대위치로 이동
+      3. moveTo(x, y) : window객체를 절대위치로 이동
+      4. resizeBy(x,y): 위도우크기를 상대크기로 조정
+      5. resizeTo(x,y): 위도우크기를 절대크기로 조정
+      6. scrollBy(x,y): 스크롤바를 상대크기로 조정
+      7. scrollTo(x,y): 스크롤바를 절대크기로 조정
+      8. focus()      : 윈도우에 초점을 이동
+      8. blur()       : 윈도우에 초점을 제거
+     10. close()      : 윈도우 창을 닫기
+    */
+    window.open('http://www.naver.com', 'chid', 'width=200 height=200');
+    let childWindow = window.open('', '', 'width=200 height=200');
+    childWindow.moveTo(0,0);
+    childWindow.document.write('<h3>window.open() 메서드!!</h3>');
+
+    // 실습. childWindow를 1초마다 x,y좌표를 10씩 이동하기
+    // setInterval함수를 이용
+    setInterval(function() {
+      childWindow.moveBy(10,10);
+    }, 1000)
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

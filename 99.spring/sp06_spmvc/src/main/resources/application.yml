@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: sp06_spmvc
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+      
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/todo
+    username: root
+    password: 12345
+    
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mappers/*.xml
+  type-aliases-package: com.lec.spmvc
+
+server:
+  port: 8090  
+

@@ -1,0 +1,82 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/b33442fb56.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>buttons</h1>
+    <button type="button" class="btn">Basic Button</button>
+    <button type="button" class="btn btn-default">Default Button</button>
+    <button type="button" class="btn btn-primary">Primary Button</button>
+    <button type="button" class="btn btn-success">Success Button</button>
+    <button type="button" class="btn btn-info">info Button</button>
+    <button type="button" class="btn btn-warning">warning Button</button>
+    <button type="button" class="btn btn-danger">danger Button</button>
+    <button type="button" class="btn btn-light">light Button</button>
+    <button type="button" class="btn btn-secondary">secondary Button</button>
+    <button type="button" class="btn btn-link">Link Button</button>
+    <a href="http://www.naver.com" class="btn btn-primary">Anchor(Button)</a>
+    
+    <h3>Button Size</h3>
+    <button type="button" class="btn btn-primary btn-lg">Large Button</button>
+    <button type="button" class="btn btn-primary btn-md">Medium Button</button>
+    <button type="button" class="btn btn-primary btn-sm">Small Button</button>
+    <button type="button" class="btn btn-primary btn-xl">X Large Button</button>
+    <button type="button" class="btn btn-primary btn-xxl">2X Large Button</button>
+    <button type="button" class="btn btn-outline-success btn-sm">Outline Button</button>
+    
+    <h3>Button - active, disable</h3>
+    <button type="button" class="btn btn-outline-success btn-sm active">Active Button</button>
+    <button type="button" class="btn btn-outline-success btn-sm disabled">Disabled Button</button>
+    
+    <h3>Button Groups</h3>
+    <div class="btn-group">
+      <button type="button" class="btn btn-success">File</button>
+      <button type="button" class="btn btn-success">Print</button>
+      <div class="btn-group">
+        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown">Save</button>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item">Save as...</a>
+          <a href="#" class="dropdown-item">Save All</a>
+        </div>
+      </div>
+    </div>
+    
+    <h1>Glyphicon (http://www.glyphicons.com)</h1>
+    <p>Envelope Icon : <span class="glyphicon glyphicon-glass"></span></p>
+    
+    <h1>Badges</h1>
+    <a href="#">글제목.... <span class="badge bg-primary">5</span></a>
+    <h5>Heading...<span class="badge bg-success">15</span></h5>
+    
+    <h3>Button with Badges</h3>
+    <button type="button" class="btn btn-success">클릭건수 <span class="badge bg-danger">5</span></button>
+
+		<button type="button" class="btn btn-primary position-relative">
+			메일함
+			<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+				99+
+				<span class="visually-hidden">읽지않은 메시지</span>
+			</span>
+		</button>
+
+    <h1>Progress Bar</h1>
+		<div class="progress progress-bar-info progress-bar-striped active">
+			<div class="progress-bar" style="width:70%" 
+				aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+		</div>
+
+    <h3>Stacked Progress Bar</h3>
+    <div class="progress">
+      <div class="progress-bar bg-success" style="width:40%">Free Spaces</div>
+      <div class="progress-bar bg-waring" style="width:20%">Movies</div>
+      <div class="progress-bar bg-danger" style="width:20%">Music</div>
+    </div>
+  </div>
+</body>
+</html>

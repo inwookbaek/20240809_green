@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    window.onload = () => {
+      // 1. 속성을 직접 설정
+      let img1 = document.createElement('img');
+      img1.src = './images/1.jpg';
+      img1.width = 200;
+      img1.height = 150;
+      document.body.appendChild(img1);
+      
+      // 2. setAttribute를 이용
+      let img2 = document.createElement('img');
+      img2.setAttribute('src', './images/1.jpg');
+      img2.setAttribute('width', 200);
+      img2.setAttribute('height', 150);
+      document.body.appendChild(img2);
+      
+    }
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

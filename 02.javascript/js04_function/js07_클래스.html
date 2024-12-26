@@ -1,0 +1,82 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /*
+      생성자함수 vs class
+
+      생성자함수는 JavaScript에서 객체를 생성하는 전통적인 방법이다.
+      new키워드를 사용하여 객체를 생성하고 함수가 호출될 때 this는
+      새롭게 생성된 객체 즉, 자기자신을 가리킨다.
+
+      클래스는 ES6(ECMA2015)에서 도입된 문법으로 객체지향프로그래밍을
+      더 쉽게 구현할 수 있도록 지원한다. 클래스는 생성자함수와 마찬가
+      지로 new키워드를 사용하여 객체를 생성한다.
+    */
+    // 1. 생성자함수
+    function Person(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+    Person.prototype.nation = '대한민국';
+    Person.prototype.sayHello = function() {
+      console.log(`안녕하세요? 내 이름은 ${this.name}이고 ${this.age}살 입니다!`)
+    }
+
+    let kim = new Person('김민재', 24);
+    let lee = new Person('이강인', 23);
+    kim.sayHello();
+    lee.sayHello();
+
+    // 2. class
+    class Person1 {
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+
+      // 인스턴스멤버
+      nation = '대한민국';
+      sayHello() {
+        return `안녕하세요? 내 이름은 ${this.name}이고 ${this.age}살 입니다!`;
+      }
+
+      // 클래스멤버
+      static addr = "서울";
+      static greet() {
+        return "안녕하세요?"
+      }
+    }
+
+    let hong = new Person1('홍길동', 1000);
+    console.log(hong.nation);
+    console.log(hong.sayHello());
+
+    // 클래스멤버 즉, static으로 선언된 속성은 객체로 접근할 수 없고
+    // 클래스이름으로만 접근 가능하다.
+    console.log(Person1.addr);
+    console.log(Person1.greet());
+    
+    /*
+      생성자함수는 ES6이전의 JavaScript에서 사용되었구 ES6이후에 
+      클래스가 도입되면서 생성자함수수대신 클래스를 사용하는 것이
+      일반적이다.
+
+      생성자함수는 이전에 작성된 코드나 라이브러리와 호환성을 위해 
+      사용된다.
+
+      클래스의 장점은 가독성이 좋고 OOP에 맞게 상속, 정적메서드등
+      객체지향언어의 패턴을 더 쉽게 구현할 수 있다.
+
+      결론적으로 새로운 JavaScript코드를 작성할 때 클래스를 사용하는
+      것을 더 권장을 한다. 하지만 기존코드나 레거시환경에서는 생성자
+      함수를 사용해야 한다.
+    */
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /*
+      1. 요소노드만들기
+        document.createElelect("p")명령은 p tag만 만들고
+        안에 들어갈 텍스트노드는 별로로 생성한 후에 p태그
+        에 자식요소로 텍스트노드를 추가해야 한다.
+      
+      2. 텍스트노드만들기
+        document.createTextNode(텍스트)의 명령으로 생성한다.
+        텍스트속성을 갖는 태그에만 추가할 수 있다.
+        예를 들어 h1태그에는 textNode를 자식요소로 추가할 수
+        있지만 inpurt태그는 텍스트속성이 없기 때문에 추가할
+        수 없다.
+
+      3. 자식노드연결하기
+        부모노드.appendChild(자식노드)명령으로 부모노드에 자
+        식노드를 추가할 수 있다. 
+
+        documnet는 html객체를 의미하기 때문에 body태그에 특
+        정노드를 추가하고자 할 경우 document.body.appendChild
+        (자식노드)형태로 추가할 수 있다.
+
+    */
+  </script>
+  <style>
+    #container {}
+    h1, h2, button, p {}
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>상품설명</h1>
+    <h2>HTML, CSS, JavaScript 공부하기</h2>
+    <p>일주일이면 웹기본지식을 완성할 수 있습니다.</p>
+    <p>기초부터 활용까지 완전정복하기</p>
+    <button id="order">도서주문</button>
+  </div>
+  <hr>
+  <div id="orderInfo"></div>
+  <script src="./js/createNode.js"></script>
+</body>
+</html>

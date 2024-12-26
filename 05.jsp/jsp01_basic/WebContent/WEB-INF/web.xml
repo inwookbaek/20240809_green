@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>jsp01_basic</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  
+  <context-param>
+  	<description>사용자아이디</description>
+  	<param-name>id</param-name>
+  	<param-value>hong</param-value>
+  </context-param>
+  
+  <context-param>
+  	<description>사용자비밀번호</description>
+  	<param-name>pw</param-name>
+  	<param-value>12345</param-value>
+  </context-param>
+  
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/jsp05_error/error/error404.jsp</location>
+  </error-page>
+  
+  <error-page>
+  	<error-code>500</error-code>
+  	<location>/jsp05_error/error/error500.jsp</location>
+  </error-page>
+  
+  <error-page>
+  	<exception-type>java.lang.NullPointerException</exception-type>
+  	<location>/jsp05_error/error/nullPointerError.jsp</location>
+  </error-page>
+</web-app>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

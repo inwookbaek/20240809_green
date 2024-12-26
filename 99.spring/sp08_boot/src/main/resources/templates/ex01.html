@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h4>[[${names}]]</h4>
+	<hr />
+	<h4 th:text="${names}"></h4>
+	<hr />
+	<h3>반복문</h3>
+	<ul>
+		<li th:each="name:${names}" th:text="${name}"></li>
+	</ul>
+	<ul>
+		<th:block th:each="name:${names}">
+			<li>[[${name}]]</li>
+		</th:block>
+	</ul>
+	<ul>
+		<li th:each="name,status:${names}">
+			[[${status.index}]] -- [[${name}]]
+		</li>
+	</ul>
+	
+	<h3>조건문</h3>
+	<h5>th:if / th:unless</h5>
+	<ul>
+	    <li th:each="name,status:${names}">
+	        <span th:if="${status.odd}"> ODD -- [[${name}]]</span>
+	        <span th:unless="${status.odd}"> EVEN -- [[${name}]]</span>
+	    </li>
+	</ul>	
+	<h5>?연산자</h5>
+	<ul>
+	    <li th:each="name,status:${names}">
+	        <span th:text="${status.odd} ? 'ODD -- ' + ${name} : 'EVEN -- ' + ${name}"></span>
+	    </li>
+	</ul>	
+	<h5>th:switch</h5>
+	<ul>
+	    <li th:each="name,status:${names}">
+	        <th:block th:switch="${status.index % 3}">
+	            <span th:case="0">0</span>
+	            <span th:case="1">1</span>
+	            <span th:case="2">2</span>
+	        </th:block>
+	    </li>
+	</ul>	
+	
+	<h3>th:href</h3>	
+	<a th:href="@{/hello(types=${ {'AA','BB','CC'} }, age= 16)}">Go to /hello</a>
+	<a th:href="@{/hello(name='한글 처리', age= 16)}">Go to /hello</a>
+	<a th:href="@{/hello(name='AAA', age= 16)}">Go to /hello</a>
+	
+</body>
+</html>

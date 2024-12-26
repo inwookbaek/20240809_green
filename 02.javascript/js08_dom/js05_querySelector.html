@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    // 1. querySelector
+    window.onload = () => {
+      let header1 = document.querySelector('#header-1');
+      let header2 = document.querySelector('#header-2');
+      
+      header1.innerHTML = "querySelector - 1";
+      header2.innerHTML = "querySelector - 2";
+    }
+    
+    // 2. querySelectorAll(태그/class) - 배열형태, 
+    // getElementsByTagName / getElementsByClassName 과 동일
+    window.onload = () => {
+      let headers = document.querySelectorAll('h3');
+      for(let i in headers) {
+        headers[i].innerHTML = `querySelectorAll - ${i}`;
+      }
+    }    
+    
+    // 3. 동적으로 객체를 변경
+    // header-3를 선택해서 style적용
+    // header-3속성 border(2px solid blue), color(red), background-color(orange)
+    window.onload = () => {
+      let header3 = document.querySelector('#header-3');
+      header3.style.border = '2px solid blue';
+      header3.style.color = 'red';
+      header3.style.backgroundColor = 'orange';
+    }    
+    
+    // 4. 문서객체 삭제하기
+    // removeChild()
+    window.onload = () => {
+      let header4 = document.querySelector('#header-4');
+      document.body.removeChild(header4);
+    }
+  </script>
+</head>
+<body>
+  <!-- h1#header-${Header}*4 -->
+  <h3 id="header-1" 
+    style="border:2px solid red; color: green; background-color: blanchedalmond;">Header</h3>
+  <h3 id="header-2">Header</h3>
+  <h3 id="header-3">Header</h3>
+  <h3 id="header-4">Header</h3>
+</body>
+</html>

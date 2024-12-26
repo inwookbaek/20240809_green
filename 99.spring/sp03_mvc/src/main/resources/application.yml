@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: jsp03_mvc
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
+server:
+  port: 8089

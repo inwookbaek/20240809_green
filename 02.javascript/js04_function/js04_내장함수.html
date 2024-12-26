@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /*
+      내장함수(built-in function) : JavaScript에서 기본적으로 제공(내장)되는 함수
+
+      1. Object, Number, String, Array, Date, Math, JSON ...
+      2. 숫자확인함수
+        isNaN() : 변수(데이터)가 NaN인지 여부를 리턴
+        isFinite() : 변수(데이터)가 무한값인지 여부
+          ... 예를 들어 1 / 0의 연산결과는 대부분 프로그램언어에서는 
+              에러가 발생되어 프로그램이 중단되지만 JavaScript에서는
+              infinity라는 값이 저장된다.
+      3. Timer함수 : 특정시간에 특정함수(콜백함수)를 실행할 수 있게 하는 함수
+        1) setTimeout(콜백함수, ms) : 지정된 시간(ms)에 콜백함수를 1번만 실행
+        2) setInterval(콜백함수, ms): 지정된 시간(ms)마다 콜백함수를 실행
+        3) clearInterval(id) : setInterval에 정의된 콜백함수를 중지
+        4) clearTimeout(id) : setTimeout에 정의된 콜백함수를 중지
+    */
+    // 1초마다 콜백함수를 실행하기
+    // let intervalID = setInterval(function() {
+    //   document.write(`<h3>${new Date()}</h3>`)
+    // }, 1000);  // 1000ms = 1초
+
+    // 5초후에 intervalId를 중지
+    // setTimeout(function() {
+    //   clearInterval(intervalID)
+    // }, 5000);
+
+
+    document.write(`0으로 나눌 때의 결과 = ${1/0}<br>`);
+    document.write(`0으로 나눌 때의 결과 = ${isFinite(1/0)}`);
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: jsp06_spmvc
+  datasource:
+    url: jdbc:mysql://localhost:3306/todo
+    username: root
+    password: 12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true 
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+server:
+  port: 8090

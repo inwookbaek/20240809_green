@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    // 1. 선언함수
+    // function 함수() { document.write('<h3>1st 함수 호출!!</h3>')}
+    // function 함수() { document.write('<h3>2nd 함수 호출!!</h3>')}
+    // 함수();
+    
+    // 2. 익명함수
+    // var 함수 = function() { document.write('<h3>3rd 함수 호출!!</h3>')}
+    // var 함수 = function() { document.write('<h3>4th 함수 호출!!</h3>')}
+    // 함수();
+    
+    // 3. 익명함수 호이스팅(x)
+    // 함수(); // 에러 발생
+    // var 함수 = function() { document.write('<h3>5th 함수 호출!!</h3>')}
+    // var 함수 = function() { document.write('<h3>6th 함수 호출!!</h3>')}
+    
+    // 4. 선언함수 호이스팅(o)
+    함수(); 
+    function 함수() { document.write('<h3>7th 함수 호출!!</h3>')}
+    function 함수() { document.write('<h3>8th 함수 호출!!</h3>')}
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
