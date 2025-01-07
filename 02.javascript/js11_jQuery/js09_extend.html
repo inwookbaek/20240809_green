@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    // extend함수 : 객체확장
+    $(() => {
+      let obj = {};
+      obj.name = '홍길동';
+      obj.age = 1000;
+      obj.addr = '조선 한양';
+      console.log(obj);
+      
+      // extend
+      let obj1 = {}
+      $.extend(obj1, {name:'홍길순', age:999, addr:'조선 평양'});
+      console.log(obj1);
+    })
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

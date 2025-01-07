@@ -1,0 +1,115 @@
+1. 부모 클래스와 자식 클래스의 메소드 동작
+
+문제: 
+Shape라는 추상 클래스를 만들고, 이를 상속받는 Circle과 Rectangle 클래스를 구현
+각각의 클래스는 calculateArea() 메소드를 구현하여, 해당 도형의 면적을 계산하는 기능을 
+포함해야 한다.
+
+Circle의 면적은 Math.PI * radius * radius로 계산.
+Rectangle의 면적은 width * height로 계산.
+
+조건: 
+메인 메소드에서 Shape 타입 배열에 Circle과 Rectangle 객체를 저장하고, 각각의 도형의 
+면적을 출력한다.
+
+
+2. 상속과 형변환을 활용한 동물 클래스
+
+문제:
+Animal이라는 상위 클래스를 만들고, 이를 상속받는 Dog와 Cat 클래스를 구현한다. 
+두 클래스 모두 makeSound() 메소드를 구현하여 각각 Bark!와 Meow!를 출력하게 만드세요.
+Animal 타입 배열에 여러 Dog와 Cat 객체를 담은 후, 각 객체의 소리를 출력한다.
+배열 순회 중, instanceof 연산자를 사용하여 Dog 객체인 경우 추가로 "This is a dog."이라는 
+메시지를 출력한다.
+
+
+3. 업캐스팅과 다운캐스팅의 활용
+
+문제: 
+Vehicle 클래스를 만들고, 이를 상속하는 Car와 Bike 클래스를 만드세요. 
+Vehicle 클래스에는 move()라는 추상 메소드가 있어, Car는 "Car is moving"을, Bike는 "Bike is moving"을 출력한다.
+
+조건:
+메인 메소드에서 Vehicle 타입의 객체로 Car 객체를 생성한 후, 이를 Car로 다운캐스팅하고 
+move()를 호출한다.
+
+
+4. 추상 클래스와 인터페이스를 활용한 직원 관리
+
+문제: 
+Employee라는 추상 클래스를 만들고, calculateSalary()라는 추상 메소드를 정의한다. 
+이 클래스를 상속받는 SalariedEmployee와 HourlyEmployee 클래스를 만들고 각각의 급여를 계산한다.
+SalariedEmployee는 연봉을 받아 12로 나눈 월급을 반환해야 한다.
+HourlyEmployee는 시간당 급여와 일한 시간을 입력받아 급여를 계산한다.
+
+조건:
+두 종류의 직원을 배열에 저장하고, 각각의 급여를 출력한다.
+
+
+5. 상속 관계에서 형변환을 통한 확장
+
+문제: 
+Person 클래스를 만들고 이를 상속하는 Student와 Teacher 클래스를 구현한다. 
+Person 클래스에는 이름과 나이를 저장하고, Student 클래스에는 추가적으로 학번, 
+Teacher 클래스에는 담당 과목을 저장한다.
+
+조건:
+Person 배열에 Student와 Teacher 객체를 저장하고, 형변환을 통해 학번과 과목을 출력한다.
+
+
+6. 관리자와 직원 관계를 활용한 상속 문제
+
+문제: 
+Employee 클래스를 상속받는 Manager 클래스를 구현한다. 
+Manager 클래스는 추가적으로 자신의 팀원들을 관리할 수 있어야 하며, 
+addTeamMember(Employee e) 메소드를 통해 팀원을 추가할 수 있습니다.
+
+조건:
+메인 메소드에서 Manager 객체를 생성하고, 팀에 몇 명의 Employee 객체를 추가한 후, 
+팀원들의 이름을 출력한다.
+
+
+7. 상속과 형변환을 통한 보너스 계산
+문제: 
+Employee 클래스에는 기본적으로 급여를 계산하는 calculateSalary() 메소드가 있다. 
+이를 상속받은 BonusEmployee 클래스는 보너스도 계산하여 급여에 추가해야 한다.
+
+조건:
+Employee 배열에 BonusEmployee 객체를 포함한 여러 직원들을 추가하고, 형변환을 통해 보너스가 포함된 급여를 계산한다.
+
+
+8. 상속을 이용한 은행 계좌 관리 시스템
+문제: 
+Account라는 추상 클래스를 만들고, 이를 상속받는 SavingAccount와 CheckingAccount 클래스를 
+구현한다. 각 클래스는 각각의 방식으로 계좌 잔액을 관리한다.
+
+SavingAccount는 연 이자를 적용하여 잔액을 계산한다.
+CheckingAccount는 수수료를 적용하여 잔액을 계산한다.
+
+조건:
+
+두 종류의 계좌를 배열에 저장하고, 잔액을 계산하여 출력한다.
+
+
+9. 상속과 형변환을 통한 자동차 대리점 관리
+
+문제: 
+Vehicle 클래스를 상속받는 Sedan, Truck, SUV 클래스를 구현한다. 
+각 클래스는 차량의 종류와 속성을 다르게 가져야 하며, 이를 형변환을 통해 차량의 
+세부 정보를 출력한다.
+
+조건:
+Vehicle 배열에 여러 종류의 차량을 저장하고, 형변환을 통해 각 차량의 고유 속성을 출력한다.
+
+
+10. 다중 상속 문제 해결
+
+문제: 
+Person 클래스와 Worker 인터페이스를 만들어 각각의 메소드를 정의하고, 이를 동시에 
+구현하는 Engineer 클래스를 만드세요.
+
+조건:
+Person 클래스에는 getName() 메소드를 정의하고, Worker 인터페이스에는 doWork() 메소드를 
+정의한다.
+Engineer 클래스에서 두 메소드를 모두 구현한 후, 메인 메소드에서 해당 객체의 메소드를 
+호출한다.

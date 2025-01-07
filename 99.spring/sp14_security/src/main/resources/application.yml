@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: sp14_security
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring
+    username: root
+    password: 12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    genrate-ddl: false      
+    properties:
+      hibernate:
+        format_sql: true 
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  # Thymeleaf Cache Setting
+  thymeleaf:
+    cache: false
+  servlet:
+    multipart:
+      enabled: true
+      location: d:/lec/00.share/98.temp/upload/
+      max-request-size: 30MB
+      max-file-size: 10MB        
+
+server:
+  port: 8090
+  servlet:
+    encoding:
+      force-response: true
+      charset: utf-8
+
+# Logging Setting
+logging:
+  level:
+    org:
+      hibernate: info
+    springframework:
+      security: trace
+  com:
+    lec: debug
+
+# file upload/download
+path:
+  upload: d:/lec/00.share/98.temp/upload/
+  download: d:/lec/00.share/98.temp/download/
+
+com:
+  lec:
+    upload:
+      path: d:/lec/00.share/98.temp/upload/	

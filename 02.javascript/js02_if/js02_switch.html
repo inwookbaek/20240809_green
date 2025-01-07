@@ -1,0 +1,80 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    let num = 2;
+    if(num%2==0) {
+      console.log(`${num}은 짝수 입니다!`)
+    } else {
+      console.log(`${num}은 홀수 입니다!`)
+    }
+    if (num%2==0) console.log(`${num}은 짝수 입니다!`)
+    else console.log(`${num}은 홀수 입니다!`)
+  
+  // switch
+  // num %= 2 -> 0 or 1이거나 -> num = num % 2
+  num = 'aaa';
+  switch(num %= 2) {
+    case 0:
+      console.log(`짝수 입니다!`)
+      break;
+    case 1:
+      console.log(`홀수 입니다!`)
+      break
+    default:
+      console.log(`${num}은 숫자가 아닙니다!`)
+    }
+
+    // 실습. 점수(score)를 전달 받아서 해당 점수가
+    // A+(95이상), A(09이상), B+(85이상) .... F까지
+    // if문과 switch문을 사용하여 작성
+    let score = 55;
+
+    if(score>90) {
+      if(score>=95) console.log("A+학점입니다!")
+      else console.log("A학점입니다!")
+    } else if(score>=80) {
+        if(score>=85) console.log("B+학점입니다!")
+        else console.log("B학점입니다!")
+    } else if(score>=70) {
+        if(score>=75) console.log("C+학점입니다!")
+        else console.log("C학점입니다!")
+    } else if(score>=60) {
+      console.log("D학점입니다!")
+    } else {
+      console.log("F학점입니다!!")
+    }
+
+    switch(true) {
+      case score>=95:
+        console.log("A+학점입니다!")
+        break;
+      case score>=90:
+        console.log("A학점입니다!")
+        break;
+      case score>=85:
+        console.log("B+학점입니다!")
+        break;
+      case score>=80:
+        console.log("B학점입니다!")
+        break;
+      case score>=75:
+        console.log("C+학점입니다!")
+        break;
+      case score>=70:
+        console.log("C학점입니다!")
+        break;
+      case score>=60:
+        console.log("D학점입니다!")
+        break;
+        default:
+        console.log("F학점입니다!")
+    }
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

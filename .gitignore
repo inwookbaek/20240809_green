@@ -1,0 +1,15 @@
+.vscode/
+.metadata/
+.settings/
+.gradle/
+gradle/
+.mvn/
+target/
+build/
+bin/
+.classpath
+.project
+servers/
+00.share/
+nginx-1.27.3/
+gradle-8.11.1/

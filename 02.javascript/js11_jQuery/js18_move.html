@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    // 실습. 1초마다 이미지 움직이기
+    // hint) setInterval(), first()
+    $(() => {
+      $('img').css({'width': 300, 'height': 200});
+
+      setInterval(() => {
+        $('img').first().appendTo('body');
+      }, 1000);
+    })
+  </script>
+</head>
+<body>
+  <img src="./images/bp01.jpg" alt="">
+  <img src="./images/bp02.jpg" alt="">
+  <img src="./images/bp03.jpg" alt="">
+</body>
+</html>

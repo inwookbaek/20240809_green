@@ -1,0 +1,35 @@
+﻿실습. mysql에 회원관리애플리케이션 
+
+1) create table member
+
+member_id   / auto increment
+member_pw
+member_name
+member_age
+member_gender
+member_email
+
+메뉴
+1. 신규회원등록
+2. 전체회원조회
+3. 회원상세조회
+4. 회원정보수정
+5. 회원정보삭제
+6. 이름으로 검색
+7. email로 검색
+0. 종료
+
+
+1. Member 테이블 생성
+	
+	2. jdbc.properties 생성
+	
+		1) DB접속정보
+		
+		2) sql정보
+		
+	3. MemberApp 프로그램
+		 메인 클래스 / Model 클래스 / DB접속정보를 공통으로 사용하기 위한 클래스
+		 Interface 클래스 / 구현 클래스 / DB접속 클래스(Singleton클래스)
+		 회원관리메뉴 클래스
+

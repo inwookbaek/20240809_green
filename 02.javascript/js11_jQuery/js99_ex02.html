@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bulletin Board</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f4f4f4; }
+        button { margin: 0 5px; }
+    </style>
+</head>
+<body>
+
+<h1>게시판</h1>
+
+<form id="entryForm">
+    <input type="text" id="title" placeholder="글제목">
+    <input type="text" id="description" placeholder="상세내용">
+    <button type="submit">게시글쓰기</button>
+</form>
+
+<table id="bulletinTable" style="margin-top: 20px;">
+    <thead>
+        <tr>
+            <th>글제목</th>
+            <th>글 상세내용</th>
+            <th>처리방법</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+</table>
+
+<script>
+    $(() => {
+        // 1. Add
+        $('#entryForm').on('submit', function(e) {
+            e.preventDefault();
+
+            const title = $('#title').val().trim();
+            const description = $('#description').val().trim();
+
+            if(title === '' || description === '') {
+                alert('글 제목과 상세내용은 반드시 입력해야 합니다!');
+                return;
+            }
+
+            const newRow = `
+                <tr>
+                    <td class="title">${title}</td>    
+                    <td class="description">${description}</td>    
+                    <td>
+                        <button class="editBtn">수정</button>
+                        <button class="deleteBtn">삭제</button>
+                    </td>  
+                </tr>`;
+            $('#bulletinTable tbody').append(newRow);
+            $('#entryForm')[0].reset();
+        })
+
+        // 2. delete
+        $('#bulletinTable').on('click', '.deleteBtn', function() {
+            // closest = parent
+            $(this).closest('tr').remove();
+        });
+
+        // 3. edit
+        $('#bulletinTable').on('click', '.editBtn', function() {
+            const row = $(this).closest('tr');
+            const title = row.find('.title').text();
+            const description = row.find('.description').text();
+            console.log(`${title}, ${description}`);
+
+            $('#title').val(title);
+            $('#description').val(description);
+
+            $('#entryForm').off('submit').on('submit', function(e) {
+                e.preventDefault();
+
+                const title = $('#title').val().trim();
+                const description = $('#description').val().trim();
+
+                if(title === '' || description === '') {
+                    alert('글 제목과 상세내용은 반드시 입력해야 합니다!');
+                    return;
+                }
+
+                const newRow = `
+                    <tr>
+                        <td class="title">${title}</td>    
+                        <td class="description">${description}</td>    
+                        <td>
+                            <button class="editBtn">수정</button>
+                            <button class="deleteBtn">삭제</button>
+                        </td>  
+                    </tr>`;
+
+                $('#bulletinTable tbody').append(newRow);
+                $('#entryForm')[0].reset();                    
+            })
+
+        });        
+    })
+</script>
+
+</body>
+</html>

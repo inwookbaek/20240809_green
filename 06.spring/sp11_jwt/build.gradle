@@ -1,0 +1,123 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.5'
+    id 'io.spring.dependency-management' version '1.1.6'
+    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
+}
+
+group = 'com.lec'
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = '17'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    querydsl.extendsFrom compileClasspath
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+	
+	// p707 - 타임리프에서 인증정보 활용, 스프링시큐리티에서 사용하기 위한 라이브러리
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // QueryDSL
+    implementation "com.querydsl:querydsl-jpa:5.1.0:jakarta"
+    annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+
+    // DTO와 Entity간의 변환처리를 간단히 처리하기 위한 의존주입
+    implementation 'org.modelmapper:modelmapper:3.1.1'
+
+    // Swagger
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+
+    // Gson for JSON parsing
+    implementation 'com.google.code.gson:gson'
+
+    // JWT dependencies
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+def querydslDir = "$buildDir/generated/querydsl"
+
+tasks.named('clean') {
+    doFirst {
+        delete querydslDir
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs.add("-parameters")
+}
+
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+
+//compileQuerydsl.doFirst {
+//    if (file(querydslDir).exists()) {
+//        delete(file(querydslDir))
+//    }
+//}
+
+//sourceSets {5.1.0과 
+//    main.java.srcDir querydslDir
+//}
+
+clean {
+    delete fileTree(dir: querydslDir)
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', querydslDir]
+        }
+    }
+}
+
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
+
+jar {
+    enabled = false
+}
+
+bootJar {
+    archiveFileName = 'app.jar'
+    launchScript()
+}

@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    // String객체는 생성하는 방법은 1) 리터럴로 정의하는 방법, 2) 생성자함수
+    // 를 이용하는 방법이 있다.
+    
+    // 1. String객체 생성하기
+    let str1 = "Hello World!";
+    let str2 = new String("Hello World!");
+
+    // 2. 속성과 메서드
+    document.write(`<h3>${str1}</h3><hr>`)
+    document.write(`1. ${str1} 문자열의 길이 = ${str1.length}<br>`)
+    document.write(`2. str1[0] = ${str1[0]}<br>`)
+    document.write(`3. charAt(6) = ${str1.charAt(6)}<br>`)
+    document.write(`4. str1.concat(str2) = ${str1.concat(str2)}<br>`)
+    document.write(`5. str1.indexOf('W') = ${str1.indexOf('W')}<br>`)
+    document.write(`6. str1.indexOf('o') = ${str1.indexOf('o')}<br>`)
+    document.write(`7. str1.indexOf('o', 6) = ${str1.indexOf('o', 6)}<br>`)
+    document.write(`8. str1.lastIndexOf('o') = ${str1.lastIndexOf('o', 6)}<br>`)
+    document.write(`9. str1.replace('o', 'x') = ${str1.replace('o', 'x')}<br>`)
+    document.write(`${str1}<br>`);
+    str1 = str1.replace('o', 'x');
+    document.write(`${str1}<br>`);
+    
+    // indexOf vs search
+    // 1. indexOf와 search는 찾는 문자열이 없을 경우 -1을 리턴
+    // 2. indexOf는 정규식(Regular Expression)을 허용하지 않는다.
+    // 3. indexOf는 검색시작위치를 사용할수 있지만 search는 사용불가
+    document.write(`10. str1.search('1x') = ${str1.search('1x')}<br>`)
+    document.write(`11. str1.slice(1, 5) = ${str1.slice(1, 5)}<br>`)
+    
+    let names = "홍길동,손흥민,이강인,김민재";
+    let arr = names.split(','); // 기준문자로 분리후 배열로 저장
+    document.write(`12. names.split(',') = ${names.split(',')} / ${arr.length}<br>`)
+    for(let i in arr) {
+      document.write(`${arr[i]}/`)
+    }
+    document.write('<br>');
+    
+    // substr(start, count)
+    // substring(start, end-1)
+    // substring(start) 
+    document.write(`13. str1.substr(1, 3) = ${str1.substr(1, 3)}<br>`)
+    document.write(`14. str1.substring(1, 3) = ${str1.substring(1, 3)}<br>`)
+    document.write(`15. str1.substring(1) = ${str1.substring(1)}<br>`)
+    
+    document.write(`16. str1.toLowerCase() = ${str1.toLowerCase()}<br>`)
+    document.write(`17. str1.toUpperCase() = ${str1.toUpperCase()}<br>`)
+    document.write(`<hr>`)
+
+    // 메서드체이닝기법
+    // 소문자 -> 0~10문자자르기 -> 'name'문자열을 연결
+    let output = "Hello JavaScript";
+    output = output.toLocaleLowerCase();
+    output = output.substring(0, 10);
+    output = output.concat(' name');
+    document.write(output, '<br>')
+    
+    output = output
+              .toLocaleLowerCase()
+              .substring(0, 10)
+              .concat(' name');
+    document.write(output, '<br>');
+</script>
+</head>
+<body>
+  
+</body>
+</html>

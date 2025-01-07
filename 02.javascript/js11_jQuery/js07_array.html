@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    // JavaScript : 배열.forEach((item, index) => {});
+    // jQuery     : $.each(배열객체, (index, item) => {});, $(선택자).each(() => {});
+    $(() => {
+      let arr = [
+        {name:'Google', link:'http//www.google.com'},
+        {name:'Amazon', link:'http//www.amazon.com'},
+        {name:'JavaScriptInfo', link:'http//javascript.info'},
+        {name:'MDN', link:'https://developer.mozilla.org/ko/'}
+      ];
+
+      let output = "";
+      $.each(arr, (idx, item) => {
+        output += `<a href="${item.link}">${item.name}</a><br>`
+      })
+      document.body.innerHTML = output;
+
+      let fruits = ['🍟','🍺','🍊','🍒','🍓','🍌','🍍'];
+      fruits.forEach((item, index) => {
+        console.log(`${index} = ${item}`);
+      })
+    })
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Access Token</h1>
+	<h6 class="accessOld"></h6>
+	<h6 class="accessResult" style="color:red;"></h6>
+	<hr />
+	
+	<h1>Refresh Token</h1>
+	<h6 class="refreshOld"></h6>
+	<h6 class="refreshResult" style="color:red;"></h6>
+	<hr />
+	
+	<button class="btn1">Refresh</button>
+	
+	
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script>
+		const oldAccessToken = localStorage.getItem("accessToken")
+		const oldRefreshToken = localStorage.getItem("refreshToken")
+		
+		document.querySelector(".accessOld").innerHTML = oldAccessToken
+		document.querySelector(".refreshOld").innerHTML = oldRefreshToken
+
+		document.querySelector(".btn1").addEventListener('click', () => {
+			
+			axios.post("http://localhost:8090/refreshToken"
+					, {accessToken: oldAccessToken, refreshToken: oldRefreshToken})
+				 .then(res => {
+					 console.log(res.data)
+					 const newAccessToken = res.data.accessToken
+					 const newRefreshToken = res.data.refreshToken
+					 
+					 document.querySelector(".accessResult").innerHTML 
+					 	= oldAccessToken !== newAccessToken ? newAccessToken : 'OLD'
+					 document.querySelector(".refreshResult").innerHTML 
+					 	= oldRefreshToken !== newRefreshToken ? newRefreshToken : 'OLD'
+					 			
+					 
+				 })
+				 .catch(error => {
+					 console.error(error)
+				 })
+			
+			
+		}, false)
+		
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

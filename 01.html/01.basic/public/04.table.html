@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Table Tag</h1>
+	<h5><a href="https://developer.mozilla.org/ko/docs/Web/HTML">mdn web doc</a></h5>
+	<!-- table>(tr>td*2)*5 -->
+	<table border="1">
+		<caption>
+			게시판
+		</caption>
+		<thead>
+			<tr>
+				<th>글번호</th>
+				<th>제목</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>금메달</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>은메달</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>동메달</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>노메달</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+			    <td>전화번호</td>
+				<td>02.9999.8888</td>
+			</tr>
+		</tfoot>		
+	</table>
+	<hr />
+	
+	
+	
+	<table border="1">
+	  <caption>
+	    Council budget (in £) 2018
+	  </caption>
+	  <thead>
+	    <tr>
+	      <th scope="col">Items</th>
+	      <th scope="col">Expenditure</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <th scope="row">Donuts</th>
+	      <td>3,000</td>
+	    </tr>
+	    <tr>
+	      <th scope="row">Stationery</th>
+	      <td>18,000</td>
+	    </tr>
+	  </tbody>
+	  <tfoot>
+	    <tr>
+	      <th scope="row">Totals</th>
+	      <td>21,000</td>
+	    </tr>
+	  </tfoot>
+	</table>
+	
+	<!-- 
+		교시   월   화  수  목 금 토 일
+		1교시  영어 수학 수학 ....
+		2교시  영어 국어 국어
+		
+		...
+		8교시
+		
+		lec/00.share/01.실습문제/01.html/01.table/홍길동.html 에 제출
+	-->
+	<h3>실습.1 수업시간표작성하기</h3>
+	<!-- table>caption+(thead>tr>th*8)+(tbody>(tr>td*8)*8)+(tfoot>tr>td) -->
+	<table border="1">
+		<caption><b><h1>수업시간표</b></h1></caption>
+		<colgroup>
+			<col />
+			<col style="background-color: yellow"/>
+			<col style="background-color: blue"/>
+		</colgroup>
+		<thead>
+			<tr>
+				<th>교시</th>
+				<th width="100">월</th>
+				<th>화</th>
+				<th>수</th>
+				<th>목</th>
+				<th>금</th>
+				<th>토</th>
+				<th>일</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>1교시</th>
+				<td rowspan="2">수학</td>
+				<td>영어</td>
+				<td>국어</td>
+				<td>과학</td>
+				<td>물리</td>
+				<td rowspan="8">특활시간</td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>2교시</th>
+				<td>영어</td>
+				<td>국어</td>
+				<td>과학</td>
+				<td>물리</td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>3교시</th>
+				<td>수학</td>
+				<td colspan="2" style="background-color: red">영어</td>
+				<td>과학</td>
+				<td>물리</td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>4교시</th>
+				<td>수학</td>
+				<td>영어</td>
+				<td>국어</td>
+				<td style="background-color: #46e3d4">과학</td>
+				<td>물리</td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>5교시</th>
+				<td>수학</td>
+				<td>영어</td>
+				<td>국어</td>
+				<td>과학</td>
+				<td>물리</td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>6교시</th>
+				<td>수학</td>
+				<td>영어</td>
+				<td>국어</td>
+				<td>과학</td>
+				<td>물리</td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>7교시</th>
+				<td>수학</td>
+				<td>영어</td>
+				<td>국어</td>
+				<td>과학</td>
+				<td>물리</td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>8교시</th>
+				<td>수학</td>
+				<td>영어</td>
+				<td>국어</td>
+				<td>과학</td>
+				<td>물리</td>
+				<td></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="8" align="center">2024.08.12일 기준</td>
+			</tr>
+		</tfoot>
+	</table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
