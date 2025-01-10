@@ -62,7 +62,7 @@ docker container inspect apa000ex21
 
 
 ■ 6-03：단계 4 뒷정리하기
-docker volume rm apa000vol1
+docker volume rm apa000vol1c
 
 
 ■ 6-03：칼럼 볼륨 백업하기
