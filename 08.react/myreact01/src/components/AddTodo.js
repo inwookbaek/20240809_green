@@ -1,11 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function AddTodo({ onAddTodo }) {
   const [title, setTitle] = useState("");
+
   return (
-    <>
+    <div>
       <input
-        placeholder='Add todo'
+        type='text'
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
@@ -17,6 +18,6 @@ export default function AddTodo({ onAddTodo }) {
       >
         Add
       </button>
-    </>
+    </div>
   );
 }
