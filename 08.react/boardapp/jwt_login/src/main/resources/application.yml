@@ -29,4 +29,4 @@ spring:
 # 해당 키는 토큰의 암호화 복호화에 사용될 것이다. HS256 알고리즘을 사용하기 위해 32글자 이상으로 설정해준다.		
 # 키생성 : $ openssl rand -hex 32
 jwt:
-  secret: c6da0f588b364ccd906e4cb00a6b5e7828a9cf54cbbfb6cdf7b687ecb26cb320
+  secret: S3cr3tK3y
