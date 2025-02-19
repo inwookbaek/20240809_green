@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /* 증감연산자
+      ++a : a = a + 1; 전위증가연산자
+      a++ : a = a + 1; 후위증가연산자
+      --a : a = a - 1; 전위감소연산자
+      a-- : a = a - 1; 후위감소연산자
+    */
+    let num = 10;
+    
+    // 후위증감연산자
+    num++;  // num = num + 1;
+    document.write(`num++ -> ${num}<br>`)
+    num--;  // num = num - 1;
+    document.write(`num-- -> ${num}<br>`)
+    
+    // 전위증감연산자
+    ++num; // num = num + 1;
+    document.write(`++num -> ${num}<br>`)
+    --num;  // num = num - 1;
+    document.write(`num-- -> ${num}<hr>`)
+    
+    // 주의할 점 : 증감연산자의 위치에 즉, 전위 or 후위에 따라 결과값이 다를 수 있다.
+    // num의 값은?(현재시점의 num은 10)
+    document.write(`num++ -> ${num++} -> 메모리에 11로 저장이 되어 있는 상태<br>`)
+    document.write(`num-- -> ${num--} -> 메모리에 10로 저장이 되어 있는 상태<br>`)
+    document.write(`현재의 num의 값은? ->  ${num}<hr>`)
+  </script>
+</head>
+<body>
+  <button onclick="counter.innerHTML = ++count;">1씩 증가(+)</button>
+  <button onclick="counter.innerHTML = --count;">1씩 감소(-)</button>
+  <h1 id="counter">0</h1>
+  <script>
+    // 실습1. button클릭하면 1씩 증가 or 1씩감소되는 로직만들기(증감연산자사용)
+    let count = 0;
+    let counter = document.querySelector("#counter");
+  </script>
+</body>
+</html>

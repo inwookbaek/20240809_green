@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/propagation.css">
+  <script>
+    /*
+      event propagation(이벤트전파)
+
+      웹요소에서 이벤트가 발생했을 때 해당 요소에만 이벤트가 처리되는
+      것이 아니라 해당요소를 감싸고 있는 부모요소, 그리고 그 요소의
+      부모요소에서도 똑같이 이벤트가 처리되는 되는 것을 이벤트전파라
+      고 한다.
+
+      이벤트전파에는 bubbling과 capturing 2가지 형태로 구분한다.
+
+      [event.target과 event.currentTarget]
+      이벤트가 발생하면 해당 이벤트와 관련된 정보는 event객체에 
+      담겨진다. event객체의 속성중에 이벤트전파와 관련된 속성이
+      target, curretTarget이다.
+    */
+  </script>
+</head>
+<body>
+  <div onclick="console.log('div')">
+    DIV
+    <section onclick="console.log('section')">
+      SECTION
+      <p onclick="console.log('p')">P</p>
+    </section>
+  </div>
+  <script src="./js/propagation.js"></script>
+</body>
+</html>

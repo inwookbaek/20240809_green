@@ -1,0 +1,123 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /*
+      Array객체
+
+      1. 배열을 생성하는 방법
+
+      let arr1 = [];
+      let arr2 = [1,2,3,4];
+      let arr3 = Array();
+      let arr4 = Array(number); -> 지정된 갯수(number) 크기의 빈 배열을 생성
+      let arr5 = Array(any ... any) -> 지정된 요소의 데이터타입의 값을 가진 배열 생성
+
+      2. 속성과 메서드
+
+      length : 배열요소의 갯수
+      push() : 배열 맨 끝에 값을 추가
+      pop()  : 맨 끝요소를 꺼내온 후 삭제
+      slice(start, end) : start~end-1까지 새로운 배열객체를 반환, 원본은 변경되지 않는다.
+      join(문자열) : 배열요소들을 문자열로 연결해서 하나의 문자열로 리턴
+      reverse() : 배열을 뒤집기(원본변경)
+      sort() : 배열을 정렬(원본변경)
+
+      map()    : 원본을 가공해서 새로운 배열로 리턴(원본유지)
+      filter() : 원본배열에서 특정조건에 맞는 요소만 모아서 새로운 배열로 리턴
+      reduce() : 요소들을 주어진 함수(리듀서함수)를 실행한 후에 하나의 결과값을 반환
+      forEach(): 요소들을 주어진 함수로 각 요소들을 하나씩 전달
+      concat() : 배열을 합치는 함수 
+    */
+
+    let arr1 = [1,2,3,4,5];
+    document.write(`1. arr1.length = ${arr1.length} <br>`);
+    document.write(`2. arr1.push(10) = ${arr1.push(10)} => ${arr1} <br>`);
+    document.write(`3. arr1.push({}, '문자열', function() {}) = ${arr1.push({}, '문자열', function() {})} => ${arr1} <br>`);
+    document.write(`4. arr1.pop() = ${arr1.pop()} => ${arr1} <br>`);
+    document.write(`5. arr1.slice(1,4) = ${arr1.slice(1,4)} => ${arr1} <hr>`);
+    
+    arr1 = [1,2,3,6,4,5];
+    document.write(`6. arr1.join('------') = ${arr1.join('------')} => ${arr1} <br>`);
+    document.write(`7. arr1.reverse() = ${arr1.reverse()} => ${arr1} <br>`);
+    document.write(`8. arr1.sort() = ${arr1.sort()} => ${arr1} <hr>`);
+    
+    arr1 = [1,4,9,16];
+    document.write(`9. arr1.map(function(x) {return x*2}) = ${arr1.map(function(x) {return x*2})} => ${arr1} <br>`);
+    document.write(`9. arr1.map(a => a*2) = ${arr1.map(x => x*2)} => ${arr1} <br>`);
+    document.write(`10. arr1.map(a => a>4)) = ${arr1.map(x => x>4)} => ${arr1} <br>`);
+    document.write(`10. arr1.filter(a => a>4)) = ${arr1.filter(x => x>4)} => ${arr1} <hr>`);
+    
+    // reduce = 1 + 4 + 9 + 16 = 30
+    const 초기값 = 0;
+    const total = arr1.reduce((이전값, 현재값) => 이전값 + 현재값, 초기값)
+    document.write(`11. arr1.reduce(() => {})) = ${total} <hr>`);
+    document.write(`11. arr1.reduce(() => {})) = ${arr1.reduce((a, b) => a+b, 100)} <hr>`);
+
+    // forEach
+    arr1.forEach(a => document.write(`${a} <br>`));
+    arr1.forEach(a => {
+      if(a>4) {
+        document.write(`${a} <br>`);
+      }
+    })
+    document.write('<hr>');
+    
+    // concat
+    let arr2 = ['a','b', 'c']
+    document.write(`12. arr1.concat(arr2) = ${arr1.concat(arr2)} <hr>`);
+  </script>
+  <script>
+    // 객체의 정렬
+    function Student(name, kor, eng, mat) {
+      this.name = name;
+      this.kor = kor;
+      this.eng = eng;
+      this.mat = mat;
+
+      this.getSum = function() { return this.kor + this.eng + this.mat }
+      this.getAvg = function() { return this.getSum() / 3 }
+      this.toString = function() {
+        return `이름=${this.name}, 국어=${this.kor}, 영어=${this.eng}, 수학=${this.mat}`;
+      }
+    }
+
+    let students = [];
+    students.push(new Student('손흥민',10,10,10));
+    students.push(new Student('이강인',20,20,20));
+    students.push(new Student('김민재',30,30,30));
+    console.log(students);
+    
+    // 1. 이름순 : // -1 0 1
+    // students.sort((a, b) => {
+    //   if(b.name > a.name) return 1;
+    //   if(b.name < a.name) return -1;
+    //   return 0;
+    // });
+    students.sort((a, b) => a.name.localeCompare(b.name));
+    console.log(students);
+    for(let i in students) {
+      document.write(students[i].toString(), '<br>');
+    }
+    document.write('<hr>');
+    
+    // 2. 총점순
+    students.sort((a, b) => b.getSum() - a.getSum()) 
+    for(let i in students) {
+      document.write(students[i].toString(), '<br>');
+    }
+    document.write('<hr>');
+
+    // 3. 2등까지만 출력(sort.slice)
+    let std = students.sort((a, b) => b.getSum() - a.getSum()).slice(0,2);
+    for(let i in std) {
+      document.write(std[i].toString(), '<br>');
+    }    
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

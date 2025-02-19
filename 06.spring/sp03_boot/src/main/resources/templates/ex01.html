@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>ex01.html(thymeleaf 사용법)</h1>
+	<h3>1. Model의 변수의 값 출력하기</h3>
+	<h5 th:text="${ names }"></h5>
+	<h5>[[${names}]]</h5>
+	
+	<h3>2. 반복문</h3>
+	<ul>
+		<li th:each="name : ${names}" th:text="${ name }"></li>
+	</ul>
+	
+	<ul>
+		<th:block th:each="name : ${names}" >
+			<li>[[${ name }]]</li>
+		</th:block>
+	</ul>
+	
+	<ul>
+		<th:block th:each="name,status : ${names}" >
+			<li>[[${status.index}]] --> [[${ name }]]</li>
+		</th:block>
+	</ul>
+	
+	<ul>
+		<li th:each="name,status : ${names}" >
+			[[${status.index}]] --> [[${ name }]]
+		</li>
+	</ul>
+	
+	<h3>3. 조건문</h3>
+	<h5>th:if / th:unless</h5>
+	<ul>
+		<li th:each="name,status : ${names}" >
+			<span th:if="${status.odd}"> 짝수 = [[${ name }]]</span>
+			<span th:unless="${status.odd}"> 홀수 = [[${ name }]]</span>
+		</li>
+	</ul>
+	
+	<h5>? : 삼항연산자</h5>
+	<ul>
+		<li th:each="name,status : ${names}" >
+			<span th:text="${status.odd} ? '짝수-' + ${name}: '홀수-' + ${name}"></span>
+		</li>
+	</ul>	
+	
+	<h5>switch</h5>
+	<ul>
+		<li th:each="name,status : ${names}" >
+			<th:block th:switch="${status.index % 3}">
+				<span th:case="0">0</span>
+				<span th:case="1">1</span>
+				<span th:case="2">2</span>
+			</th:block>
+		</li>
+	</ul>
+	
+	<h3>4. link</h3>
+
+	<!-- http://localhost:8090/hello?types=AA&types=BB&types=CC&age=16 -->
+	<a th:href="@{/hello(types=${ {'AA','BB','CC'} }, age=16)}">Go to /hello</a>
+	<a th:href="@{/hello(name='한글 처리', age=16)}">Go to /hello</a>
+	<a th:href="@{/hello(name='AAA', age=16)}">Go to /hello</a>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

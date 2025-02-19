@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: jsp04_jdbc
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+
+server:
+  port: 8090

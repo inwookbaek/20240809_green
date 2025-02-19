@@ -1,0 +1,38 @@
+version: "3"
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    devices:
+      - /dev/kvm
+    cap_add:
+      - NET_ADMIN
+    ports:
+      # 브라우저에서 접속 포트
+      - 8006:8006
+      # RDP 접속 포트
+      - 3389:3389/tcp
+      - 3389:3389/udp
+    stop_grace_period: 2m
+    restart: on-failure
+    environment:
+      # 윈도우 버전 명시
+      VERSION: "win10"
+      # RAM 사이즈
+      RAM_SIZE: "12G"
+      # CPU Core 개수
+      CPU_CORES: "6"
+      # 디스크 사이즈 : 기본 64G
+      DISK_SIZE: "150G"
+      #VERSION: "https://example.com/win.iso"
+    volumes:
+      # local 볼륨 mount
+      - ./win10:/storage
+      # 공유폴더 mount
+      #- ./example:/shared
+    #networks:
+    #  vlan:
+    #    ipv4_address: 192.168.0.100
+#networks:
+#  vlan:
+#    external: true

@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /*
+      예외처리(exception)?
+
+      예외처리는 문법에러가 아니라 프로그램실행도중 에러가 발생할 경우 프로그램의
+      중단없이 정상적으로 처리할 수 있도록 하는 방법이다.
+      예외처리는 
+      try { 
+        실행코드(예외발생가능한 코드) 
+      } catch(예외유형) {
+        예외처리를 할 로직
+      }
+    */
+    let count = 2;
+    let result = 10;
+
+    try {
+      result = result / count;
+      console.log(`나누기 결과값 = ${result}`)
+    } catch (exception) {
+      console.log('나누기 연산은 0으로 나눌 수가 없습니다!!!')
+    }
+
+    console.log('아주아주 중요한 로직을 실행해야만 한다!!!!');
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    // jQuery 선택자를 이용해서
+    // 1. 클래스 item인 전체태그를 orange
+    // 2. h1태그 클래스가 item인 태그를 red
+    // 3. h1.item.selected 색상을 blue
+    $(() => {
+      $('.item').css('color', 'orange');
+      $('h1.item').css('color', 'red');
+      $('h1.item.selected').css('color', 'blue');
+    })
+  </script>
+</head>
+<body>
+  <h1 class="item">header-1</h1>
+  <h1 class="item selected">header-2</h1>
+  <h1 class="item">header-3</h1>
+</body>
+</html>

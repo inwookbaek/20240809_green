@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <style>
+    .high { color: red; }
+    .medium { color: orange; }
+    .low { color: green; }
+  </style>
+</head>
+<body>
+  <h1>To-Do List</h1>
+  <form id="taskForm" action="">
+      <input type="text" id="taskInput" placeholder="Enter task" required>
+      <select id="prioritySelect">
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+      </select>
+      <button type="submit">Add Task</button>
+  </form>
+  <ul id="taskList"></ul>
+
+  <script>
+    /*
+      (hint)
+      1. 작업을 추가하려면 append(), prepend() 
+      2. 우선순위로 정렬(high > medium > low)
+      3. jQuery를 이용해서 우선순위에 따라 정렬
+         ... array할 때 sort -1 0 1
+    */
+   </script>
+    <script>
+      $(document).ready(function() {
+          $('#taskForm').submit(function(event) {
+              event.preventDefault();
+              
+              let taskText = $('#taskInput').val();
+              let priority = $('#prioritySelect').val();
+              
+              let taskClass = priority;
+              let taskItem = `<li class="${taskClass}" data-priority="${priority}">${taskText} 
+                              <button class="removeTask">Remove</button></li>`;
+              
+              $('#taskList').append(taskItem);
+              sortTasks();
+              
+              $('#taskInput').val('');
+          });
+          
+          $('#taskList').on('click', '.removeTask', function() {
+              $(this).parent().remove();
+          });
+          
+          function sortTasks() {
+              let tasks = $('#taskList li').get();
+              tasks.sort(function(a, b) {
+                  let priorityOrder = ['high', 'medium', 'low'];
+                  // -1 0 1
+                  return priorityOrder.indexOf($(a).data('priority')) - 
+                         priorityOrder.indexOf($(b).data('priority'));
+              });
+              $.each(tasks, function(index, task) {
+                  $('#taskList').append(task);
+              });
+          }
+      });
+  </script>
+</body>
+</html>

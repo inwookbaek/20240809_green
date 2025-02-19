@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	/* css selector 
+	   1. 전체선택자 : *
+	   2. 태그선택자 : h1~6, a, div...
+	   3. 아이디선택자 : #아이디이름
+	   4. 클래스선택자 : .클래스이름
+	   5. 후손선택자   : 선택자 선택자
+	   6. 자손선택자   : 선택자 > 선택자
+	   7. 속성선택자   : 선택자[속성]
+	   8. 수열선택자   : nth
+	*/
+	
+	* { color: red; }
+	h1 { color : yellow; }
+	h1 { color : green; }
+	h3 { color : pink; }
+	#header { 
+		color: mediumseagreen;
+		width: 100px;
+		height: 100px;
+		background-color: black; 
+	}
+	div {
+		color: mediumseagreen;
+		width: 100px;
+		height: 100px;
+		background-color: black; 
+	}
+	.div1 {
+		background-color: blue; 
+		width: 50px;
+		height: 50px;
+		color: white;		
+	}
+	
+	.div1 td {
+		background-color: blue; 
+		width: 50px;
+		height: 50px;
+		color: white;		
+	}
+</style>
+</head>
+<body>
+	<h1 style="color: blue;">CSS3 Selector Basic</h1>
+	<!-- h1{$}*3 -->
+	<h1>1</h1>
+	<h1>2</h1>
+	<h1>3</h1>
+	
+	<h3>1</h3>
+	<h3 id="header">header</h3>
+	<h3>3</h3>
+	<hr />
+	
+	<div class="div1"></div>
+	<div></div>
+	<div class="div1"></div>
+	<div></div>
+	
+	<table border="1">
+		<tr class="div1">
+			<td>홍길동</td>
+			<td>01.9999.8888</td>
+		</tr>
+		<tr class="div1">
+			<td>손흥민</td>
+			<td>01.9999.8888</td>
+		</tr>
+		<tr class="div1">
+			<td>이강인</td>
+			<td>01.9999.8888</td>
+		</tr>
+	</table>
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

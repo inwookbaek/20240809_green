@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    // preventDefault()메서드는 문서객체의 기본이벤트를 제거하는 메서드
+    $(() => {
+      $('a').on('click', function(e) {
+        $(this).css('background-color', 'green');
+        e.stopPropagation();  // bubbling, capturing을 중지
+        e.preventDefault();   // 문서객체의 기본이벤트를 중지
+      })
+    })
+  </script>
+</head>
+<body>
+  <div style="border:2px solid black">
+    <h1 style="border:10px solid red">
+      <a href="http://www.google.com" style="border:2px solid blue">Google</a>
+    </h1>
+  </div>
+</body>
+</html>

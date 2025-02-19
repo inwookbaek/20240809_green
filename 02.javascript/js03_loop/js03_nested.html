@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    // 중첩for/wile/dowhile
+
+    // 구구단을 세로로 출력
+    let i = 100;
+    for(let i=2;i<=9;i++) {
+      // console.log(`지역변수 i = ${i}`)
+      console.log(`--- ${i} 단 ------`)
+      for(let j=2;j<=9;j++) {
+        console.log(`${i} x ${j} = ${i*j}`)
+      }
+    }
+    console.log(`전역변수 i = ${i}`)
+    // console.log(`전역변수 j = ${j}`)
+
+    // 실습1. 구구단 가로로 출력하기
+    // -- 2단 -- -- 3단 -- .... -- 9단 --
+    // 2 x 2 = 4 3 x 2 = 6 .... 9 x 2 = 18
+    // ....
+    // 2 x 9 = 18 .....         9 x 9 = 81  
+    // hint) 
+    // 1. 2 x 2 = 4 3 x 2 = 6 .... 9 x 2 = 18 복합연산자, 문자열
+    // 2. j가 9일때마다 출력
+    document.write('-- 2단 -- -- 3단 -- -- 4단 -- -- 5단 -- -- 6단 -- -- 7단 -- -- 8단 -- -- 9단 --<br>');
+    for(let j=2;j<=9;j++) {
+      let output = ''
+      for(let dan=2;dan<=9;dan++) {
+        output += `${dan} x ${j} = ${dan * j}\t`; // 2x4=4 3x4=6 .... 9x4=18
+      }
+      document.write(`${output}<br>`); // 2x2=4 3x2=6 .... 9x2=18<br>
+    }
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
