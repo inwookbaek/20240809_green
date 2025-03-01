@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      /*
+        1. 4칙연산    : + - * /
+        2. 나머지연산 : %
+      */ 
+      let a = 10 + 10;
+      let b = 10 - 5;
+      let c = 10 * 10;
+      let d = 10 / 2;
+      console.log(a, b, c, d);
+
+      let e = 10 / 3;
+      console.log(e);
+
+      // 데이터타입
+      const pi = 3.141592;
+      console.log(a, typeof a);
+      console.log(pi, typeof pi);
+      let s = "문자열";
+      console.log(s, typeof s);
+
+      // 정밀한 계산을 하기 위해서는 실수연산은 적합하지가 않다.
+      // 그 이유는 컴퓨터의 모든 언어는 이진법으로 계산하기 때문이다.
+      let x = 0.1 + 0.2;   // 결과값 = 0.3?
+      console.log('실수 0.1 + 0.2 = ', x);
+
+      let y = 0.1 * 10 + 0.2 * 10;
+      y = y / 10;
+      console.log('실수 0.1 * 10 + 0.2 * 10 = ', y);
+
+      // 문자열과 숫자의 연산결과?
+      let str = "문자열";
+      let num = 10;
+      let result = str + num;
+      console.log(`문자열 연산결과 = ${result}`, typeof(result));
+
+      // 실습1. 2사람의 나이를 입력받아서 결과를 출력해 보세요
+      // prompt, document.write함수를 이용  
+      // prompt의 값은 무조건 문자열로 처리가 된다.
+      // 숫자로 처리하기해서 숫자로 파싱을 해야 한다. 
+      // JS에서 문자형숫자를 숫자형으로 파싱하는 함수는 parseInt    
+      let name1 = prompt("1번째 사람의 이름을 입력하세요!", "손흥민");
+      let age1 = prompt("1번째 사람의 나이를 입력하세요!", 33);
+      let name2 = prompt("2번째 사람의 이름을 입력하세요!", "이강인");
+      let age2 = prompt("1번째 사람의 나이를 입력하세요!", 24);
+
+      let result1 = age1 + age2;
+      console.log(age1 + age2); // 33 + 24 = 57; -> 3324
+      console.log(typeof age1, typeof(age2));
+      
+      age1 = parseInt(age1);
+      age2 = parseInt(age2);
+      console.log(typeof age1, typeof(age2));
+      result1 = age1 + age2;
+      document.write(`<h3>${name1}의 나이는 ${age1}살 입니다!</h3>`)
+      document.write(`<h3>${name2}의 나이는 ${age2}살 입니다!</h3>`)
+      document.write(`<h3>두 사람의 나이의 합은 ${result1}</h3>`)
+
+    </script>
+</head>
+<body>
+    
+  <h3 id="person1"></h3>
+  <h3 class="person2"></h3>
+  <h3 id="total"></h3>
+
+  <script>
+    // 실습2. 2사람의 나이를 입력받아서 결과를 출력해 보세요
+    // document.querySelector를 이용
+    let person1 = document.querySelector('#person1');
+    let person2 = document.querySelector('.person2');
+    let total = document.querySelector('#total');
+
+    person1.innerHTML = `${name1}의 나이는 ${age1}살 입니다!`;
+    person2.innerHTML = `${name2}의 나이는 ${age2}살 입니다!`;
+    total.innerHTML = `두 사람의 나이의 합은 ${result1}`;
+  </script>
+</body>
+</html>

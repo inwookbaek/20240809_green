@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(() => {
+      // keydown > keyup > kepress;
+      // 실습. 
+      // 1. keydown을 이용해서 textarea에 남은 글자수를 h1에 출력
+      // 2. 남은 글자수가 > 0일경우 검정색, 아닐 경우 red
+      // 3. max글자수 = 20
+
+      $('textarea').keydown(function() {
+        // 1. 남은 글자수 확인
+        let len = $(this).val().length;
+        let rem = 20 - len;
+        // console.log(`${rem}`);
+        
+        $('h1').html(rem);
+
+        // 2. 남은 글자수가 > 0일경우 검정색, 아닐 경우 red
+        if(rem>0) {
+          $('h1').css('color', 'black')
+        } else {
+          $('h1').css('color', 'red')
+        }
+      })
+    })
+  </script>
+</head>
+<body>
+  <div>
+    <p>야생화</p>
+    <h1>20</h1>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+  </div>
+</body>
+</html>

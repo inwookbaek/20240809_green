@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box {
+      border: 1px solid black;
+      width: 100px;
+      height: 100px;
+      background-color: yellow;
+    }
+    #result {
+      text-align: center;
+      font-weight: bold;
+      font-size: 2em;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+  <hr>
+
+  <h3>아무런 키를 눌러 보세요</h3>
+  <div id="result"></div>
+
+  <script>
+    /*
+      1. 마우스이벤트에서 클릭한 위치를 아라내기
+        event.pageX, event.pageY : 마우스의 클릭한 x, y좌표
+      2. key관련이벤트
+        event.code, event.key : 키와 관련된 값
+    */
+    const box = document.querySelector('#box');
+    box.addEventListener('click', event => {
+      alert(`이벤트가 발생한위치 : (${event.pageX}, ${event.pageY})`);
+      for(let key in event) {
+        console.log(`${key} = ${event[key]}`);
+      }
+    });
+
+    const body = document.body;
+    const result = document.querySelector('#result');
+    body.addEventListener('keypress', event => {
+      result.innerText = `code = ${event.code} / key = ${event.key}`;
+      for(let key in event) {
+        console.log(`${key} = ${event[key]}`);
+      }      
+    })
+  </script>
+</body>
+</html>

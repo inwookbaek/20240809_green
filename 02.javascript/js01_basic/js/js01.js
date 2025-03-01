@@ -1,0 +1,1 @@
+alert('외부파일로 정의한 JavaScript!!!!');

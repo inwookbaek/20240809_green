@@ -1,0 +1,29 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(() => {
+      // end() : 이전 단계로 돌아가기
+      // 실습 : 메서드체이닝, end, filter함수를 이용
+      // 1) h1 전체의 배경색은 orange
+      // 2) 짝수 글자색은 white
+      // 3) 홀수 글자색은 red;
+      // $('h1').css('background', 'orange');
+      // $('h1').filter(':even').css('color', 'white');
+      // $('h1').filter(':odd').css('color', 'red');
+
+      $('h1').css('background', 'green').filter(':even').css('color', 'white')
+        .end().filter(':odd').css('color', 'red');
+    })
+  </script>
+</head>
+<body>
+  <h1>header-1</h1>
+  <h1>header-2</h1>
+  <h1>header-3</h1>
+  <h1>header-4</h1>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Thymeleaf</h1>
+	<ol>
+		<li>네임스페이스(xmlns)에 Thymeleaf지정</li>
+		<li>Thymeleaf는 Model로 전달된 데이터를 출력 : <b>th:속성</b>을 이용 or <b>inline을 이용</b></li>
+		<li>주석처리 <!--/* 주석처리 */--></li>
+		<li>변수선언 th:with </li>
+		<li>반복문 th:each, th:block<br>
+			status변수(index/count/size/first/last/odd/even)
+		</li>
+		<li>조건문 th:if / th:unless / th:switch</li>
+		<li>자바스크립 : script th:inline="javascript"<br>
+			[[${list}]] ',' expected 에러표시 해결 ==> /*[[${list}]]*/'기본값';
+		</li>
+		<li>thymeleaf layout : layout:fragment="content" / script layout:fragment="script" <br>
+			implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.3.0'
+		</li>
+	</ol>
+</body>
+</html>

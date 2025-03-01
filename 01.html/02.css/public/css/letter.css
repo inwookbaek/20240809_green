@@ -1,0 +1,20 @@
+@charset "UTF-8";
+/*
+	문자선택자
+	... ::first-letter
+	... ::first-line
+	... ::selection
+*/
+
+p::first-letter {
+	font-size: 3em;
+}
+
+p::first-line {
+	color: red;
+}
+
+p::selection {
+	background: black;
+	color: white;
+}

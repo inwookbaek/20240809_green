@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.14.0/themes/ui-lightness/jquery-ui.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.min.js"></script>
+  <script>
+    $(() => {
+      let contents = [
+        "bbbn",
+        "aaaa",
+        "eeee",
+        "bbaa",
+        "cabd",
+        "adfg",
+      ];
+
+      $('#contents').autocomplete({
+        source: contents
+      })
+    })
+  </script>
+</head>
+<body>
+  <div class="ui-widget">
+    <label for="contents">Contents...</label>
+    <input type="text" id="contents">
+  </div>
+</body>
+</html>

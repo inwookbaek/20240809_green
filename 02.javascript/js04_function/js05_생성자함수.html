@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /*
+      JavaScript에서 객체를 만드는 방법이
+      1. 객체리터럴 {}를 사용하는 방법
+      2. new 객체생성연산자(or 생성자함수)를 사용하는 방법
+      3. Object()로 생성하는 방법
+      4. Object.create()로 생성하는 방법
+      5. class로 선언해서 생성하는 방법
+
+      ECMA6(2015)이전에는 생성자함수로 객체를 생성했지만
+      이후에 class로 선언해서 객체를 생성(new)한다.
+
+      객체리터럴과 생성자함수는 기술적으로 차이는 없지만 
+      생성자함수명은 대문자로 시작하는 것이 관례이고 new
+      라는 객체생성연산자로만 생성할 수 있다.
+    */
+    // 1. 객체리터럴{}로 객체생성하기
+    let hong1 = {
+      name:'홍길동',
+      gender: 'Male',
+      age: 1000
+    };
+
+    let hong2 = {
+      name:'홍길순',
+      gender: 'Feale',
+      age: 999,
+      sayHello: function() {
+        console.log(`안녕하세요 제 이름은 ${this.name}입니다!`)
+      }
+    };
+    
+    // 2. 생성자함수
+    // function hong() {} // 일반함수
+    // function Hong() {} // 생성자함수
+    function Hong(name, age, gender) {
+      this.name = name;
+      this.age = age;
+      this.gender = gender;
+      this.sayHello = function() {
+        console.log(`안녕하세요 제 이름은 ${this.name}입니다!`)
+      }
+    }
+
+    let hong3 = new Hong('홍길자', 20, 'Female');
+    hong3.sayHello();
+
+    let sonny = new Hong('손흥민', 32, 'Male');
+    sonny.sayHello();
+
+    let lee = new Hong('이강인', 23, 'Male');
+    let kim = new Hong('김민재', 25, 'Male');
+    let park = new Hong('신유빈', 24, 'Female');
+
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

@@ -1,0 +1,28 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 50px;
+}
+
+/* Paragraph Hidden/Visible Styles */
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+    color: blue;
+    font-weight: bold;
+}
+
+/* Button Styles */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: lightblue;
+}

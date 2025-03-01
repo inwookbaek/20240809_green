@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+	<display-name>B-Project</display-name>
+  	<welcome-file-list>
+    	<welcome-file>index.jsp</welcome-file>
+  	</welcome-file-list>
+  	
+  	<!-- 모든 request의 charset을 utf-8로 설정 -->
+  	<filter-mapping>
+    	<filter-name>encodingFilter</filter-name>
+    	<url-pattern>/*</url-pattern>
+  	</filter-mapping>
+  	<filter>
+    	<filter-name>encodingFilter</filter-name>
+   	 	<filter-class>com.b_project.util.CharacterEncodingFilter</filter-class>
+  	</filter>
+  
+  	<!-- 로그인 체크 필터 -->
+  	<filter-mapping>
+    	<filter-name>LoginCheckFilter</filter-name>
+    	<url-pattern>/memberDetail.do</url-pattern>   
+	    <url-pattern>/memberList.do</url-pattern>   
+	    <url-pattern>/memberModify.do</url-pattern>   
+	    <url-pattern>/memberDelete.do</url-pattern>
+    	<url-pattern>/projectWrite.do</url-pattern>
+	    <url-pattern>/projectList.do</url-pattern>
+	    <url-pattern>/projectModify.do</url-pattern>
+	    <url-pattern>/projectDelete.do</url-pattern>
+	    <url-pattern>/questionWrite.do</url-pattern>
+	    <url-pattern>/questionModify.do</url-pattern>
+	    <url-pattern>/questionDelete.do</url-pattern>
+	    <url-pattern>/answerWrite.do</url-pattern>
+	    <url-pattern>/answerModify.do</url-pattern>
+	    <url-pattern>/answerDelete.do</url-pattern>
+	    <url-pattern>/fundingSupport.do</url-pattern>
+	    <url-pattern>/fundingList.do</url-pattern>
+	    <url-pattern>/review_write.do</url-pattern> 
+	    <url-pattern>/review_modify.do</url-pattern> 
+	    <url-pattern>/reviewDelete.do</url-pattern> 
+	    <url-pattern>/fundingReq.do</url-pattern>      
+	    <url-pattern>/fundingReqModify.do</url-pattern>   
+	    <url-pattern>/fundingReqDelete.do</url-pattern>     
+  	</filter-mapping>
+  	<filter>
+	    <filter-name>LoginCheckFilter</filter-name>
+	    <filter-class>com.b_project.util.LoginCheckFilter</filter-class>
+  	</filter>
+  	
+  	<session-config>
+  		<session-timeout>30</session-timeout>
+  	</session-config>
+
+  	<servlet-mapping>
+	  	<servlet-name>FrontController</servlet-name>
+	  	<url-pattern>*.do</url-pattern>
+  	</servlet-mapping>
+  	<servlet>
+	  	<servlet-name>FrontController</servlet-name>
+	  	<servlet-class>com.b_project.controller.FrontController</servlet-class>
+	  	<init-param>
+	  		<param-name>configFile</param-name>
+	  		<param-value>/WEB-INF/controller.properties</param-value>
+  		</init-param>
+  		<load-on-startup>1</load-on-startup>
+  	</servlet>
+</web-app>

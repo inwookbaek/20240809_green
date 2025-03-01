@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Audio / Video Tag</h1>
+
+	<audio controls src="./multimedia/Kalimba.mp3"></audio>	
+	<audio controls="controls">
+		<source src="./multimedia/Kalimba.mp3" type="audio/mp3"/> 
+		<source src="./multimedia/Kalimba.ogg" type="audio/ogg"/> <!--IE에서만 구동 불가능  -->
+	</audio>
+	<hr />
+	
+	<video controls src="./multimedia/Wildlife.mp4" type="video/mp4"></video>
+	<video controls>
+		<source src="./multimedia/Wildlife.mp4" type="video/mp4"/>
+		<source src="./multimedia/Wildlife.webm" type="video/webm"/>
+	</video>
+	<video controls width="640" height="360" poster="https://via.placeholder.com/640x360">
+
+	</video>
+	<hr />
+</body>
+</html>

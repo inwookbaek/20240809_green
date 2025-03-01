@@ -1,0 +1,19 @@
+.select {
+	color: red;
+}
+
+.item {
+	color: blue;
+}
+
+.header {
+	background-color: green;
+}
+
+h2.select {
+	color: purple;
+}
+
+.header.xxx.yyy.zzz {
+	color: yellow;
+}

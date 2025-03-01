@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    let date = new Date();
+
+    // 1. 문자열을 이용 객체 생성
+    date = new Date('Aug 21 2024');
+    document.write(`new Date('Aug 21 2024') => ${date} <br>`)
+    
+    date = new Date('December 25, 2024, 12:09:09');
+    document.write(`new Date('December 25, 2024, 12:09:09') => ${date} <br>`)
+
+    // 2. 숫자를 이용 객체 생성
+    date = new Date(2024,8,21);
+    document.write(`new Date(2024,8,21) => ${date} <br>`)
+    document.write(`new Date(2024,8,21) => ${new Date(2024,7,21)} <br>`)
+
+    // 3. 메서드
+    // gettter(getXxx()), setter(setXxx())
+    // 날짜연산
+    let now = new Date();
+    let bef = new Date(2023,7,22);
+
+    // getTime() : 1970.1.1. 0:0:10 -> 10
+    document.write(`now.getTime() => ${now.getTime()}ms <br>`)
+    document.write(`now.getTime() => ${new Date(1970,1,1).getTime()}ms <br>`)
+    
+    let interval = now.getTime() - bef.getTime();
+    document.write(`now.getTime() - bef.getTime() => ${interval}ms <br>`)
+
+    Date.prototype.getInterval = function(befDate) {
+      let interval;
+
+      // 양수처리
+      if(this>befDate) {
+        interval = this.getTime() - befDate.getTime();
+      } else {
+        interval = bef.getTime() - this.getTime();
+      }
+      return Math.floor(interval / (1000*60*60*24))
+    }
+
+    document.write(now.getInterval(bef) + '일 <br>' )
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

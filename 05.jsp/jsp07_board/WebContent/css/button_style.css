@@ -1,0 +1,18 @@
+@charset "UTF-8";
+.login-btn {
+/* 		color: black;
+		background-color: #FFC312;
+		width: 100px; */
+}
+
+.login-btn:hover {
+	color: white;
+	background-color: black;
+}
+
+.input-group-prepend span {
+	color: black;
+	border-left-color: #FFC312;
+	width: 40px;
+	border: 0 !important;
+}

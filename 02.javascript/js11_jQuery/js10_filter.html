@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    // $('').filter(선택자 or function).css()
+    // 실습. h1태그를 선택해서 홀수인 요소의 배경색 green, 글자색 white
+    $(() => {
+      $('h1').filter(':odd')
+            .css({background: 'green'})
+            .css('color', 'red');
+      $('h1').filter(':even').css({background: 'black', color: 'red'})
+      $('h1').filter(idx => {
+        return idx % 3 === 0  // [true, false, false, true, false, false]
+      }).css({background: 'yellow', color: 'green'});
+
+      $('h1').filter(idx => idx % 3 === 0).css({background: 'mediumseagreen', color: 'lightgray'});
+    })
+  </script>
+</head>
+<body>
+  <h1>header - 1</h1>
+  <h1>header - 2</h1>
+  <h1>header - 3</h1>
+  <h1>header - 4</h1>
+  <h1>header - 5</h1>
+  <h1>header - 6</h1>
+</body>
+</html>

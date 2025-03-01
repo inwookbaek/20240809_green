@@ -1,0 +1,132 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /*
+			실습 1. 아래와 같이 별표 피라미드를 출력
+			*
+			**
+			***
+			****
+			*****
+			******
+			*******		
+		*/
+    function pyramid1(rows) {
+      document.write('<h3>실습1. 피라미드</h3>')
+      for(let i=1;i<=rows;i++) {
+        document.write('*'.repeat(i),'<br>')
+      }
+    }
+    pyramid1(5);
+
+    /*	
+      실습2.
+		     *
+		    **
+		   ***
+		  ****
+		 *****
+		 공란 : &npsp, 공란감소 for
+		 별
+    */
+    function pyramid2(rows) {
+      document.write('<h3>실습2. 오른쪽정렬 피라미드</h3>')
+      for(let i=1;i<=rows;i++) {
+        document.write('&nbsp;'.repeat(rows-i), '*'.repeat(i) ,'<br>')
+      }
+    }   
+    pyramid2(5);
+    /*
+		 실습3.
+		 *****
+		 ****
+		 ***
+		 **
+		 *	
+    */
+    function pyramid3(rows) {
+      document.write('<h3>실습3. 역피라미드</h3>')
+      for(let i=rows;i>=1;i--) {
+        document.write('*'.repeat(i) ,'<br>')
+      }
+    }   
+    pyramid3(5);   
+    /*
+		 실습4.
+		 *****
+		  ****
+		   ***
+		    **
+		     *    
+   */
+   function pyramid4(rows) {
+      document.write('<h3>실습4. 역피라미드 오른쪽정렬</h3>')
+      for(let i=0;i<rows;i++) {
+        document.write('&nbsp;'.repeat(i), '*'.repeat(rows-i) ,'<br>')
+      }
+    }   
+    pyramid4(5);  
+    /*     
+		 실습5.   
+	      *
+	     ***
+	    *****
+	   *******
+    *********
+  */
+  function pyramid5(rows) {
+      document.write('<h3>실습5. 중앙정렬 피라미드</h3>')
+      for(let i=1;i<=rows;i++) {
+        document.write('&nbsp;'.repeat(rows-i), '*'.repeat(2*i-1) ,'<br>')
+      }
+    }   
+    pyramid5(5);  
+  /*  
+  실습 6.
+	 *********
+	  *******
+	   *****
+	    ***
+	     *	
+  */
+  function pyramid6(rows) {
+      document.write('<h3>실습6. 중앙정렬 역피라미드</h3>')
+      for(let i=rows;i>=1;i--) {
+        document.write('&nbsp;'.repeat(rows-i), '*'.repeat(2*i-1) ,'<br>')
+      }
+    }   
+    pyramid6(5);   
+ 
+  /*
+  실습7. : 실습5,6를 한번에 실행
+	     *
+	    ***
+	   *****
+	  *******
+	 *********
+	  *******
+	   *****
+	    ***
+	     *
+	*/   
+  function pyramid7(rows) {
+      document.write('<h3>실습7. 마름모피라미드</h3>')
+      // 상단삼각형
+      for(let i=1;i<=rows;i++) {
+        document.write('&nbsp;'.repeat(rows-i), '*'.repeat(2*i-1) ,'<br>')
+      }
+      // 하단삼각형
+      for(let i=rows-1;i>=1;i--) {
+        document.write('&nbsp;'.repeat(rows-i), '*'.repeat(2*i-1) ,'<br>')
+      }      
+    }   
+    pyramid7(5);    
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

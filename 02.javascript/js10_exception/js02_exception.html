@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /*
+      try {
+        1. 실행할 코드를 입력한다.
+        2. 정상이라면 문제없이 실행되지만 경우에 따라서 예외가 발생할 수 있다.
+        3. 예외는 throw명령에 의해 강제로 발생시킬 수도 있다.
+        4. 예외를 발생시키는 메서드에 의해서도 발생할 수도 있다.
+      } catch(예외객체) {
+        1. 예외가 발생하면 예외객체를 전달 받을 수 있다.
+        2. 예외객체를 전달 받지 않을 경우에는 매개변수 없이 catch {} 정의할 수 있다.
+        3. catch 블럭은 예외발생시 예외별로 처리할 수가 있다. 
+          즉, 여러개의 catch블럭을 정의할 수 있다.
+      } finally {
+        finally블럭은 예외발생 유무와 상관없이 반드시 처리가 되는 블럭이다.
+      }
+    */    
+    function getMonthName(mon) {
+      mon = mon - 1; // mon : 0-1월,... 11-12월
+      let months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      if(months[mon]) {
+        return months[mon];
+      } else {
+        throw `${mon+1}월의 값은 1~12월까지 입니다!`; // throw명령은 강제로 예외를 발생시키는 명령
+      }
+    }
+
+    let myMonth = 999;
+    // console.log(`${getMonthName(myMonth)}`); // 예외처리를 하지 않은 경우
+
+    try {
+      monthName = getMonthName(myMonth);  // 예외가 발생할 수 있는 함수 호출, 예외처리를 한 경우
+    } catch (e) {
+      monthName = 'unknown';
+      console.log(e);   // e는 예외객체;
+    } finally {
+      console.log('프로그램이 종료가 되었습니다!')
+    }
+  </script>
+</head>
+<body>
+
+</body>
+</html>

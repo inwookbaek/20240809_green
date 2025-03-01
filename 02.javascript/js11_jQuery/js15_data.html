@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(() => {
+      
+    })
+  </script>
+</head>
+<body>
+  <button id="test1" value="test-1" data-btn-width="200" data-my-name="hong">test1</button>
+
+  <script>
+    // data- 속성은 html문법에는 없는 속성이다.
+    // jQuery or bootstrap등에서 data로 처리하기위한 속성 
+    // button의 data-btn-width 속성의 값을 읽기
+
+    // 1. data() : 이 메서드로 호출할 경우에는 'data-'를 빼고 호출한다.
+    console.log(`[data()] btn-width = ${$("#test1").data('btn-width')}`);
+    console.log(`[data()] btnWidth = ${$("#test1").data('btnWidth')}`);
+    console.log(`[data()] my-name = ${$("#test1").data('my-name')}`);
+    console.log(`[data()] myName = ${$("#test1").data('myName')}`);
+    console.log(`---------------------------------------------------`);
+    
+    // 2. attr() : 이 메서드로 호출할 경우에는 'data-'부분을 포함해서 호출한다.
+    console.log(`[attr()] undefined = ${$("#test1").attr('btn-width')}`);
+    console.log(`[attr()] undefined = ${$("#test1").attr('btnWidth')}`);
+    console.log(`[attr()] data-btn-width = ${$("#test1").attr('data-btn-width')}`);
+    console.log(`---------------------------------------------------`);
+    
+    // 3. html에서 직접가져 올 때는 dataset속성을 사용해서 가져올 수 있다.
+    // 이 때는 'CamelCase를 사용'해서만 가능하다.
+    console.log(`[dataset] [object DOMStringMap] = ${document.querySelector('#test1').dataset}`);
+    console.log(`[dataset[]] undefined = ${document.querySelector('#test1').dataset['btn-width']}`);
+    console.log(`[dataset[]] undefined = ${document.querySelector('#test1').dataset['data-btn-width']}`);
+    console.log(`[dataset[]] OK = ${document.querySelector('#test1').dataset['btnWidth']}`);
+    console.log(`[dataset[]] OK = ${document.querySelector('#test1').dataset['myName']}`);
+
+
+  </script>
+</body>
+</html>

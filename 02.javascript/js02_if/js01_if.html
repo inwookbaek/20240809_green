@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    // 1. 단순if
+    if(5>2) {
+      console.log(`5>2의 결과 ${5>2}`)
+    }
+    // console.log('프로그램종료!!');
+    
+    let age = 8;
+    if(age>=18) {
+      // true일경우
+      console.log(`age>=18의 결과 ${age>=18}`)
+    }
+    
+    // 2. if ~ else
+    if(age>=18) {
+      // true일경우
+      console.log(`성인(${age>=18})입니다!`)
+    } else {
+      // false일경우
+      console.log(`미성년자(${age>=18})입니다!`)
+    }
+
+    // 3. 중첩if
+    // if() {
+    //   if() {} else () {}
+    // }
+    // 실습. 중첩if문을 이용해서 아래 조건의 문장을 body에 출력하기
+    // 1) 시간을 입력받아서 12이전일 경우 '오전입니다' 아니면 '오후입니다'
+    // 2) 오전일 경우 9시이전일 경우 '아침을 먹습니다' 아니면 '출근을 합니다!'
+    // 3) 오후일 경우 18시이전일 경우 '일을 합니다!' 아니면 '퇴근을 합니다.'
+    // let time = Number(prompt('시간을 입력하세요!'), 9);
+    let time = 19;
+    if(time<=12) {
+      console.log('오전입니다!');
+      if(time<=9) {
+        console.log('아침을 먹습니다!');
+      } else {
+        console.log('출근을 먹습니다!');
+      }
+    } else {
+      console.log('오후입니다!');
+      if(time<=18) {
+        console.log('일을 합니다!');
+      } else {
+        console.log('퇴근을 합니다!');
+      }
+    }
+    console.log('-------------------------------');
+    
+    // 4. if ~ else if ~ else
+    // 상기실습문제를 if~else if~else
+    if(time<=9) {
+      console.log('오전입니다, 아침을 먹습니다!')
+    } else if(time<=12) {
+      console.log('오전입니다, 출근을 합니다!');
+    } else if(time<=18) {
+      console.log('오후입니다, 작업을 합니다!');
+    } else {
+      console.log('오후입니다, 퇴근을 합니다!');
+    }
+    console.log('-------------------------------');
+
+    // 5. 조건(삼항)연산자
+    // 1) 임의의 숫자를 전달받아서 해당 숫자가 짝수인지 홀수인지 확인
+    let num = 10;
+    if(num % 2 === 0) {
+      console.log(`${num}은 짝수 입니다!`)
+    } else {
+      console.log(`${num}은 홀수 입니다!`)
+    }
+
+    // 2) 조건연산자
+    // 조건식 ? 참일경우 : 거짓일경우
+    num%2 === 0 ? console.log(`${num}은 짝수 입니다!`) : console.log(`${num}은 홀수 입니다!`); 
+    num%2 === 0 ? alert('짝수입니다!') : console.log(`${num}은 홀수 입니다!`);   
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

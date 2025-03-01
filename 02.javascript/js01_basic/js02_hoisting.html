@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        /*  호이스팅(Hoisting)
+            ES2015(ECMA6)이전에는 변수를 선언할 때 var예약어를 사용했다.
+            변수에 var로 사용해서 선언하면 Hoisting이라는 개념에 
+            주의해야 한다. 호이스팅은 '끌어 올린다'라는 의미이다.
+
+            상황에 따라 변수의 선언 부분을 '스코프의 가장 위쪽으로
+            끌어 올린다.'는 것이다. 실제로 소스 코드의 위로 올린다는
+            의미가 아니라 자바스크립에서는 소스를 이런 방법으로 해석
+            한다는 의미이다.
+
+            var과는 다르게 let과 const를 사용할 경우에는 변수를 선언
+            하기 전에 사용하면 에러가 발생하는데 에러가 발생하면 개발자가
+            쉽게 에러를 확인할 수가 있지만 var사용할 경우에 선언전에 변수
+            를 사용하면 결과값이 예상과 다르게 나타나기 때문에 에러를 찾기
+            가 어렵게 된다.
+
+            변수선언  선언하지 않고 사용할 경우  재선언   재할당
+            var       오류가 없음(호이스팅)        O        O
+            let       에러발생                     X        O
+            const     에러발생                     X        X
+        */
+
+
+
+        var x = 10;
+        var sum = x + y; // 10 + 타입미확정 = NaN(Not a Numer)
+        var y = 20;
+        console.log(sum);
+
+    </script>
+</head>
+<body>
+    <h1 id="name"></h1>
+    <script>
+        let xxx = document.querySelector('#name');
+        console.log(xxx);
+        xxx.innerHTML = '김민재'
+    </script>
+</body>
+</html>

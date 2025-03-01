@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/carousel.css">
+  <script>
+    window.onload = () => {
+
+    }
+
+    window.addEventListener("contextmenu", e => {
+      e.preventDefault();
+      alert('오른쪽 마우스키를 사용할 수 없습니다!');
+    })
+  </script>
+</head>
+<body>
+  <p>좌우 화살표를 눌러 보세요!</p>
+  <div id="container">
+    <div class="arrow" id="left">&lang;</div>
+    <div class="arrow" id="right">&rang;</div>
+  </div>
+
+  <script src="./js/carousel.js"></script>
+</body>
+</html>

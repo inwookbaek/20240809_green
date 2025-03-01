@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    // textNode : innerHTML vs innerText
+    window.onload = () => {
+      // 1. innerHTML
+      let output = "";
+      output += '<ul>';
+      output += '  <li>HTML5</li>';
+      output += '  <li>CSS3</li>';
+      output += '  <li>JavaScript</li>';
+      output += '  <li>Database</li>';
+      output += '  <li>jQuery</li>';
+      output += '</ul>';
+      
+      document.write(output);
+      document.body.innerHTML = output;
+      document.write('<h1>DOM (1)</h1>');
+      document.body.innerHTML = '<h1>DOM (2)</h1>'; // innerHTML은 문서객체를 추가
+      
+      // 2. innerText
+      document.body.innerText = '<h1>DOM (2)</h1>'; // innerText는 텍스트를 추가
+    }
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

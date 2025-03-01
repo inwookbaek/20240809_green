@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    // 1. getElementById
+    window.onload = () => {
+      let header1 = document.getElementById('header-1');
+      let header2 = document.getElementById('header-2');
+
+      // 문서텍스트를 변경
+      header1.innerHTML = "getElementById('header-1')";
+      header2.innerHTML = "getElementById('header-2')";
+    }
+    // 2. getElementsByTagName
+    window.onload = () => {
+      let headers = document.getElementsByTagName('h3');
+      // header3 데이터타입은 collection -> 즉, 배열
+      headers[0].innerHTML = "getElementsByTagName('h3') - 1";
+      headers[1].innerHTML = "getElementsByTagName('h3') - 2";
+      headers[2].innerHTML = "getElementsByTagName('h3') - 3";
+
+      for(let i in headers) {
+        headers[i].innerHTML = 'for - ' + i;
+      }
+    }
+
+    // 3. getElementsByName
+    window.onload = () => {
+      let headers = document.getElementsByName('aaa');
+      for(let i in headers) {
+        headers[i].innerHTML = 'getElementsByName - ' + i;
+      }
+    }
+
+    // 4. getElementsByClassName
+    window.onload = () => {
+      let headers = document.getElementsByClassName('xxx');
+      for(let i in headers) {
+        headers[i].innerHTML = 'getElementsByClassName - ' + i;
+      }
+    }    
+  </script>
+</head>
+<body>
+  <!-- h1#header-$[name="aaa"].xxx{header-$}*3 -->
+  <h3 id="header-1" name="aaa" class="xxx">header-1</h3>
+  <h3 id="header-2" name="bbb" class="xxx">header-2</h3>
+  <h3 id="header-3" name="aaa" class="yyy">header-3</h3>
+</body>
+</html>

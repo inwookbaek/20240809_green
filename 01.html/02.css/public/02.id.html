@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="./css/id.css" />
+<!-- <style>
+	/* 실습
+		id가 header인 태그  : 넓이 800, 배경색 red
+		id가 wrap인 태그    : 넓이 800
+		id가 aside인 태그   : 넓이 200, 배경색 blue
+		id가 content인 태그 : 넓이 600, 배경색 green
+	*/
+	#header {
+		width: 800px;
+		background: red;
+	}
+	#wrap {
+		width: 800px;
+		overflow: hidden;
+	}
+	#aside {
+		width: 200px;
+		height: 300px;
+		background: blue;
+		float: left;
+		margin: 10px 10px 10px 10px; /* 상>우>하>좌 */
+	}
+	#content {
+		width: 540px;
+		height: 300px;
+		background: green;
+		float: left;
+		/* margin : 상 우 하 좌 
+		   margin : 상하 좌우
+		   margin : auto
+		*/		
+		margin: 10px 10px 10px 10px; 
+		padding: 10px 10px 10px 10px;
+	}
+</style> -->
+</head>
+<body>
+	<h1>id 선택자</h1>
+	
+	<!-- div#header>h1{Header} -->
+	<div id="header">
+		<h1>Header</h1>
+	</div>
+	
+	<!-- div#wrap>(div#aside>h1{Aside})+(div#content>h1{content}) -->
+	<div id="wrap">
+		<div id="aside">
+			<h1>Aside</h1>
+		</div>
+		<div id="content">
+			<h1>content</h1>
+		</div>
+	</div>
+</body>
+</html>

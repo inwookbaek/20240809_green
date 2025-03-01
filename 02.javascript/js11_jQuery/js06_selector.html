@@ -1,0 +1,95 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    // 위치선택자 -> :odd, :even, :first, :last
+    // 함수선택자 -> :eq(n), gtn(n), :nth-child(3n+1) 
+    $(() => {
+      $('tr:odd').css('backgroundColor', 'orange');
+      $('tr:even').css('backgroundColor', 'lightgray');
+      $('tr:nth-child(3n)').css({'backgroundColor':'green', 'color':'white'});
+      $('tr:nth-child(3n+1)').css({'backgroundColor':'mediumseagreen', 'color':'yellow'});
+      $('tr:eq(0)').css('backgroundColor', 'black').css('color', 'white');
+    })
+  </script>
+</head>
+<body>
+  <table border="1">
+    <colgroup>
+      <col style="width:100px;">
+      <col style="width:50px;">
+      <col style="width:50px;">
+      <col style="width:300px;">
+    </colgroup>
+    <tr>
+      <th>이름</th>
+      <th>성별</th>
+      <th>나이</th>
+      <th>주소</th>
+    </tr>
+    <tr>
+      <td>손흥민</td>
+      <td>남</td>
+      <td>32</td>
+      <td>영국 런던 토트넘</td>
+    </tr>
+    <tr>
+      <td>손흥민</td>
+      <td>남</td>
+      <td>32</td>
+      <td>영국 런던 토트넘</td>
+    </tr>
+    <tr>
+      <td>손흥민</td>
+      <td>남</td>
+      <td>32</td>
+      <td>영국 런던 토트넘</td>
+    </tr>
+    <tr>
+      <td>손흥민</td>
+      <td>남</td>
+      <td>32</td>
+      <td>영국 런던 토트넘</td>
+    </tr>
+    <tr>
+      <td>손흥민</td>
+      <td>남</td>
+      <td>32</td>
+      <td>영국 런던 토트넘</td>
+    </tr>
+    <tr>
+      <td>손흥민</td>
+      <td>남</td>
+      <td>32</td>
+      <td>영국 런던 토트넘</td>
+    </tr>
+    <tr>
+      <td>손흥민</td>
+      <td>남</td>
+      <td>32</td>
+      <td>영국 런던 토트넘</td>
+    </tr>
+    <tr>
+      <td>손흥민</td>
+      <td>남</td>
+      <td>32</td>
+      <td>영국 런던 토트넘</td>
+    </tr>
+    <tr>
+      <td>손흥민</td>
+      <td>남</td>
+      <td>32</td>
+      <td>영국 런던 토트넘</td>
+    </tr>
+    <tr>
+      <td>손흥민</td>
+      <td>남</td>
+      <td>32</td>
+      <td>영국 런던 토트넘</td>
+    </tr>
+  </table>
+</body>
+</html>

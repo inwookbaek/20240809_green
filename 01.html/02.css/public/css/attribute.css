@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+input[type="text"] {
+	background: red;
+}
+input[type="password"] {
+	background: blue;
+}
+	
+img {
+	width: 150px;
+	height: 300px;
+}
+
+/* $ : 끝 
+   ^ : 시작
+   * : 지정된 문자 포함
+   | : 처음부터 시작해 단어가 포함
+*/
+img[src$="jpg"] {
+  border: 3px solid red;
+}
+img[src$="png"] {
+  border: 3px solid blue;
+}
+img[src$="gif"] {
+  border: 3px solid green;
+}
+img[src^="./images/x"] {
+  border: 10px solid green;
+}
+img[src*="y"] {
+  border: 10px dashed purple;
+}
+img[src|="./images/world"] {
+  border: 10px dotted purple;
+}

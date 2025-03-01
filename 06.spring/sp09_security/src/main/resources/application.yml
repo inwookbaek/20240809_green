@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: sp09_security
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring?createDatabaseIfNotExist=true
+    username: root
+    password: 12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    genrate-ddl: false
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+  # Thymeleaf Cache Setting
+  thymeleaf:
+    cache: false
+  servlet:
+    multipart:
+      enabled: true
+      location: d:/lec/00.share/98.temp/upload/
+      max-request-size: 30MB
+      max-file-size: 10MB
+
+# Logging Setting
+logging:
+  level:
+    org:
+      hibernate: info
+      springframework:
+        security: trace
+    com:
+      lec: debug
+
+server:
+  port: 8090
+  servlet:
+    encoding:
+      force-response: true
+      charset: utf-8
+
+# file upload/download
+path:
+  upload: d:/lec/00.share/98.temp/upload/
+  download: d:/lec/00.share/98.temp/download/
+
+com:
+  lec:
+    upload:
+      path: d:/lec/00.share/98.temp/upload/

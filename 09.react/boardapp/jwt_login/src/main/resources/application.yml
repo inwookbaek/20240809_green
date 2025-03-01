@@ -1,0 +1,32 @@
+# https://suddiyo.tistory.com/entry/Spring-Spring-Security-JWT-로그인-구현하기-2
+server:
+  port: 8090
+  servlet:
+    encoding:
+      force-response: true
+      charset: utf-8
+
+spring:
+  application:
+    name: jwt_login
+  datasource:
+    url: jdbc:mysql://localhost:3306/boarddb?createDatabaseIfNotExist=true
+    username: root
+    password: 12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    genrate-ddl: false
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect		
+
+# 암호 키 설정
+# 터미널에 다음 명령어를 작성하여 랜덤으로 암호 키를 생성한 후, 생성된 secret key를 application.yml에서 설정한다.
+# 해당 키는 토큰의 암호화 복호화에 사용될 것이다. HS256 알고리즘을 사용하기 위해 32글자 이상으로 설정해준다.		
+# 키생성 : $ openssl rand -hex 32
+jwt:
+  secret: S3cr3tK3y

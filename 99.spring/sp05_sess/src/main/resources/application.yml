@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: jsp05_sess
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+
+server:
+  port: 8090

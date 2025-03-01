@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /* 복합대입연산자 
+      += : a = a + 1;
+      -= : a = a - 1;
+      *= : a = a * 1;
+      /= : a = a / 1;
+    */
+    let a;   // 선언, undefined
+    a = 1;   // 초기화
+    let b = 0;  // 선언과 동시에 초기화
+    
+    b += 10; // b = b + 10; 동일명령
+    document.write(`b += 10 -> ${b}<br>`);
+    
+    b -= 2; // b = b - 2; 동일명령
+    document.write(`b -= 2 -> ${b}<br>`);
+    
+    b *= 10; // b = b * 10; 동일명령
+    document.write(`b *= 10 -> ${b}<br>`);
+    
+    b /= 2; // b = b / 2; 동일명령
+    document.write(`b /= 2 -> ${b}<br>`);
+    
+    // list tag
+    let list = '';
+    list = list + '<ul>';
+    list = list + '  <li>HTML5</li>';
+    list = list + '  <li>CSS3</li>';
+    list = list + '  <li>JavaScript</li>';
+    list = list + '  <li>Python</li>';
+    list = list + '</ul>';
+    document.write(list);
+    
+    // 복합대입연산자
+    // 블럭선택 shift+alt+mouse드레그 
+    // 마우스이동 or 편집 
+    // 선택취소는 esc or 아무곳이나 클릭
+    list = '';
+    list += '<ul>';
+    list += '  <li>HTML5</li>';
+    list += '  <li>CSS3</li>';
+    list += '  <li>JavaScript</li>';
+    list += '  <li>Python</li>';
+    list += '</ul>';
+    document.write(list);
+
+
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

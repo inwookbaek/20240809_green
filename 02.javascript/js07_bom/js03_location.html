@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /*
+      location 객체
+
+      웹브라우저의 주소표시줄과 관련된 객체이다.
+      location객체는 프로토콜의 종류, 호스트이름, 문서등의 위치등의 정보를 제공
+
+      1. 사용방법
+
+        location = 'http://www.naver.com';
+        location.href = 'http://www.google.com'    -> 이런명령을 주로 사용
+        location.assign('http://www.google.com');  -> 이동
+        location.replace('http://www.google.com'); 
+
+      2. 메서드
+
+        assign(link)  : 현재위치를 link위치로 이동
+        replace(link) : 현재위치를 link위치로 이동, 뒤로가기버튼을 사용할 수 없다.
+        reload()      : 새로고침
+
+      3. 속성
+
+        href = url 주소
+        host = host이름과 포트번호 : localhost:8080
+        hostname = localhost
+        port = 8080
+        pathnam = 디렉토리경로
+        hash = 앵커이름(#~~)
+        search = 쿼리스트링, localhost:8080?name=hong&gender=F -> ?name=hong&gender=F
+        protocol = protocol의 종류, http, https, ftp, file....
+    */
+    for(let key in location) {
+      document.write(`${key} = ${window[key]} <br>`);
+    }
+
+    location.href = 'http://www.naver.com';
+  </script>
+</head>
+<body>
+ 
+</body>
+</html>

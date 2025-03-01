@@ -1,0 +1,26 @@
+@charset "UTF-8";
+/* 
+	후손선택자 : 선택자A > 선택자B
+	자손선택자 : 선택자A 선택자B
+
+    1. #header 후손 h1의 문자색을 red
+    2. #header 자손 h1의 문자색을 blue
+    3. 실습 : table태그의 tr의 th태그의 배경색 검정, 글자색 하양
+*/
+
+#header h1 {
+	color: red;
+}
+#header > h1 {
+	color: blue;	
+}
+
+table tr th {
+	background: black;
+	color: white;
+}
+
+table tr > th {
+	background: yellow;
+	color: red;
+}

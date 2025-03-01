@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /*
+      생성자함수?
+
+      1. new연산자로 객체를 생성할 수 있는 함수
+      2. 생성자함수명은 대문자로 시작하고 Camel케이스를 준수하는 것이 관례
+      3. 일반함수와 생성자함수를 구분하는 방법은 return문의 유모로 구분한다.
+        즉 return문이 있으면 일반함수, 없으면 생성자함수이다.
+    */
+    function Student() {}  // 생성자함수
+    function student() { return } // 일반함수
+
+    let std1 = new Student();
+    let std2 = new student();
+    let std3 = Student();
+    // new로 생성되었는지 아니면 객체리터럴로 생성되었는지 확인은 new.target
+    // 으로 확인할 수 있다.
+
+    console.log(typeof std1);
+    console.log(typeof std2);
+    console.log(typeof std3);
+
+    // prototype : 객체의 공통영역을 의미
+    function Student(name, kor, eng, mat) {
+      this.name = name;
+      this.kor = kor;
+      this.eng = eng;
+      this.mat = mat;
+      // this.getSum = function() { return this.kor + this.eng + this.mat }
+      // this.getAvg = function() { return this.getSum() / 3 }
+    }
+
+    // 객체의 공통영역(Prototype)
+    // JavaScript에서 모든 함수는 공통영역인 Prototype영역이 있다.
+    // 공통영역을 정의하는 방법
+    // 1. 속성  : 생성자함수.prototype.속성명 = 값
+    // 2. 메서드: 생성자함수.prototype.메서드명 (대표적인 메서드가 toString)
+    // 공통데이터인 국적
+    Student.prototype.nation = '대한민국';
+    Student.prototype.toString = function() {
+      return `내 이름은 ${this.name}이고 국적은 ${this.nation} 입니다!`;
+    }
+    
+    // 함수내에서는 화살표함수를 사용할 수 없다.
+    Student.prototype.getSum = function() { return this.kor + this.eng + this.mat }
+    Student.prototype.getAvg = function() { return this.getSum() / 3 }
+
+    let kim = new Student('김민재', 90,80,90);
+    let lee = new Student('이강인', 88,99,77);
+    console.log(kim.toString())
+    console.log(`총점 = ${kim.getSum()}`);
+    console.log(`평균 = ${kim.getAvg().toFixed(2)}`);
+    console.log(lee.toString())
+    console.log(`총점 = ${lee.getSum()}`);
+    console.log(`평균 = ${lee.getAvg().toFixed(2)}`);
+
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/js04.css">
+  <script>
+    // 1. forEach : array와 같이 사용
+    //    1) for문과 array
+    //    2) 배열.forEach(콜백함수)
+    let arr1 = ['손흥민','이강인','김민재','이재성','양민혁','홍길동']
+    console.log(`배열의 크기 = ${arr1.length}`)
+    
+    // 일반for문
+    for(let i=0;i<arr1.length;i++) {
+      console.log(`학생이름 = ${arr1[i]}`);
+    }
+    console.log('----------------------');
+    
+    // forEach(콜백함수)
+    arr1.forEach(function(name) {
+      console.log(`학생이름 = ${name}`);
+    })
+    console.log('----------------------');
+    
+    // forEach(화살표함수)
+    // 윈도우키+. -> 이모지
+    let arr2 = ['🥝','🥥','🍇','🍈','🍉','🍊'];
+    arr2.forEach(function(fruit) {
+      console.log(`과일 = ${fruit}`);
+    })
+    console.log('----------------------');
+    
+    arr2.forEach((f) => { console.log(`과일 = ${f}`) } );
+    console.log('----------------------');
+    
+    arr2.forEach(f => console.log(`과일 = ${f}`))
+    console.log('----------------------');
+    
+    // 2. for .. of : for와 array
+    for(let f of arr2) {
+      console.log(`과일 = ${f}`);
+    }
+    console.log('----------------------');
+    
+    // 3. for .. in : for와 object 
+    // object에서 key를 꺼내오는 기능
+    let hong = {
+      name:"홍길동",
+      age: 1000,
+      addr:"조선 한양",
+      mobile:'010-9999-8888'
+    }
+    console.log(hong.name);
+    console.log(hong.age);
+    console.log(hong.addr);
+    console.log(hong.mobile);
+    console.log('----------------------');
+
+    for(let key in hong) {
+      console.log(`${key}의 값 = ${hong[key]}`)
+      // console.log(`${key}의 값 = ${hong.key}`) dot연산자는 사용불가
+    }
+
+    // 실습2. 자리배치도 
+    // 현재 강의실의 인원수와 한 줄에 3명씩 앉을 경우 
+    // 자리배치도를 출력해보기(구구만과 같이 제출)
+    // if, for, prompt(memNum과 colNum을 전달), table태그로 출력
+    let memNum = parseInt(prompt('인원수를 입력하세요!', 16));
+    let colNum = parseInt(prompt('한열의 좌석수를 입력하세요!', 3));
+
+    if(memNum % colNum === 0) {
+      rowNum = parseInt(memNum /  colNum); // 좌석행의 갯수
+    } else {  
+      rowNum = parseInt(memNum / colNum) + 1; 
+    }
+    console.log(`총 좌석행의 수 = ${rowNum}`);
+
+    document.write('<table>');
+    for(let i=0;i<rowNum;i++) {
+      document.write('<tr>');
+      for(let j=1;j<=colNum;j++) {
+        let seatNo = i * colNum + j;  // 좌석번호
+        if(seatNo > memNum) break;
+        document.write(`<td><button>${seatNo}</button></td>`)
+        // document.write(`<td>${seatNo}</td>`)
+      }
+      document.write('</tr>');
+    }
+    document.write('</table>');
+  </script>
+</head>
+<body>
+
+</body>
+</html>

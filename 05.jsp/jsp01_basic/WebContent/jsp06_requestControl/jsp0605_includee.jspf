@@ -1,0 +1,16 @@
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!--  
+	include 디렉티브를 통해 다른 jsp에 포함되는 jsp파일의 경우
+	일반 jsp파일과 구분하기 위해 통상적으로 확장자를 ".jspf"로
+	정의한다. jsp로 사용해도 가능하지만 jspf는 jsp Fragment 즉,
+	jsp의 소스코드조각을 의미한다.
+	
+	페이지디렉티브에서 컨텐츠타입을 지정하고 있는데 포함되는 파일
+	일지라도 컨텐츠타입을 알맞게 지정해야 결과가 올바르게 출력이
+	된다.
+-->
+includer.jsp에서 가져온 자료(number) = <%= number %>
+
+<%
+	String includee_value = "includee에서 가져온 값";
+%>

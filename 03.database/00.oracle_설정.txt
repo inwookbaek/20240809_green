@@ -1,0 +1,100 @@
+1. Oracle Express Edition Downloa & Install
+
+   1) www.oracle.com 
+      ... https://www.oracle.com/database/technologies/xe-prior-release-downloads.html
+      ... Oracle Database 11gR2 Express Edition for Windows x64을 다운로드
+   2) 압축을 임시폴더에 압축풀기
+      ... disk1/setup.exe 를 실행
+
+2. Navicat Install
+   
+   1) 설치
+   2) Activation : (menu)Help>Registation : key를 복사 > Activate
+      ... Error Message 무시 후 close
+   3) Navicat 재시작  
+
+3. Oracle DB 접속
+
+   1) Window Menu : Oracle XE 11g... > Run SQL Command Line 실행
+   2) Command Line창에서 DB 접속
+      a. SQL> conn sys/12345 as sysdba 후 Enter Key
+         ... Connected 확인 : 접속성공
+      b. SQL> show user : 현재 사용자 확인 
+         ... USER is "SYS"
+      c. SQL> exit
+
+   3) Navicat 실행 
+
+      a. (menu) File > New Connection > Oracle
+      b. New Connection
+         ... Connection Name : sys
+         ... Host            : localhost
+         ... Service Name    : XE
+         ... User Name       : sys
+         ... password        : 12345
+      c. (tab) Advanced
+         ... Role            : SYSDBA
+      d. (button) Test Connection
+         ... Connection Successful
+      e. (button)OK
+      f. (menu) Tools > Options > Enviroment 
+         ... OCI Environment 
+         ... c:Progrman Files/premium soft/..../instanceclient_10_?/oci.dll 
+         ... (button) 열기
+      g. 좌측 Tree Menu : sys를 더블클릭
+         ... 접속확인
+
+4. Oracle DB 환경설정
+
+   1) Run SQL Command Line을 실행
+      
+      a. DB 접속       : SQL> conn sys/12345 as sysdba
+      
+      b. 현재사용자확인 : SQL> show user
+      
+      c. 다른 사용자접속: SQL> conn hr/hr 
+         ... hr사용자는 lock이 걸린 상태
+      
+      d. 다른 사용자접속: SQL> conn scott
+         ... scott사용자는 없는 상태
+
+      e. hr사용자는 lock해제해야 하고 scott사용자는 새로 생성해야 한다.
+
+   2) DB환경설정
+
+      a. DB환경조회 : SQL> select * from v$nls_parameters;
+      
+      b. 날짜형식 변경하기
+
+         SQL> alter session set nls_date_format = 'YYYY-MM-DD';
+              ... NLS_DATE_FORMAT=DD-MON-RR 을 YYYY-MM-DD'로 변경
+         SQL> alter session set NLS_TIMESTAMP_FORMAT = 'YYYY-MM-DD HH:MI:SS';
+
+      c. 변경정보를 영구적으로 변경
+
+         명령) alter [session/system]
+         a) session : 현재 접속한 session에서만 변경되고 접속을 끊은후 다시 접속하면 
+                      변경전 환경으로 복귀된다.
+         b) system  : database의 정보를 영구적으로 변경
+            ... 옵션 scope=[both/spfile]
+                --> both : 바로 적용 or 재시작(오류가 날 가능성이 많다.)
+                --> spfile : db를 종료후 재시작
+
+         c) 변경하기
+
+    SQL> alter system set nls_date_format = 'YYYY-MM-DD' scope=spfile;
+    SQL> alter system set NLS_TIMESTAMP_FORMAT = 'YYYY-MM-DD HH:MI:SS' scope=spfile;
+    SQL> exit
+
+      d. DB재시작 : 
+
+      Window Mene > Oracle XE.....
+      a) stop database
+      b) start database
+
+
+
+
+
+
+

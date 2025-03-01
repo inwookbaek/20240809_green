@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /*
+      객체란?
+  
+      객체란 속성과 메서드(함수)를 가지고 있는 참조 자료형이다.
+      객체{}는 키와 값을 한싸으로 갖는 자료형이다.
+      배열[]은 값만 가지는 객체이다.
+  
+    */
+    console.log(`배열[] = ${typeof []}`);  // object
+    console.log(`객체{} = ${typeof {}}`);  // object
+    
+    // 객체
+    let obj1 = {}
+    let obj2 = new Object();
+
+    // 클래스와 object차이점은 class 데이타가 없고 object 데이터가 있다.
+    let person = {
+      name: '홍길동',
+      age: 1000,
+      speak: function() { return '말을 합니다!!' }
+    }
+
+    class Person {
+      name;
+      age;
+
+      // constructor() {}
+
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+
+      speak() { return '말을 합니다!!' }
+    }
+
+    // hong을 객체라고 한다. 엄밀히 이야기해서는 인스턴스라고 한다.
+    let hong = new Person('홍길동', 1000);
+
+    // 객체의 속성과 메서드
+    console.log("객체{} = ", person.name, person['age'], person.speak());
+    console.log("new/객체 = ", hong.name, hong['age'], hong.speak());
+
+
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

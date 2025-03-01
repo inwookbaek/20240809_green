@@ -1,0 +1,134 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /*
+      JavaScript의 자료형
+      1. number : 정수(integer), 실수(float)
+      2. string : 작은, 큰 따옴표로 선언된 데이터
+      3. boolean: 참(true), 거짓(false)값만 가진 논리형 데이터
+      4. object{}: 키와 값을 한쌍으로 가진 데이터 예) {'name':'홍길동', 'age'=1000}
+      5. array[] : 여러개의 값을 가지는 데이터 타입 예) [1,  '문자열', prompt, {'name':'홍길동', 'age'=1000}]
+      6. undefined : 선언만 되어있고 값을 가지지 않는 데이터타입
+      7. null      : null이라는 하나의 값만 가지는 데이터타입
+    */
+    // 한줄 or block 복사 shift+alt+up/down
+    // 줄이동 alt+up/down
+    console.log(10, typeof 10);
+    console.log(3.14, typeof 3.14);
+    console.log('10', typeof '10');
+    console.log(true, typeof true);
+    console.log(false, typeof false);
+    // console.log(True, typeof True); // True는 변수, 정의되지 않아서 에러발생
+    console.log({}, typeof {});  // object
+    console.log([], typeof []);  // array, 배열
+    console.log(null, typeof null);
+    console.log(undefined, typeof undefined);
+  </script>
+  <script>
+    // 논리형- 비교연산자의 결과
+    // 비교연산자 
+    // 1. 동등연산자  : ==(값만비교), ===(값과 자료형)
+    // 2. 비동등연산자: !=, !==
+    // >=, <=, >, <
+
+    console.log(1 == 1); // true
+    console.log(1 == 1); // true
+
+    // JS에서 true = 1, false = 0
+    console.log('1 == true -> ', 1 == true); // 1 == 1 -> true
+    console.log('0 == true -> ', 0 == true); // 0 == 1 -> flase
+    console.log('0 == false -> ', 0 == false); // 0 == 0 -> true
+    console.log('100 == true -> ', 100 == true); // 100 == 1 -> false
+    console.log('100 == false -> ', 100 == false); // 100 == 0 -> false
+    console.log("--------------------------------------");
+    
+    console.log('1 === true -> ', 1 === true); // 1 == 1 -> flase
+    console.log('0 === true -> ', 0 === true); // 0 == 1 -> flase
+    console.log('0 === false -> ', 0 === false); // 0 == 0 -> flase
+    console.log('100 === true -> ', 100 === true); // 100 == 1 -> false
+    console.log('100 === false -> ', 100 === false); // 100 == 0 -> false
+    console.log("--------------------------------------");
+    
+    console.log('5 >= 5 -> ', 5 >= 5);  // true
+    console.log('5 >= 5 -> ', 5 >= 5);  // true
+    console.log('\'5\' == 5 -> ', '5' == 5);  // true, 숫자형의문자와 숫자비교시 먼저
+    console.log('\'5\' === 5 -> ', '5' === 5);  // false
+    console.log("--------------------------------------");
+    
+    console.log('5 != 5 -> ', 5 != 5);  // false
+    console.log('5 != 5 -> ', 5 != '5');  // false
+    console.log('5 !== 5 -> ', 5 !== '5');  // true
+    console.log("--------------------------------------");
+    
+    console.log('30 > 20 -> ', 30 > 20);  // true
+    console.log('30 > 20 > 10 -> ', 30 > 20 > 10);  // false
+    console.log('30 > 20 > 0 -> ', 30 > 20 > 0);  // ture
+  </script>
+
+<script>
+  // 논리연산자
+  // !  : not, 부정연산자
+  // && : and, 논리곱연산자
+  // || : or,  논리합연산자
+  console.log("--------------------------------------");
+  console.log(true); // true
+  console.log(!true); // false
+  console.log('!5 > 2 -> ', !5 > 2); // false
+  console.log('!(5 > 2) -> ', !(5 > 2)); // false
+  console.log('!false -> ', !false); // true
+  console.log("--------------------------------------");
+  
+  console.log('30>20 && 20>10 -> ', 30>20 && 20>10); // true : t t = t, t f = f, f t = f, f f = f
+  console.log('30>20 && 20<10 -> ', 30>20 && 20<10); // false
+    console.log('30>20 || 20>10 -> ', 30>20 || 20>10); // true 
+    console.log('30>20 || 20<10 -> ', 30>20 || 20<10); // true
+    </script>
+<script>
+  // if문장
+  // if(비교식 or 조건식) { 참일경우 실행문장 } else { 거짓일 경우 실행문장 }
+  console.log("--------------------------------------");
+  let age = parseInt(prompt('나이를 입력하세요!', 18));
+  console.log(typeof age);  // number;
+
+  if(age >=18) {
+    console.log('성인입니다!!')
+  } else {
+    console.log('미성년자입니다!')
+  }
+</script>
+<script>
+  function checkAdult() {
+    age = parseInt(document.querySelector('#age').value);
+    if(age >=18) {
+      // document.write('<h1>성인입니다!!</h1>');
+      document.querySelector('#result').innerHTML = '성년입니다!'
+    } else {
+      //document.write('<h1>미성년자입니다!</h1>');
+      document.querySelector('#result').innerHTML = '미성년입니다!'
+    }
+  }
+</script>
+</head>
+<body>
+  나이 : <input type="text" id="age" value="20"><br>
+  <button onclick="checkAdult()">클릭!</button>
+  <hr>
+  <h3 id="result"></h3>
+
+  <!-- result : 성인입니다. / 미성년자입니다. -->
+  <script>
+    // 실습
+    // input태그에서 값을 입력해서 그 값이 18세 이상일 때 성인입니다. 아니면 미성년자입니다. 
+    // 출력해 보세요! 
+    // input태그의 값을 어떻게 가져와야 할지? -> core 질문
+    // id를 정의, 버튼클릭에 onclick, docutemt.querySelector, document.write  
+    age = document.querySelector('#age').value;
+    // age = document.getElementById('age').value;
+    console.log(age, typeof age);
+    
+  </script>
+</body>
+</html>

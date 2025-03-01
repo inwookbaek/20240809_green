@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    // 함수
+    // 1. 내장함수
+    // alert, prompt는 내장함수 즉, js에서 기본적으로제공해주는 함수
+    // 함수의 호출은 함수명(매개변수1, 매개변수....)으로 호출된다.
+    // 2. 사용자정의함수
+    // function 함수명(매개변수...) {}
+    let result = prompt('이름을 입력하세요', '손흥민')
+
+    function add() {
+      return 10 + 10;
+    }
+
+    let sum = add();
+
+     console.log(`prompt의 자료형(내장함수) = ${typeof prompt}`);
+    console.log(`add의 자료형(사용자함수) = ${typeof add}`);
+    console.log(`10 + 10 = ${sum}`);
+
+    function add1(a, b) {
+      return a + b;
+    }
+    sum = add1(20, 10);
+    console.log(`20 + 10 = ${sum}`);
+
+    console.log(`30 + 20 = ${add1(30, 20)}`);
+  </script> 
+
+  <script src="./js/changeBG.js">
+    // 실습. 배경색변경하기
+    // 1. css : ./css/main.css
+    // 2. js  : ./js/changeBG.js
+    //    Math.floor(), Math.random()
+  </script>
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+<body style="background-color: rgb(255,255,10);">
+  <button onclick="bgColorChange()">배경색변경하기</button>
+</body>
+</html>

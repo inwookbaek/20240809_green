@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    // 1. 객체의 선언과 속성 정의하기
+    // 1) 속성추가
+    let student = {}
+    student.sno = 1000;
+    student.name = '홍길동';
+    student.gender = '남자';
+    student.sayHello = function() {}
+
+    for(let key in student) {
+      console.log(`${key}의 값 = ${student[key]}`)
+    }
+
+    // 2) 객체의 메서드 추가 및 재정의
+    // a. 상속받은 메서드의 재정의(Object.toString())
+    console.log(student.toString());
+    student.toString = function() {
+      return `학번=${this.sno}, 이름=${this.name}, 성별=${this.gender}`
+    }
+    console.log(student.toString());
+
+    // b. 객체메서드 추가하기
+    student.study = function(course) {
+      return `${this.name}이 ${course}과목을 공부합니다!`
+    }
+    console.log(student.study('영어'));
+    console.log(student.study('수학'));
+
+    // 3) 객체에서 속성 or 메서드를 삭제하기
+    delete(student.name)
+    delete(student.study)
+    
+    for(let key in student) {
+      console.log(`${key}의 값 = ${student[key]}`)
+    }  
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

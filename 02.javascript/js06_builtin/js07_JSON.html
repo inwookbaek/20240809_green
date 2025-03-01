@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /*
+      JSON(JavaScript Object Notation)객체?
+
+      JavaScript의 '객체형태의 문자열'아더, 즉 '속성(키):값' or 배열형태를 갖는
+      자료이다.
+
+      1. stringyfy(): JavaScript의 객체를 문자열로 변환하는 함수
+      2. parse()    : JSON객체를 JavaScript의 객체로 변환하는 함수 
+    */
+    let person = {
+      name:'홍길동',
+      age: 100,
+      gender: "M",
+      addr:"조선 한양",
+      arr: [1,2,3,4],
+      data: {a:"aaa", b:"bbb"},
+      fn: function() { console.log('JSON객체 공부하기')}
+    }
+
+    let str = JSON.stringify(person);
+    document.write(typeof str, str, '<br>');
+    
+    // JSON데이터를 JavaScript의 객체로 변환
+    let obj = JSON.parse(str);
+    document.write(typeof obj, obj.name, '<br>');
+    
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

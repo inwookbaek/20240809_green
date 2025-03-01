@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #sun {
+      font-size: 5rem;
+      color: red;
+    }
+    #earth {
+      font-size: 2rem;
+      color: greenyellow;
+    }
+    #moon {
+      font-size: 1rem;
+      color: gray;
+    }
+  </style>
+  <script>
+    window.onload = () => {
+      let sun = document.querySelector('#sun');
+      let earth = document.querySelector('#earth');
+      let moon = document.querySelector('#moon');
+
+      // 절대위치 - style
+      sun.style.position = 'absolute';
+      earth.style.position = 'absolute';
+      moon.style.position = 'absolute';
+
+      sun.style.left = 250 + 'px';
+      sun.style.top = 250 + 'px';
+
+      let earthAngle = 0;
+      let moonAngle = 0;
+
+      setInterval(function() {
+        let earthLeft = 250 + 150 * Math.cos(earthAngle);
+        let earthTop = 250 + 150 * Math.sin(earthAngle);
+        let moonLeft = earthLeft + 20 * Math.cos(moonAngle);
+        let moonTop = earthTop + 20 * Math.sin(moonAngle);
+
+        earth.style.left = earthLeft + 'px';
+        earth.style.top = earthTop + 'px';
+        moon.style.left = moonLeft + 'px';
+        moon.style.top = moonTop + 'px';
+
+        earthAngle += 0.1;
+        moonAngle += 0.3;
+      }, 200);
+
+    }
+  </script>
+</head>
+<body>
+  <div id="sun">●</div>
+  <div id="earth">●</div>
+  <div id="moon">●</div>
+</body>
+</html>

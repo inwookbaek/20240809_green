@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    /*
+      jQuery parsing
+
+      1. jQuery.parseJSON(): JSON형식의 문자열을 JavaScript객체로 변환
+      2. jQuery.parseXML() : XML형식의 문자열을 XML Documentype 객체로 변환
+      3. jQuery.parseHTML(): HTML형식의 문자열을 JavaScript객체로 변환
+    
+    */
+    let XML = ''
+    XML += '<members>';
+    XML += '  <member>';
+    XML += '    <name>홍길동</name>';
+    XML += '    <age>1000</age>';
+    XML += '    <addr>조선 한양</addr>';
+    XML += '  </member>';
+    XML += '  <member>';
+    XML += '    <name>손흥민</name>';
+    XML += '    <age>33</age>';
+    XML += '  </member>';
+    XML += '  <member>';
+    XML += '    <name>김민재</name>';
+    XML += '    <age>24</age>';
+    XML += '  </member>';
+    XML += '  <member>';
+    XML += '    <name>이강인</name>';
+    XML += '    <age>23</age>';
+    XML += '    <tel>010.9999.8888</tel>';
+    XML += '  </member>';
+    XML += '</members>';
+
+    $(() => {
+      let xmlDoc = $.parseXML(XML);
+      console.log(`${typeof xmlDoc} : ${xmlDoc}`);
+
+      $(xmlDoc).find('member').each(function(idx) {
+        let output = '';
+        output += '<div>';
+        output += '<h3>' + $(this).find('name').text() + '</h3>';
+        output += '<h3>' + $(this).find('age').text() + '</h3>';
+        output += '<h3>' + $(this).find('addr').text() + '</h3>';
+        output += '<h3>' + $(this).find('tel').text() + '</h3>';
+        output += '</div><hr>';
+        document.body.innerHTML += output;
+      });
+    })
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

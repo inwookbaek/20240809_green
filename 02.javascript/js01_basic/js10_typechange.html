@@ -1,0 +1,107 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /*
+      형변환함수
+      ... 형변환이란 데이터타입을 숫자에서 문자, 문자에서 숫자와 같이
+          데이터타입을 변환하는 함수를 말한다.
+  
+      1. Number()
+      2. String()
+      3. Boolean()
+    */
+    // 1. Number(문자열) : string -> number
+    // 조건은 숫자로 변환할 수 있는 형태의 문자열 즉, 숫자형문자열이어야 한다.
+    let age = prompt('나이를 입력하세요!', 18);
+    console.log(typeof age);
+    console.log(`${age = age + 1}`);  // 181
+    
+    // age = parseInt(age);  // 함수
+    // console.log(typeof age);
+    // console.log(`${age = age + 1}`);
+    
+    // age의 값은 181이라는 문자열
+    age = Number(age);  // 객체(class의 생성자)
+    console.log(typeof age);
+    console.log(`${age = age + 1}`);  // 182
+    
+    let num = '100';
+    console.log(`${Number(num) + 10}`); // 110
+    
+    num = '100a';
+    console.log(`${Number(num) + 10}`); // NaN
+
+    // Number(true) : boolean -> number
+    let 참 = Number(true);
+    console.log(typeof 참);
+    console.log(`${참 = 참 + 1}`);  
+    console.log('----------------------------')  
+    </script>
+  <script>
+    // 2. String(숫자) : string -> number
+    num = 100;
+    num = String(num);
+    console.log(typeof num);
+    console.log(`${num + 1}`, typeof num);
+    
+    let a = false;
+    a = String(a);
+    console.log(`${a}`, typeof a);
+    console.log('----------------------------')  
+  </script>
+  <script>
+    // 3. Boolean(숫자) or Boolean(문자)
+    // 1) 숫자 0은 flase, 0이외의 숫자는 true
+    let b = 0
+    Boolean(b);
+    console.log(typeof b, ' = ', b);
+    b = Boolean(b);
+    console.log(typeof b, ' = ', b);
+    b = Boolean(100);
+    console.log(typeof b, ' = ', b);
+    b = Boolean(-1);
+    console.log(typeof b, ' = ', b);
+    console.log('----------------------------')  
+    
+    // 2) 문자일 경우 값이 없으면 false, 값이 있으면 true
+    let s = Boolean('');
+    console.log(typeof s, ' = ', s);
+    s = Boolean(null);
+    console.log(typeof s, ' = ', s);
+    s = Boolean(undefined);
+    console.log(typeof s, ' = ', s);
+    s = Boolean('문자열');
+    console.log(typeof s, ' = ', s);
+    console.log('----------------------------')  
+    </script>
+  <script>
+    // 4. parseInt vs Number;
+    let test1 = '0001';
+    console.log(`parseInt = ${parseInt(test1)}`);
+    console.log(`Number = ${Number(test1)}`);
+    
+    test1 = '2024년';
+    console.log(`parseInt = ${parseInt(test1)}`);  // 2024
+    console.log(`Number = ${Number(test1)}`);      // NaN
+    
+    test1 = '년2024';
+    console.log(`parseInt = ${parseInt(test1)}`);  // NaN
+    console.log(`Number = ${Number(test1)}`);      // NaN
+    
+    // parseFloat vs Number
+    test1 = '10.12345';
+    console.log(`parseInt = ${parseInt(test1)}`);  
+    console.log(`parseFloat = ${parseFloat(test1)}`);  
+    console.log(`Number = ${Number(test1)}`);     
+
+  </script>
+
+  
+</head>
+<body>
+  
+</body>
+</html>
