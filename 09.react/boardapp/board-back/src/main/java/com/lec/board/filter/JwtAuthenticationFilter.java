@@ -88,15 +88,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-    	
-    	log.info(" =====> JwtAuthenticationFilter.doFilterInternal : " + request.getMethod());
-    	
+    	    	
         try {
             // 1️⃣ 요청에서 JWT 토큰을 추출
             String token = parseBearerToken(request);
-            log.info(" 1. =====> token : " + token);
             
-            // 2️⃣ 토큰이 없으면 요청을 그대로 다음 필터로 넘김
+             // 2️⃣ 토큰이 없으면 요청을 그대로 다음 필터로 넘김
             if (token == null) {
                 filterChain.doFilter(request, response);
                 return;
@@ -104,7 +101,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             // 3️⃣ 토큰 검증 및 이메일 추출
             String email = jwtProvider.validate(token);
-            log.info(" 2. =====> email : " + email);
 
             // 4️⃣ 검증에 실패하면 요청을 그대로 다음 필터로 넘김
             if (email == null) {
@@ -122,6 +118,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // 7️⃣ SecurityContext에 인증 정보 저장 (인증된 사용자로 인식됨)
             SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
             securityContext.setAuthentication(authenticationToken);
+            
             SecurityContextHolder.setContext(securityContext);
 
         } catch (Exception exception) {
@@ -141,19 +138,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private String parseBearerToken(HttpServletRequest request) {
         // 1️⃣ Authorization 헤더 값 가져오기
         String authorization = request.getHeader("Authorization");
-
+        log.info(" =====> authorization : " + authorization);
+        
         // 2️⃣ Authorization 헤더가 존재하는지 확인
         boolean hasAuthorization = StringUtils.hasText(authorization);
+        log.info(" =====> hasAuthorization : " + hasAuthorization);
         if (!hasAuthorization) return null;
 
         // 3️⃣ 헤더 값이 "Bearer "로 시작하는지 확인
         boolean isBearer = authorization.startsWith("Bearer ");
         if (!isBearer) return null;
+        log.info(" =====> hasAuthorization : " + hasAuthorization);
 
         // 4️⃣ "Bearer " 이후의 문자열(토큰) 추출
         String token = authorization.substring(7);
-        
-        log.info(" =====> JwtAuthenticationFilter.parseBearerToken : " + token);
+        log.info(" =====> token : " + token);
         
         return token;
     }

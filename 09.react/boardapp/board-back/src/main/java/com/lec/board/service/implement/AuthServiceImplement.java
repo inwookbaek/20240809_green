@@ -3,17 +3,19 @@ package com.lec.board.service.implement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.lec.board.dto.request.auth.SignInRequestDto;
 import com.lec.board.dto.request.auth.SignUpRequestDto;
 import com.lec.board.dto.response.ResponseDto;
+import com.lec.board.dto.response.SignInResponseDto;
 import com.lec.board.dto.response.auth.SignUpResponseDto;
 import com.lec.board.entity.UserEntity;
+import com.lec.board.provider.JwtProvider;
 import com.lec.board.repository.UserRepository;
 import com.lec.board.service.AuthService;
 
+import io.jsonwebtoken.JwtParser;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -21,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class AuthServiceImplement implements AuthService {
 	
 	private final UserRepository userRepository;
+	private final JwtProvider jwtProvider;
 	
 	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -53,4 +56,31 @@ public class AuthServiceImplement implements AuthService {
 		}
 		return SignUpResponseDto.success();
 	}
+
+	@Override
+	public ResponseEntity<? super SignInResponseDto> signIn(SignInRequestDto dto) {
+		
+		String token = null;
+		
+		try {
+			
+			String email = dto.getEmail();
+			UserEntity userEntity = userRepository.findByEmail(email);
+			if(userEntity == null) return SignInResponseDto.signInFail();
+			
+			String password = dto.getPassword();
+			String encodedPassword = userEntity.getPassword();
+			boolean isMached = passwordEncoder.matches(password, encodedPassword);			
+			if(!isMached) return SignInResponseDto.signInFail();
+			
+			token = jwtProvider.create(email);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseDto.databaseError();
+		}
+		return SignInResponseDto.success(token);
+	}
+
+
 }

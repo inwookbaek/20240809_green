@@ -49,10 +49,9 @@ public class WebSecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final CorsConfig corsConfig;
-    
+
     @Bean
     protected SecurityFilterChain configure(HttpSecurity httpSecurity, HttpMethod method) throws Exception {
-    	
     	
     	log.info(" =====> WebSecurityConfig.configure : " + method);
     	  	
@@ -63,7 +62,7 @@ public class WebSecurityConfig {
                 .httpBasic(httpBasic -> httpBasic.disable()) // 🔹 기본 HTTP 인증 방식 비활성화
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 🔹 세션 관리 (Stateless)            
                 .authorizeHttpRequests(auth -> auth
-                		.requestMatchers(HttpMethod.POST, "/api/v1/auth/hello").permitAll()
+                		.requestMatchers(HttpMethod.POST, "/api/v1/auth/**").permitAll()
                         .requestMatchers("/", "/api/v1/auth/**", "/api/v1/search/**", "/file/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/board/**", "/api/v1/user/*").permitAll()
                 		.anyRequest().authenticated())     // 🔹 요청별 인증 및 권한 설정 	             

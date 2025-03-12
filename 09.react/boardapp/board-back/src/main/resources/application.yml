@@ -16,10 +16,7 @@ spring:
       max-lifetime: 1800000
       connection-timeout: 30000
       auto-commit: true
-  servlet:
-    multipart:
-      max-file-size: 100MB
-      max-request-size: 110MB
-
-jwt:
-  secret: c6da0f588b364ccd906e4cb00a6b5e7828a9cf54cbbfb6cdf7b687ecb26cb320        
+  thymeleaf:
+    cache: false
+    mode: HTML
+ 

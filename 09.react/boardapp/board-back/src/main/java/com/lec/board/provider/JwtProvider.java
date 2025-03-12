@@ -22,21 +22,22 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class JwtProvider {
 
-	@Value("${jwt.secret}")
-	private String SECRET_KEY;
+	// @Value("${jwt.secret}")
+	private String SECRET_KEY = "S3cr3tK3y";
 	
 	public String create(String email) {
 		
 		Date expiredDate = Date.from(Instant.now().plus(1, ChronoUnit.HOURS));
 		
 		String jwt = Jwts.builder()
-				.signWith(SignatureAlgorithm.ES256, SECRET_KEY)
+				.signWith(SignatureAlgorithm.HS256, SECRET_KEY)
 				.setSubject(email)
 				.setIssuedAt(new Date())
 				.setExpiration(expiredDate)
-				.compact();
+				.compact();		
 		
-		log.info("jwt ==============> " + jwt);
+		log.info("SECRET_KEY ====> " + SECRET_KEY);
+		log.info("jwt ====> " + jwt);
 		
 		return jwt;
 	}
