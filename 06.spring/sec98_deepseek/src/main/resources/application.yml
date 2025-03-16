@@ -1,0 +1,23 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: sec98_deepseek
+  datasource:
+    url: jdbc:mysql://localhost:3306/secStudy?createDatabaseIfNotExist=true
+    username: root
+    password: 12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+ 
+jwt:
+  secret: DdqOm0p+pbVNqhj12jafRAnzF62IyfOSFbzeIjTWvLY=    # 키생성 : openssl rand -base64 32
+  expiration: 86400000                                    # ms : 60*60*60*24 = 24시간
