@@ -10,15 +10,21 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
+@ToString
 @Entity(name="user")
 @Table(name="user")
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEntity {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id 
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)는 
+	// 기본 키가 자동 증가하는 정수(Long or Integer) 타입에서만 사용 가능
 	private String email;
 	private String password;
 	private String nickname;
@@ -34,6 +40,6 @@ public class UserEntity {
 		this.telNumber = dto.getTelNumber();
 		this.address = dto.getAddress();
 		this.addressDetail = dto.getAddressDetail();
-		this.agreedPersonal = dto.getAgreedPersonal();		
+		this.agreedPersonal = dto.isAgreedPersonal();		
 	}
 }

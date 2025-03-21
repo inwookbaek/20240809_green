@@ -23,6 +23,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -30,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
   이 클래스에서 JWT 토큰의 생성, 복호화, 검증 기능을 구현하였다.
 */
 
-@Slf4j
+@Log4j2
 @Component
 public class JwtTokenProvider {
 
@@ -38,6 +39,10 @@ public class JwtTokenProvider {
 	
     // application.yml에서 secret 값 가져와서 SECRET_KEY에 저장
     public JwtTokenProvider(@Value("${jwt.secret}") String secretKey) {
+    	
+    	 log.info("secretKey ==> " + secretKey); // + "\n" + Decoders.BASE64.decode("S3cur!ty"));   	
+    	 log.info("BASE64 ==> " + Decoders.BASE64.decode(secretKey).toString());   	
+    	
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.SECRET_KEY = Keys.hmacShaKeyFor(keyBytes);
     }

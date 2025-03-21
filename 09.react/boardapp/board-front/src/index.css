@@ -3,6 +3,7 @@
   src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
+  font-display: swap; /* 폰트 로드 최적화 */
 }
 
 @font-face {
@@ -10,21 +11,22 @@
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/GimhaeGayaR.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+  font-display: swap; /* 폰트 로드 최적화 */
 }
 
 body {
   margin: 20px;
-  min-width: 1440px;
-  font-family: 'Pretendard-Regular';
+  font-family: 'Pretendard-Regular', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* 네비게이션 스타일 */
 nav {
   background-color: white;
   padding: 16px;
   margin-bottom: 10px;
-  transition: box-shadow 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 nav:hover {
@@ -33,9 +35,91 @@ nav:hover {
   transform: translateY(-2px);
 }
 
+nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 20px;
+}
+
+nav ul li {
+  padding: 10px 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
 nav ul li:hover {
   background-color: rgba(240, 240, 240, 1);
   box-shadow: 6px 6px 16px rgba(0, 0, 0, 0.2);
   transform: translateY(-2px);
 }
 
+/* 반응형 디자인 적용 */
+
+/* 태블릿 (768px ~ 1024px) */
+@media (max-width: 1024px) {
+  body {
+    margin: 10px;
+  }
+
+  nav {
+    padding: 12px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  nav ul li {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+/* 모바일 (768px 이하) */
+@media (max-width: 768px) {
+  body {
+    margin: 5px;
+    font-size: 14px; /* 모바일에서 폰트 크기 조정 */
+  }
+
+  nav {
+    padding: 10px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  nav ul li {
+    width: 100%;
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 14px; /* 모바일에서 폰트 크기 조정 */
+  }
+}
+
+/* 초소형 화면 (480px 이하) */
+@media (max-width: 480px) {
+  body {
+    margin: 5px;
+    font-size: 12px; /* 초소형 화면에서 폰트 크기 조정 */
+  }
+
+  nav {
+    padding: 8px;
+  }
+
+  nav ul {
+    gap: 6px;
+  }
+
+  nav ul li {
+    font-size: 12px; /* 초소형 화면에서 폰트 크기 조정 */
+    padding: 6px 10px;
+  }
+}

@@ -2,10 +2,11 @@ package com.lec.board.config;
 
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -22,7 +23,6 @@ import com.lec.board.filter.JwtAuthenticationFilter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -42,52 +42,36 @@ import lombok.extern.log4j.Log4j2;
 */
 
 @Log4j2
-@Configurable
+@Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
+// @RequiredArgsConstructor
 public class WebSecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final CorsConfig corsConfig;
-
+    
+    public WebSecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, 
+    		CorsConfig corsConfig) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.corsConfig = corsConfig;
+    }  	
     @Bean
-    protected SecurityFilterChain configure(HttpSecurity httpSecurity, HttpMethod method) throws Exception {
-    	
-    	log.info(" =====> WebSecurityConfig.configure : " + method);
+    protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {   	
     	  	
         return httpSecurity
-                .cors(cors -> cors.configurationSource(corsConfig())) // 🔹 CORS 활성화 (CorsConfig 적용)
-                .formLogin(login -> login.disable()) // 🔹 폼 로그인 비활성화
+                .cors(cors -> cors.configurationSource(corsConfig.corsConfigurationSource())) // 🔹 CORS 활성화 (CorsConfig의 빈 사용)
                 .csrf(csrf -> csrf.disable())  // 🔹 CSRF 비활성화 (JWT 인증에서는 불필요)
                 .httpBasic(httpBasic -> httpBasic.disable()) // 🔹 기본 HTTP 인증 방식 비활성화
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 🔹 세션 관리 (Stateless)            
+                .formLogin(login -> login.disable()) // 🔹 폼 로그인 비활성화
                 .authorizeHttpRequests(auth -> auth
-                		.requestMatchers(HttpMethod.POST, "/api/v1/auth/**").permitAll()
                         .requestMatchers("/", "/api/v1/auth/**", "/api/v1/search/**", "/file/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/board/**", "/api/v1/user/*").permitAll()
                 		.anyRequest().authenticated())     // 🔹 요청별 인증 및 권한 설정 	             
-                .exceptionHandling(e -> e.authenticationEntryPoint(new FailedAuthenticationEntryPoint())) // 🔹 인증 예외 발생 시 JSON 응답 반환
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 🔹 세션 관리 (Stateless)            
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // 🔹 JWT 필터 적용
+                .exceptionHandling(e -> e.authenticationEntryPoint(new FailedAuthenticationEntryPoint())) // 🔹 인증 예외 발생 시 JSON 응답 반환
                 .build(); // 🔹 설정 적용
     }
 
-    /**
-     * 📌 CORS 정책 설정
-     * @return CorsConfigurationSource 객체
-     */
-    @Bean
-    public CorsConfigurationSource corsConfig() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOriginPattern("*"); // 모든 도메인 허용
-        configuration.addAllowedMethod("*"); // 모든 HTTP 메서드 허용 (GET, POST, PUT, DELETE 등)
-        configuration.addAllowedHeader("*"); // 모든 헤더 허용
-        configuration.setAllowCredentials(true); // 쿠키 허용 (JWT 사용 시 true)
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-
-        return source;
-    }
 }
 
 /**

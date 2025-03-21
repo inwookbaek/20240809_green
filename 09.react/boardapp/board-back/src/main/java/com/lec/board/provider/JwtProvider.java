@@ -1,17 +1,16 @@
 package com.lec.board.provider;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
+
+import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
 
 /*
   Spring Security와 JWT 토큰을 사용하여 인증과 권한 부여를 처리하는 클래스이다.
@@ -19,43 +18,58 @@ import lombok.extern.slf4j.Slf4j;
 */
 
 @Log4j2
-@Component
+// JwtProvider는 강의원본로직, 이 로직을 JwtService로 대체해서 Bean등록(@Component)을 하지 않음
+// @Component
 public class JwtProvider {
 
-	// @Value("${jwt.secret}")
-	private String SECRET_KEY = "S3cr3tK3y";
+	@Value("${jwt.secret}")
+    private String secret; 
 	
-	public String create(String email) {
-		
-		Date expiredDate = Date.from(Instant.now().plus(1, ChronoUnit.HOURS));
-		
-		String jwt = Jwts.builder()
-				.signWith(SignatureAlgorithm.HS256, SECRET_KEY)
-				.setSubject(email)
-				.setIssuedAt(new Date())
-				.setExpiration(expiredDate)
-				.compact();		
-		
-		log.info("SECRET_KEY ====> " + SECRET_KEY);
-		log.info("jwt ====> " + jwt);
-		
-		return jwt;
-	}
- 
-	public String validate(String jwt) {
-		
-		Claims claims = null;
-		
-		try {
-			claims = Jwts.parser()
-					.setSigningKey(SECRET_KEY)
-					.parseClaimsJws(jwt)
-					.getBody();
-		} catch (Exception exception) {
-			exception.printStackTrace();
-			return null;
-		}
-		
-		return claims.getSubject();
-	}
+	@Value("${jwt.expiration}") 
+    private long expiration;
+
+
+    public String create(String email) {
+
+    	String token = Jwts.builder()
+                .subject(email) // setSubject -> subject
+                .issuedAt(new Date()) // setIssuedAt -> issuedAt
+                .expiration(new Date(System.currentTimeMillis() + expiration)) // setExpiration -> expiration
+                .signWith(Keys.hmacShaKeyFor(secret.getBytes())) // signWith에 SecretKey 사용
+                .compact();
+    	
+        log.info("token ====> " + token);
+
+        return token;
+    }
+    
+    public String validate(String token) {
+    	Claims claims = null;
+    	
+    	try {
+    		claims = Jwts.claims().build();
+    		
+    		log.info("claims.getSubject() ===> " + claims.getSubject());
+    		
+    		return claims.getSubject();
+    	} catch (Exception exception) {
+    		exception.printStackTrace();
+    		return null;
+    	}
+    }
+
+    public boolean validateToken(String token) {
+
+        try {
+            Jwts.parser()
+                    .verifyWith(Keys.hmacShaKeyFor(secret.getBytes())) // setSigningKey -> verifyWith
+                    .build()
+                    .parseSignedClaims(token); 
+            return true;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return false;
+        }
+    }
+    
 }

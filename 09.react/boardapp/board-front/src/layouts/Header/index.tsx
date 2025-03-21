@@ -33,9 +33,7 @@ export default function Header() {
   // ✅ 로그인 상태 관리 (초기값 false)
   const [isLogin, setLogin] = useState<boolean>(false);
 
-  // ✅ 페이지 이동을 위한 Hook
-  const navigate = useNavigate();
-  
+
   // ✅ 현재 사용자가 위치한 페이지에 대한 상태 체크
   const isAuthPage = pathname.startsWith(AUTH_PATH());  // 로그인 관련 페이지인지 확인
   const isMainPage = pathname === MAIN_PATH();  // 메인 페이지인지 확인
@@ -44,6 +42,9 @@ export default function Header() {
   const isBoardWritePage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_WRITE_PATH());  // 게시글 작성 페이지인지 확인
   const isBoardUpdatePage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_UPDATE_PATH(''));  // 게시글 수정 페이지인지 확인
   const isUserPage = pathname.startsWith(USER_PATH(''));  // 사용자 페이지인지 확인
+
+  // ✅ 페이지 이동을 위한 Hook
+  const navigate = useNavigate();
 
   // ✅ 로고 클릭 시 메인 페이지로 이동하는 함수
   const onLogClickHandler = () => navigate(MAIN_PATH());

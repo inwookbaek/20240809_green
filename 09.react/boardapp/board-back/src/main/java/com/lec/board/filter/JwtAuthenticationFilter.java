@@ -12,16 +12,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.lec.board.provider.JwtProvider;
+import com.lec.board.service.JwtService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
 
 /*
 	🔹 코드 상세 설명
@@ -77,8 +75,15 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor  // 생성자 주입을 자동으로 처리하는 Lombok 어노테이션
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtProvider jwtProvider; // JWT 토큰을 검증하는 Provider 클래스
-
+    // private final JwtProvider jwtProvider; // JWT 토큰을 검증하는 Provider 클래스
+    private final JwtService jwtService; // JWT 토큰을 검증하는 Provider 클래스
+	
+//    public JwtAuthenticationFilter(JwtService jwtService) {
+//		 
+//		 log.info("JwtAuthenticationFilter ==> " + jwtService.toString());	 
+//	     this.jwtService = jwtService;
+//	 }
+    
     /**
      * 📌 doFilterInternal 메서드: HTTP 요청이 들어올 때마다 실행되는 필터 메서드
      * @param request  HTTP 요청 객체
@@ -90,7 +95,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
     	    	
         try {
-            // 1️⃣ 요청에서 JWT 토큰을 추출
+            // 1️⃣ 요청에서 JWT 토큰을 추출      	
             String token = parseBearerToken(request);
             
              // 2️⃣ 토큰이 없으면 요청을 그대로 다음 필터로 넘김
@@ -100,13 +105,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
 
             // 3️⃣ 토큰 검증 및 이메일 추출
-            String email = jwtProvider.validate(token);
-
+            // String email = jwtProvider.validate(token);
+//            if (email == null) {
+//                filterChain.doFilter(request, response);
+//                return;
+//            }
+            
+            boolean isValidteToken = jwtService.validateToken(token);
+         
             // 4️⃣ 검증에 실패하면 요청을 그대로 다음 필터로 넘김
-            if (email == null) {
+            if (!isValidteToken) {
                 filterChain.doFilter(request, response);
                 return;
             }
+            String email = jwtService.getUsernameFromToken(token);
+            log.info("token ====> " + token + ", email ====> " + email);
 
             // 5️⃣ 인증 객체 생성 (사용자의 권한 정보를 설정할 수도 있음)
             AbstractAuthenticationToken authenticationToken =
@@ -136,7 +149,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
      * @return JWT 토큰 (없으면 null)
      */
     private String parseBearerToken(HttpServletRequest request) {
-        // 1️⃣ Authorization 헤더 값 가져오기
+    	
+        // 1️⃣ Authorization 헤더 값 가져오기   	
+//        Enumeration<String> attributeNames = request.getAttributeNames();
+//        while (attributeNames.hasMoreElements()) {
+//            String attributeName = attributeNames.nextElement();
+//            log.info(attributeName + " ====> " + request.getAttribute(attributeName));
+//        }
+    	
         String authorization = request.getHeader("Authorization");
         log.info(" =====> authorization : " + authorization);
         

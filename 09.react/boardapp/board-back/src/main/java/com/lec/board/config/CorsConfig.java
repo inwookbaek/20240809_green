@@ -1,6 +1,10 @@
 package com.lec.board.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -38,4 +42,25 @@ public class CorsConfig implements WebMvcConfigurer { // WebMvcConfigurer를 구
             .allowedOrigins("*");     // 3️⃣ 모든 도메인에서 요청 허용 (보안이 필요하면 특정 도메인만 허용 가능)
 
     }
+    
+
+    /**
+     * 📌 CORS 정책 설정
+     * @return CorsConfigurationSource 객체
+     */
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOriginPattern("*"); // 모든 도메인 허용
+        configuration.addAllowedMethod("*"); // 모든 HTTP 메서드 허용 (GET, POST, PUT, DELETE 등)
+        configuration.addAllowedHeader("*"); // 모든 헤더 허용
+        configuration.addExposedHeader("Authorization"); // 클라이언트가 Authorization 헤더에 접근할 수 있도록 허용
+        configuration.setAllowCredentials(true); // 쿠키 허용 (JWT 사용 시 true)
+         
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
+    }
+    
 }

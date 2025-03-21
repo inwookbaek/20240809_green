@@ -1,7 +1,8 @@
-import { ResponseCode } from "types/enum";
+import SignInRequestDto from './sign-in-request-dto';
 import SignUpRequestDto from "./sign-up.request.dto";
 
-export default interface RequstDto {
-  code: ResponseCode;
-  message: String;
-}
+export type { 
+  SignInRequestDto, 
+  SignUpRequestDto 
+};
+

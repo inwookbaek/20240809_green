@@ -11,9 +11,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class SignUpRequestDto {
@@ -36,6 +38,6 @@ public class SignUpRequestDto {
 	private String addressDetail;
 	
 	@NotNull @AssertTrue
-	private Boolean agreedPersonal;
+	private boolean agreedPersonal;
 
 }
