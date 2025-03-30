@@ -24,7 +24,9 @@ export default function Authentication() {
   // 페이지 이동을 위한 Hook
   const navigator = useNavigate();
 
-  // 로그인 카드 컴포넌트
+  /**
+   * 로그인 카드 컴포넌트
+   */
   const SignInCard = () => {
 
     // 이메일과 비밀번호 입력 필드의 참조
@@ -60,9 +62,7 @@ export default function Authentication() {
       const now = new Date().getTime();
       const expires = new Date(now + expirationTime * 1000); // 만료 시간 설정
 
-      // expires : accessToken의 유효시간,  path : 쿠키가 유효한 경로
-      setCookie('accessToken', token, { expires, path: MAIN_PATH() });
-
+      setCookie('accessTokn', token, { expires, path: MAIN_PATH() });
       navigator(MAIN_PATH());
     }
 
@@ -139,8 +139,7 @@ export default function Authentication() {
               label='이메일주소 *' 
               type='text' 
               placeholder='이메일 주소를 입력해 주세요.' 
-              error={error} 
-              value={email} 
+              error={error} value={email} 
               onChange={onEmailChangeHandler} 
               onKeyDown={onEmailKeyDownHandler} />
             <InputBox 
@@ -175,7 +174,9 @@ export default function Authentication() {
     )
   } // signInCard
 
- // 회원가입 카드 컴포넌트
+  /**
+   * 회원가입 카드 컴포넌트
+   */
   const SignUpCard = () => {
 
     // Refernce
@@ -381,7 +382,7 @@ export default function Authentication() {
     const onSignUpButtonClickHandler = () => {
       
       // alert('회원가입버튼클릭!!!!');
-      const emailRegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const emailRegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // 이메일 정규식  or /^[a-zA-Z0-9]*@([-.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,4}$/; 
       const isEmailPattern = emailRegExp.test(email);
 
       if(!isEmailPattern) {
@@ -415,7 +416,7 @@ export default function Authentication() {
         setNicknameErrorMessage('닉네임을 입력해 주세요!!');
       }
 
-      const telNumberPattern = /^[0-9]{11,13}$/; // /^01[016789]-?\d{3,4}-?\d{4}$/; 
+      const telNumberPattern = /^[0-9]{11,13}$/;
       const isTelNumberPattern = telNumberPattern.test(telNumber);
       if(!isTelNumberPattern) {
         setTelNumberError(true);
@@ -644,8 +645,8 @@ export default function Authentication() {
           <div className="auth-jumbotron-contents">
             <div className="auth-jumbotron-icon"></div>
             <div className="auth-jumbotron-text-box">
-              <div className="auth-jumbotron-text-small">{'방문을 환영합니다.'}</div>
-              <div className="auth-jumbotron-text">{'GILCNS 게시판입니다!'}</div>
+              <div className="auth-jumbotron-text">{'환영합니다.'}</div>
+              <div className="auth-jumbotron-text">{'실습용 게시판입니다!'}</div>
             </div>
           </div>
         </div>

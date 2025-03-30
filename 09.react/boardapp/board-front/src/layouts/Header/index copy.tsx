@@ -33,6 +33,7 @@ export default function Header() {
   // ✅ 로그인 상태 관리 (초기값 false)
   const [isLogin, setLogin] = useState<boolean>(false);
 
+
   // ✅ 현재 사용자가 위치한 페이지에 대한 상태 체크
   const isAuthPage = pathname.startsWith(AUTH_PATH());  // 로그인 관련 페이지인지 확인
   const isMainPage = pathname === MAIN_PATH();  // 메인 페이지인지 확인
@@ -117,17 +118,17 @@ export default function Header() {
 
     const onLoginButtonClickHandler = () => navigate(AUTH_PATH());  // 로그인 페이지로 이동
 
+    // 🔹 로그인한 경우
     if (isLogin) {
       return userEmail === loginUser?.email ? (
         <div className='white-button' onClick={onLogoutButtonClickHandler}>로그아웃</div>
       ) : (
         <div className='white-button' onClick={onMyPageButtonClickHandler}>마이페이지</div>
       );
-    } 
+    }
 
     // 🔹 로그인하지 않은 경우
     return <div className='black-button' onClick={onLoginButtonClickHandler}>로그인</div>;
-
   };
 
   // ✅ 파일 업로드 버튼 컴포넌트
