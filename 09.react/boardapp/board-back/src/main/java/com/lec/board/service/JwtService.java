@@ -56,7 +56,7 @@ public class JwtService {
                 .signWith(secretKey)  // SecretKey를 사용한 서명(Signature) 추가
                 .compact();  // 최종 JWT 문자열 생성
         
-        log.info("[generateToken] ====> 생성된 토큰: " + token);
+        // log.info("[generateToken] ====> 생성된 토큰: " + token);
         
         return token;
     }

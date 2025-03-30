@@ -1,6 +1,7 @@
 package com.lec.board.filter;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -119,7 +120,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 return;
             }
             String email = jwtService.getUsernameFromToken(token);
-            log.info("token ====> " + token + ", email ====> " + email);
+            // log.info("token ====> " + token + ", email ====> " + email);
 
             // 5️⃣ 인증 객체 생성 (사용자의 권한 정보를 설정할 수도 있음)
             AbstractAuthenticationToken authenticationToken =
@@ -151,28 +152,27 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private String parseBearerToken(HttpServletRequest request) {
     	
         // 1️⃣ Authorization 헤더 값 가져오기   	
-//        Enumeration<String> attributeNames = request.getAttributeNames();
-//        while (attributeNames.hasMoreElements()) {
-//            String attributeName = attributeNames.nextElement();
-//            log.info(attributeName + " ====> " + request.getAttribute(attributeName));
-//        }
+        Enumeration<String> attributeNames = request.getAttributeNames();
+        while (attributeNames.hasMoreElements()) {
+            String attributeName = attributeNames.nextElement();
+            log.info(attributeName + " ====> " + request.getAttribute(attributeName));
+        }
     	
         String authorization = request.getHeader("Authorization");
-        log.info(" =====> authorization : " + authorization);
+        // log.info(" =====> authorization : " + authorization);   // return 'Bearer '
         
         // 2️⃣ Authorization 헤더가 존재하는지 확인
         boolean hasAuthorization = StringUtils.hasText(authorization);
-        log.info(" =====> hasAuthorization : " + hasAuthorization);
         if (!hasAuthorization) return null;
 
         // 3️⃣ 헤더 값이 "Bearer "로 시작하는지 확인
         boolean isBearer = authorization.startsWith("Bearer ");
         if (!isBearer) return null;
-        log.info(" =====> hasAuthorization : " + hasAuthorization);
+        // log.info(" =====> hasAuthorization : " + hasAuthorization);
 
         // 4️⃣ "Bearer " 이후의 문자열(토큰) 추출
         String token = authorization.substring(7);
-        log.info(" =====> token : " + token);
+        // log.info(" =====> jwt " + token);
         
         return token;
     }

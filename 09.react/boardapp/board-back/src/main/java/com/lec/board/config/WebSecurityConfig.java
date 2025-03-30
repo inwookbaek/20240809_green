@@ -65,6 +65,7 @@ public class WebSecurityConfig {
                 .formLogin(login -> login.disable()) // 🔹 폼 로그인 비활성화
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/api/v1/auth/**", "/api/v1/search/**", "/file/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/board/**", "/api/v1/user/**").permitAll()
                 		.anyRequest().authenticated())     // 🔹 요청별 인증 및 권한 설정 	             
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 🔹 세션 관리 (Stateless)            
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // 🔹 JWT 필터 적용

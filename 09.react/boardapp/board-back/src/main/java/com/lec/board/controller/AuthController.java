@@ -59,8 +59,8 @@ public class AuthController {
 			@RequestBody @Valid SignInRequestDto requestBody) {
 		ResponseEntity<? super SignInResponseDto> response = authService.signIn(requestBody);
 		
-		log.info("email ==========> " + requestBody.getEmail());
-		log.info("password ==========> " + requestBody.getPassword());		
+		// log.info("email ==========> " + requestBody.getEmail());
+		// log.info("password ==========> " + requestBody.getPassword());		
 		
 		return response;
 	}

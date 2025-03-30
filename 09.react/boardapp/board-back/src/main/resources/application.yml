@@ -31,5 +31,5 @@ spring:
 # 키(secret)값은 base64 32비트 문자열 또는 임의문자열(예 S3cr3tK3y!)을 설정해도 가능
 # ms : 1000*60*60*24 = 24시간
 jwt:
-  secret: "DdqOm0p+pbVNqhj12jafRAnzF62IyfOSFbzeIjTWvLY="
+  secret: DdqOm0p+pbVNqhj12jafRAnzF62IyfOSFbzeIjTWvLY=
   expiration: 86400000  # (1일 = 1000 * 60 * 60 * 24)                                
