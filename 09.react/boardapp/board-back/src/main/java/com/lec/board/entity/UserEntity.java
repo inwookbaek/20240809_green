@@ -32,6 +32,7 @@ public class UserEntity {
 	private String address;
 	private String addressDetail;
 	private boolean agreedPersonal;
+	private String profileImage;
 	
 	public UserEntity(SignUpRequestDto dto) {
 		this.email = dto.getEmail();
@@ -40,6 +41,7 @@ public class UserEntity {
 		this.telNumber = dto.getTelNumber();
 		this.address = dto.getAddress();
 		this.addressDetail = dto.getAddressDetail();
-		this.agreedPersonal = dto.isAgreedPersonal();		
+		this.agreedPersonal = dto.isAgreedPersonal();	
+		this.profileImage = null;
 	}
 }

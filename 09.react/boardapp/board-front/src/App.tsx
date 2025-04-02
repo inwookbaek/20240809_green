@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import './App.css'
 /*
   React Router 사용
@@ -45,15 +45,15 @@ import { User } from "types/interface";
 import { getSignInUserRequest } from "apis";
 
 function App() {
-
+  
   // login user 전역상태
   const { setLoginUser, resetLoginUser } = useLoginUserStore();
-
+    
   // cookie 상태
   const [cookies, setCookies] = useCookies();
 
   // get sign in user response 처리함수
-  const getSingInUserResponse = (responseBody: GetSignInResponseDto | ResponseDto | null) => {
+  const getSignInUserResponse = useCallback((responseBody: GetSignInResponseDto | ResponseDto | null) => {
     if(!responseBody) return;
     
     const { code }  = responseBody;
@@ -64,7 +64,7 @@ function App() {
     
     const loginUser: User = { ...responseBody as GetSignInUserResponseDto }
     setLoginUser(loginUser);
-  }
+  }, [resetLoginUser, setLoginUser]);
 
   // accessToken값이 변경될 떄마다 호출할 함수
   useEffect(() => {
@@ -72,11 +72,9 @@ function App() {
       resetLoginUser();
       return;
     }
-    
-    getSignInUserRequest(cookies.accessToken).then(getSingInUserResponse);
-  }, [cookies.accessToken]);
+    getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
+  }, [cookies.accessToken, getSignInUserResponse, resetLoginUser]);  
 
-  const [value, setValue] = useState<string>('');
   /*
     /                           : Main
     /auth                       : 로그인, 회원가입
@@ -105,6 +103,7 @@ function App() {
 }
 
 // 🔹 게시글 목록 페이지
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function BoardList() {
   return (
     <>
@@ -117,6 +116,7 @@ function BoardList() {
 }
 
 // 🔹 Top 3 게시글 목록 페이지
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Top3List() {
   return (
     <div style={{ display: "flex", justifyContent: "center", gap: '24px' }}>
@@ -129,6 +129,7 @@ function Top3List() {
 }
 
 // 🔹 댓글 목록 페이지
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function CommentList() {
   return (
     <div style={{ padding: '0 20px', display: "flex", flexDirection: "column", gap: '30px' }}>
@@ -141,6 +142,7 @@ function CommentList() {
 }
 
 // 🔹 좋아요 목록 페이지
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function FavoriteList() {
   return (
     <div style={{ display: "flex", flexDirection: "row", columnGap: '30px', rowGap: '20px' }}>

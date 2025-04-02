@@ -155,7 +155,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         Enumeration<String> attributeNames = request.getAttributeNames();
         while (attributeNames.hasMoreElements()) {
             String attributeName = attributeNames.nextElement();
-            log.info(attributeName + " ====> " + request.getAttribute(attributeName));
+            // log.info(attributeName + " ====> " + request.getAttribute(attributeName));
         }
     	
         String authorization = request.getHeader("Authorization");

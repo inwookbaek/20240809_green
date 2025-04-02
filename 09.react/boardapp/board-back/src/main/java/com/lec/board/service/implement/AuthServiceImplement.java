@@ -13,7 +13,6 @@ import com.lec.board.dto.response.auth.SignUpResponseDto;
 import com.lec.board.entity.UserEntity;
 import com.lec.board.repository.UserRepository;
 import com.lec.board.service.AuthService;
-import com.lec.board.service.JwtService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -25,7 +24,7 @@ public class AuthServiceImplement implements AuthService {
 	
 	private final UserRepository userRepository;
 	// private final JwtProvider jwtProvider;// = new JwtProvider();
-	private final JwtService jwtService;// = new JwtProvider();
+	private final JwtServiceImpl jwtService;// = new JwtProvider();
 	
 	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 

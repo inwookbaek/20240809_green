@@ -1,12 +1,29 @@
 package com.lec.board.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.lec.board.entity.FavoriteEntity;
 import com.lec.board.entity.primaryKey.FavoritePK;
+import com.lec.board.repository.resultSet.GetFavoriteListResultSet;
 
 @Repository
 public interface FavoriteRepository extends JpaRepository<FavoriteEntity, FavoritePK> {
 
+	FavoriteEntity findByBoardNumberAndUserEmail(Integer boardNumber, String userEmail);
+	
+	@Query(
+		value = 
+			"select U.email as email " + 
+			"     , U.nickname as nickname " +
+			"     , U.profile_image as profileImage " +
+			"  from favorite as F  " +
+			" inner join user as U " +
+			"    on F.user_email = U.email " +
+			" where F.board_number = ?1"
+	  , nativeQuery = true)
+	List<GetFavoriteListResultSet> getFavoriteList(Integer boardNumber);
 }

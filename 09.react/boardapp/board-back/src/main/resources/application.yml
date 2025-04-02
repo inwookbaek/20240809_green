@@ -1,9 +1,15 @@
 server:
-  port: 8090
+  host: ${SERVER_HOST:localhost}  # 환경변수 없으면 기본값 localhost
+  port: ${SERVER_PORT:8090}
 
 spring:
   application:
     name: board-back
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 110MB
+      enabled: true     
   datasource:
     url: jdbc:mysql://localhost:3306/boarddb?createDatabaseIfNotExist=true
     username: root
@@ -19,13 +25,21 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      #naming:
+      #  physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   thymeleaf:
     cache: false
     mode: HTML
     prefix: classpath:/templates/
     suffix: .html
+
+upload:
+  url: http://${server.host}:${server.port}/file/
+  # https에서는 url: https://${server.host:localhost}:${server.port}/file/
+  path: ${user.home}/app_uploads/   # 시스템 기본 위치 또는 절대 경로
+  # Windows에서는 C:\Users\john\uploads\, Linux에서는 /home/john/app_uploads/, macOS에서는 /Users/john/app_uploads/
+  # path: ./uploads/            # 상대 경로 (애플리케이션 실행 위치 기준)
+  # path: classpath:uploads/    # classpath 내부 (jar 패키징 시 주의 필요),  src/main/resources/uploads/ 
 
 # 키생성 : openssl rand -base64 32 
 # 키(secret)값은 base64 32비트 문자열 또는 임의문자열(예 S3cr3tK3y!)을 설정해도 가능

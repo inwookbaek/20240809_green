@@ -95,3 +95,27 @@ update user set nickname = '[수정]닉네임' where email = 'iwbaek@gmail.com';
 
 -- 프로필이미지수정
 update user set profie_image = 'localhost:/image/xxx.png' where email = 'iwbaek@gmail.com';	 
+
+-- 상세게시물 불러오기
+select B.board_number as boardNumber
+     , B.title as title
+		 , B.content as content
+		 , B.write_datetime as writeDatetime
+		 , B.writer_email as writerEmail
+		 , U.nickname as nickname
+		 , U.profile_image as writerProfileImage
+  from board as B
+ inner join user as U
+    on B.writer_email = U.email
+ where board_number = 1; 
+
+ -- 댓글조회
+ select U.nickname as nickname
+      , U.profile_image as profile_image
+			, C.write_datetime as write_datetime
+			, C.content as content
+   from comment as C 
+	inner join user as U 
+	   on C.user_email = U.email
+  where C.board_number = 1
+  order by write_datetime;

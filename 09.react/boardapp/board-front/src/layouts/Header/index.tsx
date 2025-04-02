@@ -4,6 +4,10 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { AUTH_PATH, BOARD_DETAIL_PATH, BOARD_PATH, BOARD_UPDATE_PATH, BOARD_WRITE_PATH, MAIN_PATH, SEARCH_PATH, USER_PATH } from 'constant';
 import { useCookies } from 'react-cookie';
 import { useBoardStore, useLoginUserStore } from 'stores';
+import { fileUploadRequest, postBoardRequest } from 'apis';
+import { PostBoardRequestDto } from 'apis/request/board';
+import { PostBoardResponseDto } from 'apis/response/board';
+import { ResponseDto } from 'apis/response';
 
 /*
 📌 코드 주요 기능
@@ -28,19 +32,40 @@ export default function Header() {
   const { userEmail, searchWord } = useParams();
   
   // ✅ 쿠키 사용을 위한 Hook
-  const [cookie, setCookie] = useCookies();
+  const [cookies, setCookies] = useCookies();
 
   // ✅ 로그인 상태 관리 (초기값 false)
   const [isLogin, setLogin] = useState<boolean>(false);
 
+  useEffect(() => {
+    setLogin(loginUser !== null)
+  }, [loginUser]);
+  
   // ✅ 현재 사용자가 위치한 페이지에 대한 상태 체크
-  const isAuthPage = pathname.startsWith(AUTH_PATH());  // 로그인 관련 페이지인지 확인
-  const isMainPage = pathname === MAIN_PATH();  // 메인 페이지인지 확인
-  const isSearchPage = pathname.startsWith(SEARCH_PATH(''));  // 검색 페이지인지 확인
-  const isBoardDetailPage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_DETAIL_PATH(''));  // 게시글 상세 페이지인지 확인
-  const isBoardWritePage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_WRITE_PATH());  // 게시글 작성 페이지인지 확인
-  const isBoardUpdatePage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_UPDATE_PATH(''));  // 게시글 수정 페이지인지 확인
-  const isUserPage = pathname.startsWith(USER_PATH(''));  // 사용자 페이지인지 확인
+  const [isAuthPage, setAuthPage] = useState<boolean>(false);
+  const [isMainPage, setMainPage] = useState<boolean>(false);
+  const [isSearchPage, setSearchPage] = useState<boolean>(false);
+  const [isBoardDetailPage, setBoardDetailPage] = useState<boolean>(false);
+  const [isBoardWritePage, setBoardWritePage] = useState<boolean>(false);
+  const [isBoardUpdatePage, setBoardUpdatePage] = useState<boolean>(false);
+  const [isUserPage, setUserPage] = useState<boolean>(false);
+
+  useEffect(() => {
+    const isAuthPage = pathname.startsWith(AUTH_PATH());  // 로그인 관련 페이지인지 확인
+    setAuthPage(isAuthPage);
+    const isMainPage = pathname === MAIN_PATH();  // 메인 페이지인지 확인
+    setMainPage(isMainPage);
+    const isSearchPage = pathname.startsWith(SEARCH_PATH(''));  // 검색 페이지인지 확인
+    setSearchPage(isSearchPage);
+    const isBoardDetailPage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_DETAIL_PATH(''));  // 게시글 상세 페이지인지 확인
+    setBoardDetailPage(isBoardDetailPage);
+    const isBoardWritePage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_WRITE_PATH());  // 게시글 작성 페이지인지 확인
+    setBoardWritePage(isBoardWritePage);
+    const isBoardUpdatePage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_UPDATE_PATH(''));  // 게시글 수정 페이지인지 확인
+    setBoardUpdatePage(isBoardUpdatePage);
+    const isUserPage = pathname.startsWith(USER_PATH(''));  // 사용자 페이지인지 확인
+    setUserPage(isUserPage);
+  }, [pathname]);
 
   // ✅ 페이지 이동을 위한 Hook
   const navigate = useNavigate();
@@ -112,6 +137,7 @@ export default function Header() {
 
     const onLogoutButtonClickHandler = () => {
       resetLoginUser();  // 로그아웃 처리
+      setCookies('accessToken' , '', { path: MAIN_PATH(), expires: new Date() });
       navigate(MAIN_PATH());  // 메인 페이지로 이동
     };
 
@@ -132,10 +158,42 @@ export default function Header() {
 
   // ✅ 파일 업로드 버튼 컴포넌트
   const UploadButton = () => {
-    const { title, content, boardImageFileList } = useBoardStore();
+    const { title, content, boardImageFileList, resetBoard } = useBoardStore();
 
-    const onUploadButtonClickHandler = () => {
-      // 파일 업로드 처리 로직 (현재는 비어 있음)
+    // postBoardResponse처리함수
+    const postBoardResponse =  (reponseBody: PostBoardResponseDto| ResponseDto | null) => {
+      if(!reponseBody) return;
+      const { code } = reponseBody;
+      if(code === 'DBE') alert('데이터베이스 오류 입니다!!');
+      if(code === 'AF' || code === 'NU') navigate(AUTH_PATH());
+      if(code === 'VF') alert('제목과 내용은 필수 입력사항 입니다!!');
+      if(code !== 'SU') return;
+
+      resetBoard();
+      if(!loginUser) return;
+      const { email } = loginUser;
+      navigate(USER_PATH(email));
+
+    }
+
+    const onUploadButtonClickHandler = async () => {
+      const accessToken = cookies.accessToken
+      if(!accessToken) return;
+
+      const boardImageList: string[] = [];
+      for(const file of boardImageFileList) {
+        const data = new FormData();
+        data.append('file', file);
+
+        const url = await fileUploadRequest(data);
+        if(url) boardImageList.push(url); 
+      }
+
+      const requestBody: PostBoardRequestDto = {
+        title, content, boardImageList
+      }
+
+      postBoardRequest(requestBody, accessToken).then(postBoardResponse);
     };
 
     // 🔹 제목과 내용이 있는 경우 (업로드 가능)

@@ -12,7 +12,7 @@ import com.lec.board.dto.request.auth.SignUpRequestDto;
 import com.lec.board.dto.response.auth.SignInResponseDto;
 import com.lec.board.dto.response.auth.SignUpResponseDto;
 import com.lec.board.service.AuthService;
-import com.lec.board.service.JwtService;
+import com.lec.board.service.implement.JwtServiceImpl;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ import lombok.extern.log4j.Log4j2;
 public class AuthController {
 
 	private final AuthService authService;
-    private final JwtService jwtService;
+    private final JwtServiceImpl jwtService;
     
 	/*
 	postman등에서 실행할 경우 Authorization탭에서 Auth Type 기본값(Inherit auth from parent)로

@@ -1,4 +1,4 @@
-package com.lec.board.entity;
+ package com.lec.board.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,4 +20,9 @@ public class ImageEntity {
 	private int sequence;
 	private String image;
 	private int boardNumber;
+	
+	public ImageEntity(int boardNumber, String image) {
+		this.boardNumber = boardNumber;
+		this.image = image;
+	}
 }

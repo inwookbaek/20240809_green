@@ -1,3 +1,8 @@
+/* 공통사용 */
+.divider {
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
 /* 기본 스타일 */
 .black-button, .black-large-full-button, .white-button, .disable-button {
   border-radius: 46px;
@@ -121,6 +126,14 @@
 
 .check-ring-light-icon {
   background-image: url(assets/image/check-ring-light.png);
+}
+
+.image-box-light-icon {
+  background-image: url(assets/image/image-box-light.png);
+}
+
+.close-icon  {
+  background-image: url(assets/image/close.png);
 }
 
 /* 반응형 스타일 */
