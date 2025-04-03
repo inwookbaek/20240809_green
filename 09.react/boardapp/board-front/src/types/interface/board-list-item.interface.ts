@@ -7,8 +7,8 @@ export default interface BoardListItem {
   commentCount: number;         // 댓글 수
   viewCount: number;            // 조회수
   writeDatetime: string;        // 게시글 작성일 (날짜 및 시간 문자열)
-  writeNickname: string;        // 작성자 닉네임
-  writeProfileImage: string | null; // 작성자 프로필 이미지 URL (이미지가 없을 경우 null)
+  writerNickname: string;        // 작성자 닉네임
+  writerProfileImage: string | null; // 작성자 프로필 이미지 URL (이미지가 없을 경우 null)
 }
 
 /*

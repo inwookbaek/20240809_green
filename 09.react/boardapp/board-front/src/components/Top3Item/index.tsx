@@ -15,7 +15,7 @@ export default function Top3Item({ top3ListItem }: Props) {
   // properties
   const {boardNumber, title, content, boardTitleImage} = top3ListItem;
   const {favoriteCount, commentCount, viewCount} = top3ListItem;
-  const {writeDatetime, writeNickname, writeProfileImage} = top3ListItem;
+  const {writeDatetime, writerNickname, writerProfileImage} = top3ListItem;
 
   // function : 내비게이트함수
   const navigator = useNavigate();
@@ -31,10 +31,10 @@ export default function Top3Item({ top3ListItem }: Props) {
       <div className='top-3-list-item-main-box'>
         <div className='top-3-list-item-top'>
           <div className='top-3-list-item-profile-box'>
-            <div className='top-3-list-item-profile-image' style={{backgroundImage: `url(${writeProfileImage ? writeProfileImage : top3BoardItemImage})`}}></div>
+            <div className='top-3-list-item-profile-image' style={{backgroundImage: `url(${writerProfileImage ? writerProfileImage : top3BoardItemImage})`}}></div>
           </div>
           <div className='top-3-list-item-write-box'>
-            <div className='top-3-list-item-nickname'>{writeNickname}</div>
+            <div className='top-3-list-item-nickname'>{writerNickname}</div>
             <div className='top-3-list-item-write-date'>{writeDatetime}</div>
           </div>
         </div>

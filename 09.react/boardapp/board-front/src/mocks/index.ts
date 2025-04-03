@@ -1,11 +1,13 @@
+import BoardMock from "./board.mock";
 import top3BoardListMock from "./top-3-board-list.mock";
 import latestBoardListMock from "./latest-board-list.mock";
 import commentListMock from "./comment-list.mock";
-import { favoriteListMock } from "./favorite-list.mock";
+import favoriteListMock from "./favorite-list.mock";
 
 export { 
+    BoardMock,
     top3BoardListMock,
     latestBoardListMock,
     commentListMock,
-    favoriteListMock
+    favoriteListMock,
 }

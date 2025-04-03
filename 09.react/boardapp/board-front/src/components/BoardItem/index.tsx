@@ -15,7 +15,7 @@ export default function BoardItem({ boardListItem }: Props) {
   // 🔹 Destructuring: boardListItem에서 필요한 값 추출
   const { boardNumber, title, content, boardTitleImage } = boardListItem; // 게시글 정보
   const { favoriteCount, commentCount, viewCount } = boardListItem; // 게시글 통계 정보
-  const { writeDatetime, writeNickname, writeProfileImage } = boardListItem; // 작성자 정보
+  const { writeDatetime, writerNickname, writerProfileImage } = boardListItem; // 작성자 정보
 
   // 🔹 useNavigate 훅을 사용하여 페이지 이동 기능 설정
   const navigator = useNavigate();
@@ -37,13 +37,13 @@ export default function BoardItem({ boardListItem }: Props) {
             <div
               className="board-list-item-profile-image"
               style={{
-                backgroundImage: `url(${writeProfileImage ? writeProfileImage : defaultProfileImage})`,
+                backgroundImage: `url(${writerProfileImage ? writerProfileImage : defaultProfileImage})`,
               }}
             ></div>
           </div>
           {/* 작성자 닉네임 및 작성일 */}
           <div className="board-list-item-write-box">
-            <div className="board-list-item-nickname">{writeNickname}</div>
+            <div className="board-list-item-nickname">{writerNickname}</div>
             <div className="board-list-item-write-datetime">{writeDatetime}</div>
           </div>
         </div>

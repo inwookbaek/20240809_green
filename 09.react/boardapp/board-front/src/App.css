@@ -3,6 +3,11 @@
   width: 100%;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
+
+.emphasis {
+  font-weight: bolder;
+}
+
 /* 기본 스타일 */
 .black-button, .black-large-full-button, .white-button, .disable-button {
   border-radius: 46px;
@@ -134,6 +139,30 @@
 
 .close-icon  {
   background-image: url(assets/image/close.png);
+}
+
+.more-icon  {
+  background-image: url(assets/image/more.png);
+}
+
+.favorite-fill-icon  {
+  background-image: url(assets/image/favorite-fill.png);
+}
+
+.favorite-light-icon  {
+  background-image: url(assets/image/favorite-light.png);
+}
+
+.up-light-icon  {
+  background-image: url(assets/image/expand-up-light.png);
+}
+
+.down-light-icon  {
+  background-image: url(assets/image/expand-down-light.png);
+}
+
+.comment-icon  {
+  background-image: url(assets/image/chat-light.png);
 }
 
 /* 반응형 스타일 */

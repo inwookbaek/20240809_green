@@ -12,8 +12,8 @@ const latestBoardListMock: BoardListItem[] = [
         commentCount: 0,
         viewCount: 0,
         writeDatetime: "2025.02.20 14:50:35",
-        writeNickname: "안녕하세요? 나는 호두비숑",
-        writeProfileImage: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg",
+        writerNickname: "안녕하세요? 나는 호두비숑",
+        writerProfileImage: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg",
     },
     {
         boardNumber: 2,
@@ -26,8 +26,8 @@ const latestBoardListMock: BoardListItem[] = [
         commentCount: 0,
         viewCount: 0,
         writeDatetime: "2025.02.20 14:50:35",
-        writeNickname: "안녕하세요? 나는 호두비숑",
-        writeProfileImage: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg",
+        writerNickname: "안녕하세요? 나는 호두비숑",
+        writerProfileImage: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg",
     },
     {
         boardNumber: 3,
@@ -40,8 +40,8 @@ const latestBoardListMock: BoardListItem[] = [
         commentCount: 0,
         viewCount: 0,
         writeDatetime: "2025.02.20 14:50:35",
-        writeNickname: "안녕하세요? 나는 호두비숑",
-        writeProfileImage: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg",
+        writerNickname: "안녕하세요? 나는 호두비숑",
+        writerProfileImage: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg",
     }
 ]
 
