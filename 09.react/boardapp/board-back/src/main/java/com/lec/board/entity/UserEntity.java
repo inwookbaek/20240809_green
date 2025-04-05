@@ -22,7 +22,6 @@ import lombok.ToString;
 public class UserEntity {
 
 	@Id 
-	// @GeneratedValue(strategy = GenerationType.IDENTITY)
 	// @GeneratedValue(strategy = GenerationType.IDENTITY)는 
 	// 기본 키가 자동 증가하는 정수(Long or Integer) 타입에서만 사용 가능
 	private String email;

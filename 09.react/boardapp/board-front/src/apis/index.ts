@@ -4,7 +4,8 @@ import { SignInResponseDto, SignUpResponseDto } from "./response/auth";
 import { ResponseDto } from "./response";
 import { GetSignInUserResponseDto } from "./response/user";
 import { PostBoardRequestDto } from "./request/board";
-import { PostBoardResponseDto } from "./response/board";
+import { GetBoardResponseDto, GetCommentListResponseDto, GetFavoriteListResponseDto, PostBoardResponseDto, PutFavoriteResponseDto } from "./response/board";
+import IncreaseViewCountResponseDto from './response/board/inerase-view-count.reponse.dto';
 
 // .env 파일에서 포트 번호를 가져옴
 const PORT = process.env.REACT_APP_API_PORT || '8090'; // 기본값 설정 (옵션)
@@ -49,7 +50,70 @@ export const signUpRequest = async (requestBody: SignUpRequestDto) => {
     return result; 
 }
 
+const GET_BOARD_URL = (boardNumber: number | string) => `${API_DOMAIN}/board/${boardNumber}`;
+const INCREASE_VIEW_COUNT_URL = (boardNumber: number | string) => `${API_DOMAIN}/board/${boardNumber}/increase-view-count`;
+const GET_FAVORITE_LIST_URL = (boardNumber: number | string) => `${API_DOMAIN}/board/${boardNumber}/favorite-list`;
+const GET_COMMENT_LIST_URL = (boardNumber: number | string) => `${API_DOMAIN}/board/${boardNumber}/comment-list`;
 const POST_BOARD_URL = () => `${API_DOMAIN}/board`;
+const PUT_FAVORITE_URL = (boardNumber: string | number)  => `${API_DOMAIN}/board/${boardNumber}/favorite`;
+
+export const getBoardRequest = async (boardNumber: number | string) => {
+  const result = await axios.get(GET_BOARD_URL(boardNumber))
+      .then(response => {
+        const responseBody: GetBoardResponseDto = response.data;
+        return responseBody
+      })
+      .catch(error => {
+        if(!error.response) return null;
+        const responseBody: ResponseDto = error.response.data;
+        return responseBody;
+      })
+
+      return result;
+}
+
+export const increaseViewCountRequest = async (boardNumber: number | string) => {
+  const result = await axios.get(INCREASE_VIEW_COUNT_URL(boardNumber))
+    .then(response => {
+      const responseBody: IncreaseViewCountResponseDto = response.data;
+      return responseBody
+    })
+    .catch(error => {
+      if(!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    })
+  return result;
+}
+
+export const getFavoriteListRequest = async (boardNumber: number | string) => {
+  const result = await axios.get(GET_FAVORITE_LIST_URL(boardNumber))
+    .then(response => {
+      const responseBody: GetFavoriteListResponseDto = response.data;
+      return responseBody
+    })
+    .catch(error => {
+      if(!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    })
+  return result;
+}
+
+export const getCommentListRequest = async (boardNumber: number | string) => {
+  const result = await axios.get(GET_COMMENT_LIST_URL(boardNumber))
+    .then(response => {
+      const responseBody: GetCommentListResponseDto = response.data;
+      return responseBody
+    })
+    .catch(error => {
+      if(!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    })
+  return result;
+}
+
 export const postBoardRequest = async (requestBody: PostBoardRequestDto, accessToken: string) => {
   const result = await axios.post(POST_BOARD_URL(), requestBody, authorization(accessToken))
       .then((response) => {
@@ -62,6 +126,21 @@ export const postBoardRequest = async (requestBody: PostBoardRequestDto, accessT
         return responseBody;
       })
       return result;
+}
+
+
+export const putFavoriteRequest = async (boardNumber: number | string, accessToken: string) => {
+  const result = await axios.put(PUT_FAVORITE_URL(boardNumber), {}, authorization(accessToken)) // put 보낼것은 없기 때문에 {}
+    .then(response => {
+      const responseBody: PutFavoriteResponseDto = response.data;
+      return responseBody
+    })
+    .catch(error => {
+      if(!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    })
+  return result;
 }
 
 const GET_SIGN_IN_USER_URL = () => `${API_DOMAIN}/user`;

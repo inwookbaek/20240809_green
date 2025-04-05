@@ -71,7 +71,7 @@
 .board-detail-write-date {
   color: rgba(0, 0, 0, 0.4);
   
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 140%;
 
@@ -231,6 +231,7 @@
 .board-detail-bottom-comment-pagination-box {
   display: flex;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
 .board-detail-bottom-comment-input-box {
@@ -248,7 +249,7 @@
 
 .board-detail-bottom-comment-textarea {
   border: none;
-  border-bottom: 1px solid  rgba(0, 0, 0, 0.4);
+  border-bottom: 1px dotted rgba(0, 0, 255, 0.4);
   outline: none;
   background: none;
   resize: none;

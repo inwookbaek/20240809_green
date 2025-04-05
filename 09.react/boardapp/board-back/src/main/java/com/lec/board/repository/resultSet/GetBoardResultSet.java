@@ -5,7 +5,7 @@ public interface GetBoardResultSet {
 	Integer getBoardNumber();
 	String getTitle();
 	String getContent();
-	String getWriterDatetime();
+	String getWriteDatetime();
 	String getWriterEmail();
 	String getWriterNickname();
 	String getWriterProfileImage();

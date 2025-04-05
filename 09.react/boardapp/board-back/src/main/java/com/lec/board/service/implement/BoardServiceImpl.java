@@ -14,6 +14,7 @@ import com.lec.board.dto.response.ResponseDto;
 import com.lec.board.dto.response.board.GetBoardResponseDto;
 import com.lec.board.dto.response.board.GetCommentListResponseDto;
 import com.lec.board.dto.response.board.GetFavoriteListResponseDto;
+import com.lec.board.dto.response.board.IncreaseViewCountResponseDto;
 import com.lec.board.dto.response.board.PostBoardResponseDto;
 import com.lec.board.dto.response.board.PostCommentResponseDto;
 import com.lec.board.dto.response.board.PutFavoriteResponseDto;
@@ -96,9 +97,10 @@ public class BoardServiceImpl implements BoardService {
 			if(resultSet == null) return GetBoardResponseDto.notExistBoard();
 			imageEntities = imageRepository.findByBoardNumber(boardNumber);
 			
-			BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
-			boardEntity.increaseViewCount();
-			boardRepository.save(boardEntity);
+			// front에서 viewcount증가가 4번 돌아가는 것을 주석처리 하고 별도 로직(increaseViewCount 메서드) 작성
+			// BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
+			// boardEntity.increaseViewCount(); 
+			// boardRepository.save(boardEntity);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -204,6 +206,22 @@ public class BoardServiceImpl implements BoardService {
 		}
 		
 		return GetCommentListResponseDto.success(resultSets);
+	}
+
+	@Override
+	public ResponseEntity<? super IncreaseViewCountResponseDto> increaseViewCount(Integer boardNumber) {
+		try {
+			 BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
+			 
+			 if(boardEntity == null) return IncreaseViewCountResponseDto.notExistBoard();
+			 
+			 boardEntity.increaseViewCount(); 
+			 boardRepository.save(boardEntity);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseDto.databaseError();
+		}
+		return IncreaseViewCountResponseDto.success();
 	}
 
 }

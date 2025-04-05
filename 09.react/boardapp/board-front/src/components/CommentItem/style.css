@@ -41,9 +41,9 @@
 }
 
 .comment-list-item-time {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(0, 0, 0, 0.4);
   
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 140%;
 }

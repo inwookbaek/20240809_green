@@ -7,6 +7,7 @@ import com.lec.board.dto.request.board.PostCommentRequestDto;
 import com.lec.board.dto.response.board.GetBoardResponseDto;
 import com.lec.board.dto.response.board.GetCommentListResponseDto;
 import com.lec.board.dto.response.board.GetFavoriteListResponseDto;
+import com.lec.board.dto.response.board.IncreaseViewCountResponseDto;
 import com.lec.board.dto.response.board.PostBoardResponseDto;
 import com.lec.board.dto.response.board.PostCommentResponseDto;
 import com.lec.board.dto.response.board.PutFavoriteResponseDto;
@@ -19,5 +20,6 @@ public interface BoardService {
 	ResponseEntity<? super GetFavoriteListResponseDto> getFavoritList(Integer boardNumber);
 	ResponseEntity<? super PostCommentResponseDto> postComment(PostCommentRequestDto dto, Integer boardNumber, String email);
 	ResponseEntity<? super GetCommentListResponseDto> getCommentList(Integer boardNumber);
+	ResponseEntity<? super IncreaseViewCountResponseDto> increaseViewCount(Integer boardNumber);
 	
 }

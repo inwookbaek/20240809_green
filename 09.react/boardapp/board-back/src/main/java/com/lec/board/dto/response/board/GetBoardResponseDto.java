@@ -43,7 +43,7 @@ public class GetBoardResponseDto extends ResponseDto {
         this.boardImageList = imageEntities.stream()
                 .map(ImageEntity::getImage)  // ImageEntity에서 URL 추출
                 .collect(Collectors.toList());
-		this.writeDatetime = resultSet.getWriterDatetime();
+		this.writeDatetime = resultSet.getWriteDatetime();
 		this.writerEmail = resultSet.getWriterEmail();
 		this.writerNickname = resultSet.getWriterNickname();
 		this.writerProfileImage = resultSet.getWriterProfileImage();
