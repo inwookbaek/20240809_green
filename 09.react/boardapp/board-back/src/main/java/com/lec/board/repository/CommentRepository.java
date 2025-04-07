@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lec.board.entity.CommentEntity;
 import com.lec.board.repository.resultSet.GetCommentListResultSet;
@@ -24,5 +25,7 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
 			    " order by writeDatetime desc              "
 	  , nativeQuery = true)
 	List<GetCommentListResultSet> getCommentList(Integer boardNumber);
-
+	
+	@Transactional
+	void deleteByBoardNumber(Integer boardNumber);
 }

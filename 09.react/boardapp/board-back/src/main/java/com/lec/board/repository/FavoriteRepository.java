@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lec.board.entity.FavoriteEntity;
 import com.lec.board.entity.primaryKey.FavoritePK;
@@ -26,4 +27,7 @@ public interface FavoriteRepository extends JpaRepository<FavoriteEntity, Favori
 			" where F.board_number = ?1"
 	  , nativeQuery = true)
 	List<GetFavoriteListResultSet> getFavoriteList(Integer boardNumber);
+	
+	@Transactional
+	void deleteByBoardNumber(Integer boardNumber);
 }

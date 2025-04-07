@@ -54,7 +54,8 @@ public class WebSecurityConfig {
     		CorsConfig corsConfig) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.corsConfig = corsConfig;
-    }  	
+    }  
+
     @Bean
     protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {   	
     	  	

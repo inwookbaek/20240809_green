@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import com.lec.board.config.WebSecurityConfig;
 import com.lec.board.dto.request.board.PostBoardRequestDto;
 import com.lec.board.dto.request.board.PostCommentRequestDto;
 import com.lec.board.dto.response.ResponseDto;
+import com.lec.board.dto.response.board.DeleteBoardResponseDto;
 import com.lec.board.dto.response.board.GetBoardResponseDto;
 import com.lec.board.dto.response.board.GetCommentListResponseDto;
 import com.lec.board.dto.response.board.GetFavoriteListResponseDto;
@@ -42,9 +44,9 @@ public class BoardServiceImpl implements BoardService {
 
     private final WebSecurityConfig webSecurityConfig;
 
-	private final UserRepository userRepository;
-	private final BoardRepository boardRepository;
-	private final ImageRepository imageRepository;
+    private final UserRepository userRepository;
+    private final BoardRepository boardRepository;
+    private final ImageRepository imageRepository;
 	private final CommentRepository commentRepository;
 	private final FavoriteRepository favoriteRepository;
 	
@@ -212,9 +214,7 @@ public class BoardServiceImpl implements BoardService {
 	public ResponseEntity<? super IncreaseViewCountResponseDto> increaseViewCount(Integer boardNumber) {
 		try {
 			 BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
-			 
 			 if(boardEntity == null) return IncreaseViewCountResponseDto.notExistBoard();
-			 
 			 boardEntity.increaseViewCount(); 
 			 boardRepository.save(boardEntity);
 		} catch (Exception e) {
@@ -222,6 +222,30 @@ public class BoardServiceImpl implements BoardService {
 			return ResponseDto.databaseError();
 		}
 		return IncreaseViewCountResponseDto.success();
+	}
+
+	@Override
+	public ResponseEntity<? super DeleteBoardResponseDto> deleteBoard(Integer boardNumber, String email) {
+		try {
+			boolean existUser = userRepository.existsByEmail(email);
+			if(!existUser) return PutFavoriteResponseDto.noExistUser();
+			
+			 BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
+			 if(boardEntity == null) return DeleteBoardResponseDto.noExistBoard();
+			 
+			 String writerEamil = boardEntity.getWriterEmail();
+			 boolean isWriter = writerEamil.equals(email);
+			 if(!isWriter) return DeleteBoardResponseDto.noPermission();
+			 
+			 imageRepository.deleteByBoardNumber(boardNumber);
+			 commentRepository.deleteByBoardNumber(boardNumber);
+			 favoriteRepository.deleteByBoardNumber(boardNumber);
+			 boardRepository.delete(boardEntity);
+			 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}			
+		return DeleteBoardResponseDto.success();
 	}
 
 }

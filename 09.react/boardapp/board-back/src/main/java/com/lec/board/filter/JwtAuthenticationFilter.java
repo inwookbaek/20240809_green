@@ -168,11 +168,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // 3️⃣ 헤더 값이 "Bearer "로 시작하는지 확인
         boolean isBearer = authorization.startsWith("Bearer ");
         if (!isBearer) return null;
-         log.info(" =====> hasAuthorization : " + hasAuthorization);
+        // log.info(" =====> hasAuthorization : " + hasAuthorization);
 
         // 4️⃣ "Bearer " 이후의 문자열(토큰) 추출
         String token = authorization.substring(7);
-        log.info(" =====> jwt " + token);
+        // log.info(" =====> jwt " + token);
         
         return token;
     }
