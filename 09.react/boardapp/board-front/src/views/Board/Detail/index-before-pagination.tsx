@@ -181,25 +181,16 @@ export default function BoardDetail() {
     /* ref -------------------------------------------------------------------*/
     const commentRef = useRef<HTMLTextAreaElement | null>(null);
     
-    /* state -------------------------------------------------------------------*/
-    // 페이지네이션적용
-    const {
-      currentPage, currentSection, viewList, viewPageList, totalSection,
-      setCurrentPage, setCurrentSection, setTotalList 
-    } = usePagination<CommentListItem>(3);
-
-    
+    /* state -------------------------------------------------------------------*/   
     const [favoriteList, setFavoriteList] = useState<FavoriteListItem[]>([]);
     const [isFavorite, setFavorite] = useState<boolean>(false);
     const [showFavorite, setShowFavorite] = useState<boolean>(false);
     
     // 페이지네이션 로직 적용전에 임시로 작성
-    // const [commentList, setCommentList] = useState<CommentListItem[]>([]);
-    const [totalCommentCount, setTotalCommentCount] = useState<number>(0);    // 페이지네이션 적용 - 전체댓글상태
-    const [comment, setComment] = useState<string>('');
+    const [commentList, setCommentList] = useState<CommentListItem[]>([]);
+    
     const [showComment, setShowComment] = useState<boolean>(false);
-
-
+    const [comment, setComment] = useState<string>('');
 
     /* function -------------------------------------------------------------*/
     // 좋아요목록
@@ -230,9 +221,7 @@ export default function BoardDetail() {
       if(code !== 'SU') return;
 
       const { commentList } = responseBody as GetCommentListResponseDto;
-      // setCommentList(commentList);            // 페이지네이션 적용전
-      setTotalList(commentList);                 // 페이지네이션 적용후
-      setTotalCommentCount(commentList.length);   // 페이지네이션 적용후
+      setCommentList(commentList);            // 페이지네이션 적용전
     }
     
     const putFavoriteResponse = (responseBody: PutFavoriteResponseDto | ResponseDto | null) => {
@@ -332,8 +321,7 @@ export default function BoardDetail() {
             <div className="icon-button">
               <div className="icon comment-icon"></div>
             </div>
-            {/* <div className="board-detail-bottom-text">{`댓글 ${commentList.length}`}</div> 페이지네이션 적용 전*/}
-            <div className="board-detail-bottom-text">{`댓글 ${totalCommentCount}`}</div>
+            <div className="board-detail-bottom-text">{`댓글 ${ commentList.length }`}</div> {/* 페이지네이션 적용 전 */}
             <div className="icon-button" onClick={ onShowCommentClickHandler }>
             {showComment 
               ? <div className="icon up-light-icon"></div> 
@@ -355,25 +343,16 @@ export default function BoardDetail() {
         {showComment &&  
         <div className="board-detail-bottom-comment-box">
           <div className="board-detail-bottom-comment-container">
-            {/* <div className="board-detail-bottom-comment-title">{'댓글 '}<span className='emphasis'>{ commentList.length }</span></div> */}
-            <div className="board-detail-bottom-comment-title">{'댓글 '}<span className='emphasis'>{ totalCommentCount }</span></div>
+            <div className="board-detail-bottom-comment-title">{'댓글 '}<span className='emphasis'>{ commentList.length }</span></div> {/*페이지네이션적용전 */}
             <div className="board-detail-bottom-comment-list-container">
-              {/* commentList.map((item, idx)  =>  <CommentItem key={idx} commentListItem={item}/>)} // 페이지네이션 적용전 */}
-              {viewList.map(item => <CommentItem commentListItem={item}/>)}   {/* // 페이지네이션 적용후   */}
+              { commentList.map((item, idx)  =>  <CommentItem key={idx} commentListItem={item}/>)}  {/* 페이지네이션 적용전 */}
             </div>
           </div> {/* comment-container */}
 
           <div className="divider"></div>
 
           <div className="board-detail-bottom-comment-pagination-box">
-            <Pagination 
-                  currentPage = {currentPage}
-                  currentSection = {currentSection}
-                  setCurrentPage = {setCurrentPage}
-                  setCurrentSction = {setCurrentSection}
-                  viewPageList = {viewPageList}
-                  totalSection = {totalSection}
-            />
+            {/* <Pagination /> */}
           </div> {/* -pagination-box */}
 
           {loginUser !== null &&
