@@ -2,6 +2,7 @@ package com.lec.board.service;
 
 import org.springframework.http.ResponseEntity;
 
+import com.lec.board.dto.request.board.PatchBoardRequestDto;
 import com.lec.board.dto.request.board.PostBoardRequestDto;
 import com.lec.board.dto.request.board.PostCommentRequestDto;
 import com.lec.board.dto.response.board.DeleteBoardResponseDto;
@@ -9,6 +10,7 @@ import com.lec.board.dto.response.board.GetBoardResponseDto;
 import com.lec.board.dto.response.board.GetCommentListResponseDto;
 import com.lec.board.dto.response.board.GetFavoriteListResponseDto;
 import com.lec.board.dto.response.board.IncreaseViewCountResponseDto;
+import com.lec.board.dto.response.board.PatchBoardResponseDto;
 import com.lec.board.dto.response.board.PostBoardResponseDto;
 import com.lec.board.dto.response.board.PostCommentResponseDto;
 import com.lec.board.dto.response.board.PutFavoriteResponseDto;
@@ -23,5 +25,6 @@ public interface BoardService {
 	ResponseEntity<? super GetCommentListResponseDto> getCommentList(Integer boardNumber);
 	ResponseEntity<? super IncreaseViewCountResponseDto> increaseViewCount(Integer boardNumber);
 	ResponseEntity<? super DeleteBoardResponseDto> deleteBoard(Integer boardNumber, String email);
+	ResponseEntity<? super PatchBoardResponseDto> patchBoard(PatchBoardRequestDto dto, Integer boardNumber, String email);
 	
 }

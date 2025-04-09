@@ -37,7 +37,7 @@ export default function BoardDetail() {
   const [cookies, setCookies] = useCookies();
   
   /* global 실행함수 -------------------------------------------------------- */
-  const navigator = useNavigate();
+  const navigate = useNavigate();
 
   const IncreaseViewCountResponse = (responseBody: IncreaseViewCountResponseDto | ResponseDto | null) => {
     if(!responseBody) return;
@@ -69,7 +69,7 @@ export default function BoardDetail() {
       if(code === 'NB') alert('존재하지 않는 게시물 입니다!!');
       if(code === 'DBE') alert('데이터베이스 오류 입니다!!');
       if(code !== 'SU') {
-        navigator(MAIN_PATH());
+        navigate(MAIN_PATH());
         return;
       }
 
@@ -95,13 +95,11 @@ export default function BoardDetail() {
       if(code === 'NP') alert('권한이 없습니다!!');
       if(code === 'DBE') alert('데이터베이스 오류입니다!!');
       if(code !== 'SU') return;
-
-      navigator(MAIN_PATH());
+navigate(MAIN_PATH());
     }    
 
     const onNicknameClickHandler = () => {
-      if(!board) return;
-      navigator(USER_PATH(board.writerEmail));
+      if(!board) return;navigate(USER_PATH(board.writerEmail));
     } 
     
     const onMoreBttonClickHandler = () => {
@@ -110,8 +108,7 @@ export default function BoardDetail() {
     
     const onUpdateButtonClickHandler = () => {
       if(!board || !loginUser) return;
-      if(loginUser.email !== board.writerEmail) return;
-      navigator(BOARD_PATH() + '/' + BOARD_UPDATE_PATH(board.boardNumber));
+      if(loginUser.email !== board.writerEmail) return;navigate(BOARD_PATH() + '/' + BOARD_UPDATE_PATH(board.boardNumber));
     }
     
     const onDeleteButtonClickHandler = () => {
@@ -125,7 +122,7 @@ export default function BoardDetail() {
     useEffect(() => {
       // setBoard(boardMock) /* mock data로 테스트 */
       if(!boardNumber) {
-        navigator(MAIN_PATH());
+        navigate(MAIN_PATH());
         return;
       }
     
@@ -193,13 +190,11 @@ export default function BoardDetail() {
     const [isFavorite, setFavorite] = useState<boolean>(false);
     const [showFavorite, setShowFavorite] = useState<boolean>(false);
     
-    // 페이지네이션 로직 적용전에 임시로 작성
+    // 페이지네이션 로직 적용전에 임시로 작성한 부분 주석처리
     // const [commentList, setCommentList] = useState<CommentListItem[]>([]);
     const [totalCommentCount, setTotalCommentCount] = useState<number>(0);    // 페이지네이션 적용 - 전체댓글상태
     const [comment, setComment] = useState<string>('');
     const [showComment, setShowComment] = useState<boolean>(false);
-
-
 
     /* function -------------------------------------------------------------*/
     // 좋아요목록

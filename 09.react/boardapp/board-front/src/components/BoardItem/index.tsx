@@ -18,11 +18,11 @@ export default function BoardItem({ boardListItem }: Props) {
   const { writeDatetime, writerNickname, writerProfileImage } = boardListItem; // 작성자 정보
 
   // 🔹 useNavigate 훅을 사용하여 페이지 이동 기능 설정
-  const navigator = useNavigate();
+  const navigate = useNavigate();
 
   // 🔹 게시글 아이템 클릭 이벤트 핸들러
   const onClickHandler = () => {
-    navigator(`/board/${boardNumber}`); // 클릭 시 해당 게시글 상세 페이지로 이동
+    navigate(`/board/${boardNumber}`); // 클릭 시 해당 게시글 상세 페이지로 이동
   };
 
   // 🔹 Board List Item 컴포넌트 렌더링

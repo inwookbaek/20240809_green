@@ -3,9 +3,10 @@ import { ResponseDto } from "./response";
 import { GetSignInUserResponseDto } from "./response/user";
 import { SignInRequestDto, SignUpRequestDto } from "./request/auth";
 import { SignInResponseDto, SignUpResponseDto } from "./response/auth";
-import { PostBoardRequestDto, PostCommentRequestDto } from "./request/board";
+import { PatchBoardRequestDto, PostBoardRequestDto, PostCommentRequestDto } from "./request/board";
 import { GetBoardResponseDto, GetCommentListResponseDto, GetFavoriteListResponseDto, PostBoardResponseDto
-  , PostCommentResponseDto, PutFavoriteResponseDto , IncreaseViewCountResponseDto , DeleteBoardResponseDto } from "./response/board";
+  , PostCommentResponseDto, PutFavoriteResponseDto , IncreaseViewCountResponseDto , DeleteBoardResponseDto, 
+  PatchBoardResponseDto} from "./response/board";
 
 // .env 파일에서 포트 번호를 가져옴
 const PORT = process.env.REACT_APP_API_PORT || '8090'; // 기본값 설정 (옵션)
@@ -56,6 +57,7 @@ const INCREASE_VIEW_COUNT_URL = (boardNumber: number | string) => `${API_DOMAIN}
 const GET_FAVORITE_LIST_URL = (boardNumber: number | string) => `${API_DOMAIN}/board/${boardNumber}/favorite-list`;
 const GET_COMMENT_LIST_URL = (boardNumber: number | string) => `${API_DOMAIN}/board/${boardNumber}/comment-list`;
 const POST_BOARD_URL = () => `${API_DOMAIN}/board`;
+const PATCH_BOARD_URL = (boardNumber: string | number)  => `${API_DOMAIN}/board/${boardNumber}`;
 const POST_COMMENT_URL = (boardNumber: string | number)  => `${API_DOMAIN}/board/${boardNumber}/comment`;
 const PUT_FAVORITE_URL = (boardNumber: string | number)  => `${API_DOMAIN}/board/${boardNumber}/favorite`;
 const DELETE_BOARD_URL = (boardNumber: string | number)  => `${API_DOMAIN}/board/${boardNumber}`;
@@ -180,7 +182,6 @@ export const deleteBoardRequest = async (boardNumber: number | string, accessTok
   return result;
 }
 
-
 export const getSignInUserRequest = async (accessToken: string) => {
   const result = await axios.get(GET_SIGN_IN_USER_URL(), authorization(accessToken))
     .then(response => {
@@ -207,5 +208,19 @@ export const fileUploadRequest = async (data: FormData) => {
         return null;
       })
 
+      return result;
+}
+
+export const patchBoardRequest = async (boardNumber: number | string, requestBody: PatchBoardRequestDto, accessToken: string) => {
+  const result = await axios.patch(PATCH_BOARD_URL(boardNumber), requestBody, authorization(accessToken))
+      .then((response) => {
+        const responseBody: PatchBoardResponseDto = response.data;
+        return responseBody
+      })
+      .catch(error => {
+        if(!error.response) return null;
+        const responseBody: ResponseDto = error.response.data;
+        return responseBody;
+      })
       return result;
 }

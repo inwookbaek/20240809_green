@@ -4,7 +4,9 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 
+import com.lec.board.dto.request.board.PatchBoardRequestDto;
 import com.lec.board.dto.request.board.PostBoardRequestDto;
+import com.lec.board.dto.response.board.PatchBoardResponseDto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -67,6 +69,11 @@ public class BoardEntity {
 	
 	public void decreaseCommentCount() {
 		this.commentCount--;
+	}
+	
+	public void patchBoard(PatchBoardRequestDto dto) {
+		this.title = dto.getTitle();
+		this.content = dto.getContent();
 	}
 	
 }

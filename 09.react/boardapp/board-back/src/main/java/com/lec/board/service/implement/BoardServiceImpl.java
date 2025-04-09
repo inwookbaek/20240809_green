@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.lec.board.config.WebSecurityConfig;
+import com.lec.board.dto.request.board.PatchBoardRequestDto;
 import com.lec.board.dto.request.board.PostBoardRequestDto;
 import com.lec.board.dto.request.board.PostCommentRequestDto;
 import com.lec.board.dto.response.ResponseDto;
@@ -17,6 +17,7 @@ import com.lec.board.dto.response.board.GetBoardResponseDto;
 import com.lec.board.dto.response.board.GetCommentListResponseDto;
 import com.lec.board.dto.response.board.GetFavoriteListResponseDto;
 import com.lec.board.dto.response.board.IncreaseViewCountResponseDto;
+import com.lec.board.dto.response.board.PatchBoardResponseDto;
 import com.lec.board.dto.response.board.PostBoardResponseDto;
 import com.lec.board.dto.response.board.PostCommentResponseDto;
 import com.lec.board.dto.response.board.PutFavoriteResponseDto;
@@ -244,8 +245,43 @@ public class BoardServiceImpl implements BoardService {
 			 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return ResponseDto.databaseError();
 		}			
 		return DeleteBoardResponseDto.success();
+	}
+
+	@Override
+	public ResponseEntity<? super PatchBoardResponseDto> patchBoard(PatchBoardRequestDto dto, Integer boardNumber,
+			String email) {
+		try {
+			
+			BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
+			
+			if(boardEntity == null) return PatchBoardResponseDto.noExistBoard();				
+						
+			boolean existUser = userRepository.existsByEmail(email);
+			if(!existUser) return PatchBoardResponseDto.noExistUser();	 
+			
+			String writerEamil = boardEntity.getWriterEmail();
+			boolean isWriter = writerEamil.equals(email);
+			if(!isWriter) return PatchBoardResponseDto.noPermission();
+			
+			boardEntity.patchBoard(dto);
+			boardRepository.save(boardEntity);
+			
+			imageRepository.deleteByBoardNumber(boardNumber);						
+			List<ImageEntity> imageEntities = 
+				 dto.getBoardImageList()
+					.stream()
+					.map(image -> new ImageEntity(boardNumber, image))
+					.collect(Collectors.toList());
+			imageRepository.saveAll(imageEntities);
+			 
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseDto.databaseError();
+		}			
+		return PatchBoardResponseDto.success();
 	}
 
 }

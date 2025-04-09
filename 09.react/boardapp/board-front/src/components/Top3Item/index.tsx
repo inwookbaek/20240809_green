@@ -18,11 +18,11 @@ export default function Top3Item({ top3ListItem }: Props) {
   const {writeDatetime, writerNickname, writerProfileImage} = top3ListItem;
 
   // function : 내비게이트함수
-  const navigator = useNavigate();
+  const navigate = useNavigate();
 
   // eventHandler : 게시글 아이템 클릭 이벤트
   const onClickHandler = ()=> {
-    navigator(boardNumber);
+    navigate(boardNumber);
   }
 
   // render : Top 3 List Item component rendering

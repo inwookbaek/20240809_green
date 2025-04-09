@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -11,16 +12,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lec.board.dto.request.board.PatchBoardRequestDto;
 import com.lec.board.dto.request.board.PostBoardRequestDto;
 import com.lec.board.dto.request.board.PostCommentRequestDto;
+import com.lec.board.dto.response.board.DeleteBoardResponseDto;
 import com.lec.board.dto.response.board.GetBoardResponseDto;
 import com.lec.board.dto.response.board.GetCommentListResponseDto;
 import com.lec.board.dto.response.board.GetFavoriteListResponseDto;
 import com.lec.board.dto.response.board.IncreaseViewCountResponseDto;
+import com.lec.board.dto.response.board.PatchBoardResponseDto;
 import com.lec.board.dto.response.board.PostBoardResponseDto;
 import com.lec.board.dto.response.board.PostCommentResponseDto;
 import com.lec.board.dto.response.board.PutFavoriteResponseDto;
-import com.lec.board.dto.response.board.DeleteBoardResponseDto;
 import com.lec.board.service.BoardService;
 
 import jakarta.validation.Valid;
@@ -111,4 +114,13 @@ public class BoardController {
 		return response;
 	}
 
+	@PatchMapping("/{boardNumber}")
+	public ResponseEntity<? super PatchBoardResponseDto> patchBoard(
+			@RequestBody @Valid PatchBoardRequestDto dto,
+			@PathVariable("boardNumber") Integer boardNumber,
+			@AuthenticationPrincipal String email) { 
+		ResponseEntity<? super PatchBoardResponseDto> response = boardService.patchBoard(dto, boardNumber, email);		
+		return response;
+	}
+	
 }

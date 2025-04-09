@@ -91,7 +91,7 @@ export default function BoardWrite() {
 
 
   return (
-    <div id="board-writer-wrapper">
+    <div id="board-write-wrapper">
       <div className="board-write-container">
         <div className="board-write-box">
           <div className="board-write-title-box">

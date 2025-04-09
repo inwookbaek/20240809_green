@@ -4,9 +4,9 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { AUTH_PATH, BOARD_DETAIL_PATH, BOARD_PATH, BOARD_UPDATE_PATH, BOARD_WRITE_PATH, MAIN_PATH, SEARCH_PATH, USER_PATH } from 'constant';
 import { useCookies } from 'react-cookie';
 import { useBoardStore, useLoginUserStore } from 'stores';
-import { fileUploadRequest, postBoardRequest } from 'apis';
-import { PostBoardRequestDto } from 'apis/request/board';
-import { PostBoardResponseDto } from 'apis/response/board';
+import { fileUploadRequest, patchBoardRequest, postBoardRequest } from 'apis';
+import { PatchBoardRequestDto, PostBoardRequestDto } from 'apis/request/board';
+import { PatchBoardResponseDto, PostBoardResponseDto } from 'apis/response/board';
 import { ResponseDto } from 'apis/response';
 
 /*
@@ -158,10 +158,12 @@ export default function Header() {
 
   // ✅ 파일 업로드 버튼 컴포넌트
   const UploadButton = () => {
+
+    const { boardNumber } = useParams();
     const { title, content, boardImageFileList, resetBoard } = useBoardStore();
 
     // postBoardResponse처리함수
-    const postBoardResponse =  (reponseBody: PostBoardResponseDto| ResponseDto | null) => {
+    const postBoardResponse =  (reponseBody: PostBoardResponseDto | ResponseDto | null) => {
       if(!reponseBody) return;
       const { code } = reponseBody;
       if(code === 'DBE') alert('데이터베이스 오류 입니다!!');
@@ -173,7 +175,18 @@ export default function Header() {
       if(!loginUser) return;
       const { email } = loginUser;
       navigate(USER_PATH(email));
+    }
 
+    const patchBoardResponse = (reponseBody: PatchBoardResponseDto | ResponseDto | null) => {
+      if(!reponseBody) return;
+      const { code } = reponseBody;
+      if(code === 'DBE') alert('데이터베이스 오류 입니다!!');
+      if(code === 'AF' || code === 'NU' || code === 'NB' || code === 'NP') navigate(AUTH_PATH());
+      if(code === 'VF') alert('제목과 내용은 필수 입력사항 입니다!!');
+      if(code !== 'SU') return;
+
+      if(!boardNumber) return;
+      navigate(BOARD_PATH() + '/' + BOARD_DETAIL_PATH(boardNumber));
     }
 
     const onUploadButtonClickHandler = async () => {
@@ -189,19 +202,24 @@ export default function Header() {
         if(url) boardImageList.push(url); 
       }
 
-      const requestBody: PostBoardRequestDto = {
-        title, content, boardImageList
+      // 게시글수정 patch로직 추가
+      const isWritePage = pathname === BOARD_PATH() + '/' + BOARD_WRITE_PATH();
+      if(isWritePage) {
+        const requestBody: PostBoardRequestDto = { title, content, boardImageList }
+        postBoardRequest(requestBody, accessToken).then(postBoardResponse);
+      } else  {
+        if(!boardNumber) return;
+        const requestBody: PatchBoardRequestDto = { title, content, boardImageList }
+        patchBoardRequest(boardNumber, requestBody, accessToken).then(patchBoardResponse);
       }
-
-      postBoardRequest(requestBody, accessToken).then(postBoardResponse);
     };
 
     // 🔹 제목과 내용이 있는 경우 (업로드 가능)
     if (title && content) 
-      return <div className='black-button' onClick={onUploadButtonClickHandler}>파일 업로드</div>;
+      return <div className='black-button' onClick={onUploadButtonClickHandler}>게시글등록</div>;
 
     // 🔹 제목 또는 내용이 없는 경우 (업로드 불가)
-    return <div className='disable-button'>파일 업로드</div>;
+    return <div className='disable-button'>게시글등록</div>;
   };
 
   // ✅ 최종적으로 렌더링되는 JSX

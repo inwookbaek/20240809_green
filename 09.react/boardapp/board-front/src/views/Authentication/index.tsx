@@ -22,7 +22,7 @@ export default function Authentication() {
   const [cookies, setCookie] = useCookies();
 
   // 페이지 이동을 위한 Hook
-  const navigator = useNavigate();
+  const navigate = useNavigate();
 
   // 로그인 카드 컴포넌트
   const SignInCard = () => {
@@ -62,8 +62,7 @@ export default function Authentication() {
 
       // expires : accessToken의 유효시간,  path : 쿠키가 유효한 경로
       setCookie('accessToken', token, { expires, path: MAIN_PATH() });
-
-      navigator(MAIN_PATH());
+navigate(MAIN_PATH());
     }
 
     /**
