@@ -4,6 +4,7 @@ import './style.css'
 import top3BoardItemImage from "assets/image/top3BoardItemImage.jpg";
 import { BoardListItem } from 'types/interface';
 import { useNavigate } from 'react-router-dom';
+import { BOARD_DETAIL_PATH, BOARD_PATH } from 'constant';
 
 interface Props {
   top3ListItem: BoardListItem;
@@ -22,7 +23,7 @@ export default function Top3Item({ top3ListItem }: Props) {
 
   // eventHandler : 게시글 아이템 클릭 이벤트
   const onClickHandler = ()=> {
-    navigate(boardNumber);
+    navigate(BOARD_PATH() + '/' + BOARD_DETAIL_PATH(boardNumber));
   }
 
   // render : Top 3 List Item component rendering

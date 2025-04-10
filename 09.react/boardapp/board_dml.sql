@@ -43,21 +43,24 @@ select b.board_number
 	 
 	 
 -- 최신게시물
-create view board_list_view as
-select b.board_number
-	   , b.title
-		 , b.content
-		 , i.image as title_image
-		 , b.favorite_count
-		 , b.comment_count
-		 , b.view_count
-		 , b.write_datetime
-     , u.nickname
-		 , u.profile_image as writer_profile_image
-  from board b, user u, (select board_number, any_value(image) as image from image group by board_number) i
- where b.writer_email = u.email
-   and b.board_number = i.board_number
- order by write_datetime;
+create or replace view board_list_view as
+select b.board_number     as board_number
+	   , b.title            as title
+		 , b.content					as content
+		 , i.image 						as title_image
+		 , b.favorite_count		as favorite_count
+		 , b.comment_count		as comment_count
+		 , b.view_count				as view_count
+		 , b.write_datetime   as write_datetime
+		 , b.writer_email	    as writer_email
+     , u.nickname					as writer_nickname
+		 , u.profile_image 		as writer_profile_image
+  from board b
+	inner join user u 
+	      on b.writer_email = u.email
+	 left join (select board_number, any_value(image) as image from image group by board_number) i 
+				on b.board_number = i.board_number
+ order by write_datetime desc;
  
  -- comment count
  select u.nickname

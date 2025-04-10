@@ -9,6 +9,8 @@ import com.lec.board.dto.response.board.DeleteBoardResponseDto;
 import com.lec.board.dto.response.board.GetBoardResponseDto;
 import com.lec.board.dto.response.board.GetCommentListResponseDto;
 import com.lec.board.dto.response.board.GetFavoriteListResponseDto;
+import com.lec.board.dto.response.board.GetLatestBoardListResponseDto;
+import com.lec.board.dto.response.board.GetTop3BoardListResponseDto;
 import com.lec.board.dto.response.board.IncreaseViewCountResponseDto;
 import com.lec.board.dto.response.board.PatchBoardResponseDto;
 import com.lec.board.dto.response.board.PostBoardResponseDto;
@@ -26,5 +28,7 @@ public interface BoardService {
 	ResponseEntity<? super IncreaseViewCountResponseDto> increaseViewCount(Integer boardNumber);
 	ResponseEntity<? super DeleteBoardResponseDto> deleteBoard(Integer boardNumber, String email);
 	ResponseEntity<? super PatchBoardResponseDto> patchBoard(PatchBoardRequestDto dto, Integer boardNumber, String email);
+	ResponseEntity<? super GetLatestBoardListResponseDto> getLatestBoardList();
+	ResponseEntity<? super GetTop3BoardListResponseDto> getTop3BoardList();
 	
 }

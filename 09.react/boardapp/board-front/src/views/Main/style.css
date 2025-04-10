@@ -1,0 +1,152 @@
+#main-top-wrapper {
+  border-top: 2px solid rgba(0, 0, 0, 1);
+  padding: 40px 0 40px;
+  display: flex;
+  justify-content: center;  
+}
+
+.main-top-container {
+  width: 1200px;
+  min-width: 1200px;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.main-top-title {
+  color: rgba(0, 0, 0, 1);
+
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 140%;
+
+  white-space: pre-wrap;
+}
+
+.main-top-contents-box {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 140%;
+}
+
+.main-top-contents-title {
+  color: rgba(0, 0, 0, 1);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 140%;
+}
+
+.main-top-contents {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+#main-bottom-wrapper {
+  padding: 40px 0;;
+
+  display: flex;
+  justify-content: center;
+
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+}
+
+.main-bottom-container {
+  width: 1200px;
+  min-width: 1200px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+}
+
+.main-bottom-title {
+  color: rgba(0, 0, 0, 1);
+
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 140%;
+  text-align: center;
+
+}
+
+.man-bottom-latest-contents-box {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 8fr 4fr;
+  gap: 20px;
+
+}
+
+.man-bottom-current-contents {
+  grid-column: 1 / 2;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.main-bottom-popular-box {
+  grid-column: 2 / 3;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.main-bottom-pouplar-card {
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.main-bottom-popular-card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+} 
+
+.main-bottom-popular-card-title {
+  color: rgba(0, 0, 0, 1);
+
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 140%;
+  text-align: center;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 10px;
+}
+
+
+.main-bottom-popular-card-contents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+}
+
+.main-bottom-pagination-box {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+

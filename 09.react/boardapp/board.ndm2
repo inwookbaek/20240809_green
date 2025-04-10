@@ -1511,7 +1511,7 @@
           {
             "objectType": "View_MYSQL",
             "name": "board_list_view",
-            "selectStatement": "select `b`.`board_number` AS `board_number`,`b`.`title` AS `title`,`b`.`content` AS `content`,`i`.`image` AS `title_image`,`b`.`favorite_count` AS `favorite_count`,`b`.`comment_count` AS `comment_count`,`b`.`view_count` AS `view_count`,`b`.`write_datetime` AS `write_datetime`,`u`.`nickname` AS `nickname`,`u`.`profile_image` AS `writer_profile_image` from ((`board` `b` join `user` `u`) join (select `image`.`board_number` AS `board_number`,any_value(`image`.`image`) AS `image` from `image` group by `image`.`board_number`) `i`) where ((`b`.`writer_email` = `u`.`email`) and (`b`.`board_number` = `i`.`board_number`)) order by `b`.`write_datetime`",
+            "selectStatement": "select b.board_number     as board_number\r\n\t   , b.title            as title\r\n\t\t , b.content\t\t\t\t\tas content\r\n\t\t , i.image \t\t\t\t\t\tas title_image\r\n\t\t , b.favorite_count\t\tas favorite_count\r\n\t\t , b.comment_count\t\tas comment_count\r\n\t\t , b.view_count\t\t\t\tas view_count\r\n\t\t , b.write_datetime   as write_datetime\r\n\t\t , b.writer_email\t    as writer_email\r\n     , u.nickname\t\t\t\t\tas writer_nickname\r\n\t\t , u.profile_image \t\tas writer_profile_image\r\n  from board b\r\n\tinner join user u \r\n\t      on b.writer_email = u.email\r\n\t left join (select board_number, any_value(image) as image from image group by board_number) i \r\n\t\t\t\ton b.board_number = i.board_number\r\n order by write_datetime desc;",
             "viewAlgorithm": "UNDEFINED",
             "sqlSecurity": "DEFINER",
             "checkOption": "",
@@ -1606,7 +1606,7 @@
           "schemaName": "boarddb",
           "tableName": "search_log",
           "x": 30,
-          "y": 810,
+          "y": 480,
           "width": 150,
           "height": 130,
           "isBold": false,

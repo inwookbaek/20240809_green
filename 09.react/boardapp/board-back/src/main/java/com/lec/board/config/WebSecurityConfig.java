@@ -102,7 +102,7 @@ class FailedAuthenticationEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
     	
-    	System.out.println("Error =======> " + HttpServletResponse.SC_UNAUTHORIZED);
+    	// System.out.println("Error =======> " + HttpServletResponse.SC_UNAUTHORIZED);
     	
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

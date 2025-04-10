@@ -4,6 +4,7 @@ import defaultProfileImage from "assets/image/defaultProfileImage.jpg"; // 기�
 import defaultBoardItemImage from "assets/image/defaultBoardItemImage.jpg"; // 기본 게시글 대표 이미지
 import type { BoardListItem } from "types/interface"; // 게시글 타입 정의 임포트
 import { useNavigate } from "react-router-dom"; // 페이지 이동을 위한 useNavigate 훅 임포트
+import { BOARD_DETAIL_PATH, BOARD_PATH } from 'constant';
 
 // 🔹 Props 인터페이스 정의
 interface Props {
@@ -22,7 +23,7 @@ export default function BoardItem({ boardListItem }: Props) {
 
   // 🔹 게시글 아이템 클릭 이벤트 핸들러
   const onClickHandler = () => {
-    navigate(`/board/${boardNumber}`); // 클릭 시 해당 게시글 상세 페이지로 이동
+        navigate(BOARD_PATH() + '/' + BOARD_DETAIL_PATH(boardNumber)); // 클릭 시 해당 게시글 상세 페이지로 이동
   };
 
   // 🔹 Board List Item 컴포넌트 렌더링

@@ -8,6 +8,21 @@
   font-weight: bolder;
 }
 
+.word-badge {
+  padding: 6px 20px;
+  border-radius: 50px;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 14px; 
+  font-weight: 500;
+  line-height: 140%;
+}
+
+.word-badge:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
 /* 기본 스타일 */
 .black-button, .black-large-full-button, .white-button, .disable-button {
   border-radius: 46px;

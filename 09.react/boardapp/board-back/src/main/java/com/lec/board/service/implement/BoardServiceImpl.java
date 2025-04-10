@@ -1,6 +1,10 @@
 package com.lec.board.service.implement;
 
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,15 +20,19 @@ import com.lec.board.dto.response.board.DeleteBoardResponseDto;
 import com.lec.board.dto.response.board.GetBoardResponseDto;
 import com.lec.board.dto.response.board.GetCommentListResponseDto;
 import com.lec.board.dto.response.board.GetFavoriteListResponseDto;
+import com.lec.board.dto.response.board.GetLatestBoardListResponseDto;
+import com.lec.board.dto.response.board.GetTop3BoardListResponseDto;
 import com.lec.board.dto.response.board.IncreaseViewCountResponseDto;
 import com.lec.board.dto.response.board.PatchBoardResponseDto;
 import com.lec.board.dto.response.board.PostBoardResponseDto;
 import com.lec.board.dto.response.board.PostCommentResponseDto;
 import com.lec.board.dto.response.board.PutFavoriteResponseDto;
 import com.lec.board.entity.BoardEntity;
+import com.lec.board.entity.BoardListViewEntity;
 import com.lec.board.entity.CommentEntity;
 import com.lec.board.entity.FavoriteEntity;
 import com.lec.board.entity.ImageEntity;
+import com.lec.board.repository.BoardListViewRepository;
 import com.lec.board.repository.BoardRepository;
 import com.lec.board.repository.CommentRepository;
 import com.lec.board.repository.FavoriteRepository;
@@ -50,6 +58,7 @@ public class BoardServiceImpl implements BoardService {
     private final ImageRepository imageRepository;
 	private final CommentRepository commentRepository;
 	private final FavoriteRepository favoriteRepository;
+	private final BoardListViewRepository boardListViewRepository;
 	
 	@Override
 	public ResponseEntity<? super PostBoardResponseDto> postBoard(PostBoardRequestDto dto, String email) {
@@ -282,6 +291,43 @@ public class BoardServiceImpl implements BoardService {
 			return ResponseDto.databaseError();
 		}			
 		return PatchBoardResponseDto.success();
+	}
+
+	@Override
+	public ResponseEntity<? super GetLatestBoardListResponseDto> getLatestBoardList() {
+		
+		List<BoardListViewEntity> boardListViewEntities = new ArrayList<>();
+		
+		try {
+			
+			boardListViewEntities = boardListViewRepository.findByOrderByWriteDatetimeDesc();
+			 
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseDto.databaseError();
+		}			
+		return GetLatestBoardListResponseDto.success(boardListViewEntities);
+	}
+
+	@Override
+	public ResponseEntity<? super GetTop3BoardListResponseDto> getTop3BoardList() {
+		
+		List<BoardListViewEntity> boardListViewEntities = new ArrayList<>();
+		
+		try {
+			
+			Date beforeOneWeek = Date.from(Instant.now().minus(7, ChronoUnit.DAYS));
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String sevenDaysAgo = sdf.format(beforeOneWeek);
+			
+			boardListViewEntities = boardListViewRepository
+					.findTop3ByWriteDatetimeGreaterThanOrderByFavoriteCountDescCommentCountDescViewCountDescWriteDatetimeDesc(sevenDaysAgo);
+			 
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseDto.databaseError();
+		}			
+		return GetTop3BoardListResponseDto.success(boardListViewEntities);
 	}
 
 }

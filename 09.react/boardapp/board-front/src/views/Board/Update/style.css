@@ -1,5 +1,5 @@
 #board-update-wrapper {
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 2px solid rgba(0, 0, 0, 1);
   display: flex;
   justify-content: center;
 
@@ -33,8 +33,8 @@
   
   color: rgba(0, 0, 0, 1);
   
-  font-size: 30px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
   line-height: 140%;
 }
 
@@ -48,8 +48,9 @@
 .board-update-content-textarea {
   
   flex: 1;
-
+  
   border: none;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.5);
   outline: none;
   background: none;
   resize: none;
