@@ -2,20 +2,8 @@ package com.lec.board.service;
 
 import org.springframework.http.ResponseEntity;
 
-import com.lec.board.dto.request.board.PatchBoardRequestDto;
-import com.lec.board.dto.request.board.PostBoardRequestDto;
-import com.lec.board.dto.request.board.PostCommentRequestDto;
-import com.lec.board.dto.response.board.DeleteBoardResponseDto;
-import com.lec.board.dto.response.board.GetBoardResponseDto;
-import com.lec.board.dto.response.board.GetCommentListResponseDto;
-import com.lec.board.dto.response.board.GetFavoriteListResponseDto;
-import com.lec.board.dto.response.board.GetLatestBoardListResponseDto;
-import com.lec.board.dto.response.board.GetTop3BoardListResponseDto;
-import com.lec.board.dto.response.board.IncreaseViewCountResponseDto;
-import com.lec.board.dto.response.board.PatchBoardResponseDto;
-import com.lec.board.dto.response.board.PostBoardResponseDto;
-import com.lec.board.dto.response.board.PostCommentResponseDto;
-import com.lec.board.dto.response.board.PutFavoriteResponseDto;
+import com.lec.board.dto.request.board.*;
+import com.lec.board.dto.response.board.*;
 
 public interface BoardService {
 
@@ -30,5 +18,6 @@ public interface BoardService {
 	ResponseEntity<? super PatchBoardResponseDto> patchBoard(PatchBoardRequestDto dto, Integer boardNumber, String email);
 	ResponseEntity<? super GetLatestBoardListResponseDto> getLatestBoardList();
 	ResponseEntity<? super GetTop3BoardListResponseDto> getTop3BoardList();
+	ResponseEntity<? super GetSearchBoardListResponseDto> getSearchBoardList(String searchWord, String preSearchWord);
 	
 }

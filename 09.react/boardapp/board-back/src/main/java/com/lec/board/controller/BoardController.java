@@ -20,6 +20,7 @@ import com.lec.board.dto.response.board.GetBoardResponseDto;
 import com.lec.board.dto.response.board.GetCommentListResponseDto;
 import com.lec.board.dto.response.board.GetFavoriteListResponseDto;
 import com.lec.board.dto.response.board.GetLatestBoardListResponseDto;
+import com.lec.board.dto.response.board.GetSearchBoardListResponseDto;
 import com.lec.board.dto.response.board.GetTop3BoardListResponseDto;
 import com.lec.board.dto.response.board.IncreaseViewCountResponseDto;
 import com.lec.board.dto.response.board.PatchBoardResponseDto;
@@ -134,6 +135,18 @@ public class BoardController {
 	@GetMapping("/top3")
 	public ResponseEntity<? super GetTop3BoardListResponseDto> getTop3BoardList() { 
 		ResponseEntity<? super GetTop3BoardListResponseDto> response = boardService.getTop3BoardList();
+		return response;
+	}
+	
+	
+	@GetMapping(value={"/search/{searchWord}", "/search/{searchWord}/{preSearchWord}"})
+	public ResponseEntity<? super GetSearchBoardListResponseDto> getSearchBoardList(
+			@PathVariable("searchWord") String searchWord,
+			@PathVariable(value="preSearchWord", required = false) String preSearchWord) {
+		
+		log.info("controller - searchWord ===> ", searchWord);
+		
+		ResponseEntity<? super GetSearchBoardListResponseDto> response = boardService.getSearchBoardList(searchWord, preSearchWord);
 		return response;
 	}
 	

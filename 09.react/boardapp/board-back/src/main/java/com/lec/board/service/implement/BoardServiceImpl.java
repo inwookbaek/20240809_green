@@ -12,35 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.lec.board.config.WebSecurityConfig;
-import com.lec.board.dto.request.board.PatchBoardRequestDto;
-import com.lec.board.dto.request.board.PostBoardRequestDto;
-import com.lec.board.dto.request.board.PostCommentRequestDto;
+import com.lec.board.dto.request.board.*;
 import com.lec.board.dto.response.ResponseDto;
-import com.lec.board.dto.response.board.DeleteBoardResponseDto;
-import com.lec.board.dto.response.board.GetBoardResponseDto;
-import com.lec.board.dto.response.board.GetCommentListResponseDto;
-import com.lec.board.dto.response.board.GetFavoriteListResponseDto;
-import com.lec.board.dto.response.board.GetLatestBoardListResponseDto;
-import com.lec.board.dto.response.board.GetTop3BoardListResponseDto;
-import com.lec.board.dto.response.board.IncreaseViewCountResponseDto;
-import com.lec.board.dto.response.board.PatchBoardResponseDto;
-import com.lec.board.dto.response.board.PostBoardResponseDto;
-import com.lec.board.dto.response.board.PostCommentResponseDto;
-import com.lec.board.dto.response.board.PutFavoriteResponseDto;
-import com.lec.board.entity.BoardEntity;
-import com.lec.board.entity.BoardListViewEntity;
-import com.lec.board.entity.CommentEntity;
-import com.lec.board.entity.FavoriteEntity;
-import com.lec.board.entity.ImageEntity;
-import com.lec.board.repository.BoardListViewRepository;
-import com.lec.board.repository.BoardRepository;
-import com.lec.board.repository.CommentRepository;
-import com.lec.board.repository.FavoriteRepository;
-import com.lec.board.repository.ImageRepository;
-import com.lec.board.repository.UserRepository;
-import com.lec.board.repository.resultSet.GetBoardResultSet;
-import com.lec.board.repository.resultSet.GetCommentListResultSet;
-import com.lec.board.repository.resultSet.GetFavoriteListResultSet;
+import com.lec.board.dto.response.board.*;
+import com.lec.board.entity.*;
+import com.lec.board.repository.*;
+import com.lec.board.repository.resultSet.*;
 import com.lec.board.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -58,6 +35,7 @@ public class BoardServiceImpl implements BoardService {
     private final ImageRepository imageRepository;
 	private final CommentRepository commentRepository;
 	private final FavoriteRepository favoriteRepository;
+	private final SearchLogRepository searchLogRepository;
 	private final BoardListViewRepository boardListViewRepository;
 	
 	@Override
@@ -328,6 +306,35 @@ public class BoardServiceImpl implements BoardService {
 			return ResponseDto.databaseError();
 		}			
 		return GetTop3BoardListResponseDto.success(boardListViewEntities);
+	}
+
+	@Override
+	public ResponseEntity<? super GetSearchBoardListResponseDto> getSearchBoardList(String searchWord,
+			String preSearchWord) {
+		
+		
+		log.info("ServiceImpl - searchWord ===> ", searchWord);
+		
+		List<BoardListViewEntity> boardListViewEntities = new ArrayList<>();
+		
+		try {
+			
+			boardListViewEntities = boardListViewRepository.findByTitleContainsOrContentContainsOrderByWriteDatetimeDesc(searchWord, preSearchWord);
+			
+			SearchLogEntity searchLogEntity = new SearchLogEntity(searchWord, preSearchWord, false);
+			searchLogRepository.save(searchLogEntity);
+
+			boolean relation = preSearchWord != null;
+			if(relation) {
+				searchLogEntity = new SearchLogEntity(preSearchWord, searchWord, relation);
+				searchLogRepository.save(searchLogEntity);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseDto.databaseError();
+		}			
+		return GetSearchBoardListResponseDto.success(boardListViewEntities);
 	}
 
 }

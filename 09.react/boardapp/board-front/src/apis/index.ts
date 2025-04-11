@@ -9,9 +9,9 @@ import { GetBoardResponseDto, GetCommentListResponseDto, GetFavoriteListResponse
   PatchBoardResponseDto} from "./response/board";
 
 // .env 파일에서 포트 번호를 가져옴
-const PORT = process.env.REACT_APP_API_PORT || '8090'; // 기본값 설정 (옵션)
-const DOMAIN = `http://localhost:${PORT}`;
-
+const APP_ADDR = process.env.APP_API_ADDR || 'http://localhost'; // 기본값 설정 (옵션)
+const APP_PORT = process.env.APP_API_PORT || '8090'; // 기본값 설정 (옵션)
+const DOMAIN = `${APP_ADDR}:${APP_PORT}`;
 
 const API_DOMAIN = `${DOMAIN}/api/v1`;
 
