@@ -11,6 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.lec.board.service.FileService;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @Service
 public class FileServiceImpl implements FileService {
 	
@@ -22,7 +25,14 @@ public class FileServiceImpl implements FileService {
 	
 	@Override
 	public String upload(MultipartFile file) {
+			
 		if(file.isEmpty()) return null;
+
+		File dir = new File(filePath);
+		if (!dir.exists()) {
+			boolean created = dir.mkdirs();
+			log.info("폴더가 존재하지 않아 생성 시도: " + (created ? "성공" : "실패"));
+		}
 		
 		String originalFileName = file.getOriginalFilename();
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));

@@ -84,7 +84,7 @@
 
 }
 
-.man-bottom-latest-contents-box {
+.main-bottom-latest-contents-box {
   width: 100%;
 
   display: grid;
@@ -93,7 +93,7 @@
 
 }
 
-.man-bottom-current-contents {
+.main-bottom-current-contents {
   grid-column: 1 / 2;
 
   display: flex;

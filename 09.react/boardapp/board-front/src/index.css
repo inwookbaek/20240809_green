@@ -3,7 +3,8 @@
   src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
-  font-display: swap; /* 폰트 로드 최적화 */
+  /* font-display: swap; 폰트 로드 최적화 */
+  font-display: block; /* swap 대신 block으로 변경 */
 }
 
 @font-face {

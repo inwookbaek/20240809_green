@@ -24,6 +24,14 @@
 }
 
 .board-write-title-textarea {
+   /* 브라우저 기본 스타일 (Browser Default Styles): HTML 폼 요소들 (textarea, input, button, select 등)은 
+      종종 브라우저 자체의 기본 스타일(user-agent stylesheet)을 가집니다. 이 기본 스타일에는 font-family도 
+      포함될 수 있으며, 이 기본 폰트가 body 태그로부터 상속받는 폰트보다 우선 적용될 수 있습니다. 
+      즉, body에 Pretendard-Regular를 설정했더라도 textarea는 브라우저의 기본 폰트를 사용하려고 할 수 있다. 
+      
+      font-family를 상속받는 방법과 font-family: 'Pretendard-Regular', sans-serif;처럼 직접 폰트 지정하는 방법법이 있다.
+   */
+  font-family: inherit; /* 상속받는 방법 */
   width: 100%;
   
   border: none;
@@ -33,11 +41,11 @@
   
   color: rgba(0, 0, 0, 1);
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 140%;
-
+  
 }
-
+  
 .board-write-content-box {
   width: 100%;
   
@@ -46,7 +54,7 @@
 }
 
 .board-write-content-textarea {
-  
+  font-family: 'Pretendard-Regular', sans-serif; /* 직접 폰트 지정하는 방법법 */
   flex: 1;
   
   border: none;
@@ -56,13 +64,12 @@
   resize: none;
 
   color: rgba(0, 0, 0, 0.7);
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 10;
   line-height: 140%;  
 }
 
 .board-write-images-box {
-
   width: 100%;
 
   display: flex;

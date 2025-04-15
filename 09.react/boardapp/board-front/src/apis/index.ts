@@ -6,7 +6,11 @@ import { SignInResponseDto, SignUpResponseDto } from "./response/auth";
 import { PatchBoardRequestDto, PostBoardRequestDto, PostCommentRequestDto } from "./request/board";
 import { GetBoardResponseDto, GetCommentListResponseDto, GetFavoriteListResponseDto, PostBoardResponseDto
   , PostCommentResponseDto, PutFavoriteResponseDto , IncreaseViewCountResponseDto , DeleteBoardResponseDto, 
-  PatchBoardResponseDto} from "./response/board";
+  PatchBoardResponseDto,
+  GetLatestBoardListResponseDto,
+  GetTop3BoardListResponseDto} from "./response/board";
+import { GetPopularListResponseDto, GetRelationListResponseDto } from "./response/search";
+import GetSearchBoardListResponseDto from "./response/board/get-search-board-list.response.dto";
 
 // .env 파일에서 포트 번호를 가져옴
 const APP_ADDR = process.env.APP_API_ADDR || 'http://localhost'; // 기본값 설정 (옵션)
@@ -53,6 +57,9 @@ export const signUpRequest = async (requestBody: SignUpRequestDto) => {
 
 // 요청URL
 const GET_BOARD_URL = (boardNumber: number | string) => `${API_DOMAIN}/board/${boardNumber}`;
+const GET_LASTEST_BOARD_LIST_URL = () => `${API_DOMAIN}/board/latest`;
+const GET_TOP3_BOARD_LIST_URL = () => `${API_DOMAIN}/board/top3`;
+const GET_SEARCH_BOARD_LIST_URL = (searchWord: string, preSearchWord: string | null) => `${API_DOMAIN}/search-list/${searchWord}${preSearchWord ? '/' + preSearchWord : ''}`;
 const INCREASE_VIEW_COUNT_URL = (boardNumber: number | string) => `${API_DOMAIN}/board/${boardNumber}/increase-view-count`;
 const GET_FAVORITE_LIST_URL = (boardNumber: number | string) => `${API_DOMAIN}/board/${boardNumber}/favorite-list`;
 const GET_COMMENT_LIST_URL = (boardNumber: number | string) => `${API_DOMAIN}/board/${boardNumber}/comment-list`;
@@ -62,9 +69,66 @@ const POST_COMMENT_URL = (boardNumber: string | number)  => `${API_DOMAIN}/board
 const PUT_FAVORITE_URL = (boardNumber: string | number)  => `${API_DOMAIN}/board/${boardNumber}/favorite`;
 const DELETE_BOARD_URL = (boardNumber: string | number)  => `${API_DOMAIN}/board/${boardNumber}`;
 
+const GET_POPULAR_LIST_URL = () => `${API_DOMAIN}/search/popular`;
+export const getPopularListRequest = async () => {
+  const result = await axios.get(GET_POPULAR_LIST_URL())
+      .then(response => {
+        const responseBody: GetPopularListResponseDto = response.data;
+        return responseBody
+      })
+      .catch(error => {
+        if(!error.response) return null;
+        const responseBody: ResponseDto = error.response.data;
+        return responseBody;
+      })
+  return result;  
+};
+const GET_RELATION_LIST_URL = (searchWord: string) => `${API_DOMAIN}/search/${searchWord}`;
+export const getRelationListRequest = async (searchWord: string) => {
+  const result = await axios.get(GET_RELATION_LIST_URL(searchWord))
+      .then(response => {
+        const responseBody: GetRelationListResponseDto = response.data;
+        return responseBody
+      })
+      .catch(error => {
+        if(!error.response) return null;
+        const responseBody: ResponseDto = error.response.data;
+        return responseBody;
+      })
+  return result;  
+};
+
 const GET_SIGN_IN_USER_URL = () => `${API_DOMAIN}/user`;
+export const getSignInUserRequest = async (accessToken: string) => {
+  const result = await axios.get(GET_SIGN_IN_USER_URL(), authorization(accessToken))
+    .then(response => {
+      const responseBody: GetSignInUserResponseDto = response.data;
+      return responseBody;
+    })
+    .catch(error => {
+      if(!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+
+  return result;
+}
+
 const FILE_DOMAIN = `${DOMAIN}/file`;
 const FILE_UPLOAD_URL = () => `${FILE_DOMAIN}/upload`;
+const multipartFormData = { headers: { 'Content-Type': 'multipart/form-data'} }
+
+export const fileUploadRequest = async (data: FormData) => {
+  const result = await axios.post(FILE_UPLOAD_URL(), data, multipartFormData)
+      .then(response => {
+        const responseBody: string = response.data;
+        return responseBody;
+      })
+      .catch(error => {
+        return null;
+      })
+  return result;
+}
 
 export const getBoardRequest = async (boardNumber: number | string) => {
   const result = await axios.get(GET_BOARD_URL(boardNumber))
@@ -80,6 +144,51 @@ export const getBoardRequest = async (boardNumber: number | string) => {
 
       return result;
 }
+
+export const getLatestBoardListRequest = async () => {
+  const result = await axios.get(GET_LASTEST_BOARD_LIST_URL())
+  .then(response => {
+    const responseBody: GetLatestBoardListResponseDto = response.data;
+    return responseBody
+  })
+  .catch(error => {
+    if(!error.response) return null;
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  })
+  
+  return result;
+};
+
+export const getTop3BoardListRequest = async () => {
+  const result = await axios.get(GET_TOP3_BOARD_LIST_URL())
+      .then(response => {
+        const responseBody: GetTop3BoardListResponseDto = response.data;
+        return responseBody
+      })
+      .catch(error => {
+        if(!error.response) return null;
+        const responseBody: ResponseDto = error.response.data;
+        return responseBody;
+      })
+
+  return result;
+};
+
+export const getSearchBoardListRequest = async (searchWord: string, preSearchWord: string | null) => {
+  const result = await axios.get(GET_SEARCH_BOARD_LIST_URL(searchWord, preSearchWord))
+      .then(response => {
+        const responseBody: GetSearchBoardListResponseDto = response.data;
+        return responseBody
+      })
+      .catch(error => {
+        if(!error.response) return null;
+        const responseBody: ResponseDto = error.response.data;
+        return responseBody;
+      })
+
+  return result;
+};
 
 export const increaseViewCountRequest = async (boardNumber: number | string) => {
   const result = await axios.get(INCREASE_VIEW_COUNT_URL(boardNumber))
@@ -180,35 +289,6 @@ export const deleteBoardRequest = async (boardNumber: number | string, accessTok
       return responseBody;
     })
   return result;
-}
-
-export const getSignInUserRequest = async (accessToken: string) => {
-  const result = await axios.get(GET_SIGN_IN_USER_URL(), authorization(accessToken))
-    .then(response => {
-      const responseBody: GetSignInUserResponseDto = response.data;
-      return responseBody;
-    })
-    .catch(error => {
-      if(!error.response) return null;
-      const responseBody: ResponseDto = error.response.data;
-      return responseBody;
-    });
-
-    return result;
-}
-const multipartFormData = { headers: { 'Content-Type': 'multipart/form-data'} }
-
-export const fileUploadRequest = async (data: FormData) => {
-  const result = await axios.post(FILE_UPLOAD_URL(), data, multipartFormData)
-      .then(response => {
-        const responseBody: string = response.data;
-        return responseBody;
-      })
-      .catch(error => {
-        return null;
-      })
-
-      return result;
 }
 
 export const patchBoardRequest = async (boardNumber: number | string, requestBody: PatchBoardRequestDto, accessToken: string) => {

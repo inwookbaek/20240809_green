@@ -298,13 +298,16 @@ public class BoardServiceImpl implements BoardService {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String sevenDaysAgo = sdf.format(beforeOneWeek);
 			
-			boardListViewEntities = boardListViewRepository
-					.findTop3ByWriteDatetimeGreaterThanOrderByFavoriteCountDescCommentCountDescViewCountDescWriteDatetimeDesc(sevenDaysAgo);
+			boardListViewEntities = boardListViewRepository			
+					//.findTop3ByWriteDatetimeGreaterThanOrderByWriteDatetimeDescFavoriteCountDescCommentCountDescViewCountDesc(sevenDaysAgo);
+					.getTop3BoardList(sevenDaysAgo);
 			 
+			// log.info("top3 ======> " + boardListViewEntities.toString() + " / " + sevenDaysAgo);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseDto.databaseError();
-		}			
+		}		
 		return GetTop3BoardListResponseDto.success(boardListViewEntities);
 	}
 

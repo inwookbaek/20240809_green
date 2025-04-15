@@ -24,6 +24,7 @@
 }
 
 .board-update-title-textarea {
+  font-family: inherit;
   width: 100%;
   
   border: none;
@@ -46,6 +47,7 @@
 }
 
 .board-update-content-textarea {
+  font-family: inherit;
   
   flex: 1;
   

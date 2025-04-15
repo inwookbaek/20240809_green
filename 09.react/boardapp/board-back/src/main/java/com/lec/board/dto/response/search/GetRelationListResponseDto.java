@@ -1,3 +1,4 @@
+
 package com.lec.board.dto.response.search;
 
 import java.util.ArrayList;
