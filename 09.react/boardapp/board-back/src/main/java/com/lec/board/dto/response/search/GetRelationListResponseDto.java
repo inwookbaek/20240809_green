@@ -29,7 +29,7 @@ public class GetRelationListResponseDto  extends ResponseDto {
 		
 		for(GetRelationListResultSet resultSet : resultSets) {
 			String relativeWord = resultSet.getSearchWord();
-					relativeWordList.add(relativeWord);
+			relativeWordList.add(relativeWord);
 		}
 		
 		this.relativeWordList = relativeWordList;

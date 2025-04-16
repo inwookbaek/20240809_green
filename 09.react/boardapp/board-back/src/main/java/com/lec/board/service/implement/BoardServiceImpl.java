@@ -299,8 +299,8 @@ public class BoardServiceImpl implements BoardService {
 			String sevenDaysAgo = sdf.format(beforeOneWeek);
 			
 			boardListViewEntities = boardListViewRepository			
-					//.findTop3ByWriteDatetimeGreaterThanOrderByWriteDatetimeDescFavoriteCountDescCommentCountDescViewCountDesc(sevenDaysAgo);
-					.getTop3BoardList(sevenDaysAgo);
+					.findTop3ByWriteDatetimeGreaterThanOrderByFavoriteCountDescCommentCountDescViewCountDescWriteDatetimeDesc(sevenDaysAgo);
+					//.getTop3BoardList(sevenDaysAgo);
 			 
 			// log.info("top3 ======> " + boardListViewEntities.toString() + " / " + sevenDaysAgo);
 
@@ -315,21 +315,20 @@ public class BoardServiceImpl implements BoardService {
 	public ResponseEntity<? super GetSearchBoardListResponseDto> getSearchBoardList(String searchWord,
 			String preSearchWord) {
 		
-		
-		log.info("ServiceImpl - searchWord ===> ", searchWord);
-		
 		List<BoardListViewEntity> boardListViewEntities = new ArrayList<>();
 		
 		try {
 			
-			boardListViewEntities = boardListViewRepository.findByTitleContainsOrContentContainsOrderByWriteDatetimeDesc(searchWord, preSearchWord);
+			boardListViewEntities = boardListViewRepository
+					 .findByTitleContainsOrContentContainsOrderByWriteDatetimeDesc(searchWord, searchWord);
+					// .getBoardTitleContentContains(searchWord);
 			
 			SearchLogEntity searchLogEntity = new SearchLogEntity(searchWord, preSearchWord, false);
 			searchLogRepository.save(searchLogEntity);
 
 			boolean relation = preSearchWord != null;
 			if(relation) {
-				searchLogEntity = new SearchLogEntity(preSearchWord, searchWord, relation);
+				searchLogEntity = new SearchLogEntity(preSearchWord, searchWord, true);
 				searchLogRepository.save(searchLogEntity);
 			}
 			

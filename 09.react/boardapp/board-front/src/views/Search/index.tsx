@@ -5,11 +5,12 @@ import { BoardListItem } from 'types/interface';
 import BoardItem from 'components/BoardItem';
 import { latestBoardListMock } from 'mocks';
 import { SEARCH_PATH } from 'constant';
-import { getSearchBoardListRequest } from 'apis';
+import { getRelationListRequest, getSearchBoardListRequest } from 'apis';
 import { ResponseDto } from 'apis/response';
 import { GetSearchBoardListResponseDto } from 'apis/response/board';
 import { usePagination } from 'hooks';
 import Pagination from 'components/Pagination';
+import { GetRelationListResponseDto } from 'apis/response/search';
 
 export default function Search() {
  
@@ -22,7 +23,8 @@ export default function Search() {
 
   const [count, setCount ] = useState<number>(0);
   const [searchBoardList, setSearchBoardList ] = useState<BoardListItem[]>([]);
-  const [relationList, setRelationList ] = useState<string[]>([]);
+  
+  const [relationWordList, setRelationWordList ] = useState<string[]>([]);
   
   const navigate = useNavigate();
 
@@ -37,16 +39,31 @@ export default function Search() {
       setTotalList(searchList);
       setCount(searchList.length);
       setPreSearchWord(searchWord);
-  }
+  };
 
-  const onPopularWordClickHandler = (word: string) => {
+  const getRelationListResponse = (responseBody: GetRelationListResponseDto | ResponseDto | null) => {
+    if(!responseBody) return;
+    const { code } = responseBody;
+    if(code === 'DBE') alert('데이터베이스 오류입니다!!');
+    if(code !== 'SU') return;
+    
+    if(!searchWord) return;
+    const { relativeWordList } = responseBody as GetRelationListResponseDto;
+    setRelationWordList(relativeWordList);
+    setCount(relativeWordList.length);
+    setPreSearchWord(searchWord);
+  };
+
+  const onRelationWordClickHandler = (word: string) => {
     navigate(SEARCH_PATH(word));
-  }
+  };
 
   useEffect(() => {
     // setSearchBoardList(latestBoardListMock);
+    // setRelationList(['안녕?','반가워']);
     if(!searchWord) return;
     getSearchBoardListRequest(searchWord, preSearchWord).then(getSearchBoardListResponse);
+    getRelationListRequest(searchWord).then(getRelationListResponse);
   }, [searchWord]);
 
 
@@ -69,10 +86,10 @@ export default function Search() {
             <div className="search-relation-card">
               <div className="search-relation-card-container">
                 <div className="search-relation-card-title">{'관련검색어'}</div>
-                {relationList.length === 0
+                {relationWordList.length === 0
                   ? <div className="search-relation-card-contents-noting">{'관련검색어가 없습니다!!'}</div>
                   : <div className="search-relation-card-contents">
-                      {relationList.map(word => <div className='word-badge' onClick={() => onPopularWordClickHandler(word)}>{word}</div>)}
+                      {relationWordList.map(word => <div className='word-badge' onClick={() => onRelationWordClickHandler(word)}>{word}</div>)}
                     </div>
                 }
               </div> {/* search-relation-card-container*/}

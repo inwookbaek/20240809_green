@@ -62,7 +62,7 @@ export default function Authentication() {
 
       // expires : accessToken의 유효시간,  path : 쿠키가 유효한 경로
       setCookie('accessToken', token, { expires, path: MAIN_PATH() });
-navigate(MAIN_PATH());
+      navigate(MAIN_PATH());
     }
 
     /**

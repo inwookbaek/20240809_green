@@ -87,7 +87,7 @@ export default function Main() {
 
     useEffect(() => {
       // setCurrentBoardList(latestBoardListMock);
-      // setPopularWordList(['맛집','브롬톤','헬리녹스','맛집','브롬톤','헬리녹스',])
+      // setPopularWordList(['게시글','파스타','헬리녹스','맛집','브롬톤','헬리녹스',])
       getLatestBoardListRequest().then(getLatestBoardListResponse);
       getPopularListRequest().then(getPopularListResponse);
     }, []);

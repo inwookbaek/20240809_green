@@ -267,6 +267,7 @@
 }
 
 .board-detail-bottom-comment-textarea {
+  font-family: inherit;
   border: none;
   border-bottom: 1px dotted rgba(0, 0, 255, 0.4);
   outline: none;

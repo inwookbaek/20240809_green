@@ -15,12 +15,12 @@ public interface BoardListViewRepository extends JpaRepository<BoardListViewEnti
 	
 	//	select * from  board_list_view
 	//	 where write_datetime > '2025-04-08 19:17:28'
-	//order by write_datetime    desc
-	//       , favorite_count    desc
+	//order by favorite_count    desc
 	//       , comment_count     desc
 	//       , view_count        desc
+	// 		 , write_datetime    desc
 	//	 limit 3;
-    List<BoardListViewEntity> findTop3ByWriteDatetimeGreaterThanOrderByWriteDatetimeDescFavoriteCountDescCommentCountDescViewCountDesc(String writeDatetime);
+    List<BoardListViewEntity> findTop3ByWriteDatetimeGreaterThanOrderByFavoriteCountDescCommentCountDescViewCountDescWriteDatetimeDesc(String writeDatetime);
     
     @Query(value = """
 		select * from  board_list_view
@@ -33,7 +33,15 @@ public interface BoardListViewRepository extends JpaRepository<BoardListViewEnti
     List<BoardListViewEntity> getTop3BoardList(String sevenDaysAgo);
 	
 	// 검색어 : where title like %% or content like %% order by writedatetime desc
-	List<BoardListViewEntity> findByTitleContainsOrContentContainsOrderByWriteDatetimeDesc(String title, String content);
+    List<BoardListViewEntity> findByTitleContainsOrContentContainsOrderByWriteDatetimeDesc(String title, String content);
+    
+    //  // 에러표시는 되지만 실제는 에러가 아님
+    @Query(value = """
+		select * from  board_list_view
+		 where title   like %?1%                 
+		    or content like %?1%
+      order by write_datetime    desc """, nativeQuery = true)     
+	List<BoardListViewEntity> getBoardTitleContentContains(String title);
 
 	
 }

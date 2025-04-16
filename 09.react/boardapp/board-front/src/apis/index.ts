@@ -59,7 +59,7 @@ export const signUpRequest = async (requestBody: SignUpRequestDto) => {
 const GET_BOARD_URL = (boardNumber: number | string) => `${API_DOMAIN}/board/${boardNumber}`;
 const GET_LASTEST_BOARD_LIST_URL = () => `${API_DOMAIN}/board/latest`;
 const GET_TOP3_BOARD_LIST_URL = () => `${API_DOMAIN}/board/top3`;
-const GET_SEARCH_BOARD_LIST_URL = (searchWord: string, preSearchWord: string | null) => `${API_DOMAIN}/search-list/${searchWord}${preSearchWord ? '/' + preSearchWord : ''}`;
+const GET_SEARCH_BOARD_LIST_URL = (searchWord: string, preSearchWord: string | null) => `${API_DOMAIN}/board/search-list/${searchWord}${preSearchWord ? '/' + preSearchWord : ''}`;
 const INCREASE_VIEW_COUNT_URL = (boardNumber: number | string) => `${API_DOMAIN}/board/${boardNumber}/increase-view-count`;
 const GET_FAVORITE_LIST_URL = (boardNumber: number | string) => `${API_DOMAIN}/board/${boardNumber}/favorite-list`;
 const GET_COMMENT_LIST_URL = (boardNumber: number | string) => `${API_DOMAIN}/board/${boardNumber}/comment-list`;
@@ -83,7 +83,8 @@ export const getPopularListRequest = async () => {
       })
   return result;  
 };
-const GET_RELATION_LIST_URL = (searchWord: string) => `${API_DOMAIN}/search/${searchWord}`;
+
+const GET_RELATION_LIST_URL = (searchWord: string) => `${API_DOMAIN}/search/${searchWord}/relation`;
 export const getRelationListRequest = async (searchWord: string) => {
   const result = await axios.get(GET_RELATION_LIST_URL(searchWord))
       .then(response => {

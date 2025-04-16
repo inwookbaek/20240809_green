@@ -11,7 +11,9 @@ import com.lec.board.dto.response.search.GetRelationListResponseDto;
 import com.lec.board.service.SearchService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @RestController
 @RequestMapping(value="/api/v1/search")
 @RequiredArgsConstructor
@@ -29,6 +31,7 @@ public class SearchController {
 	public ResponseEntity<? super GetRelationListResponseDto> getReationList(
 			@PathVariable("searchWord") String searchWord) {
 		ResponseEntity<? super GetRelationListResponseDto> response = searchService.getRelationList(searchWord);
+		log.info("/{searchWord}/relation ==> " + response.toString());
 		return response;
 	}
 }
