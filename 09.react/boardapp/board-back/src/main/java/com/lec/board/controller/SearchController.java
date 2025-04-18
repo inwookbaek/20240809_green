@@ -31,7 +31,7 @@ public class SearchController {
 	public ResponseEntity<? super GetRelationListResponseDto> getReationList(
 			@PathVariable("searchWord") String searchWord) {
 		ResponseEntity<? super GetRelationListResponseDto> response = searchService.getRelationList(searchWord);
-		log.info("/{searchWord}/relation ==> " + response.toString());
+		// log.info("/{searchWord}/relation ==> " + response.toString());
 		return response;
 	}
 }

@@ -35,13 +35,14 @@ public interface BoardListViewRepository extends JpaRepository<BoardListViewEnti
 	// 검색어 : where title like %% or content like %% order by writedatetime desc
     List<BoardListViewEntity> findByTitleContainsOrContentContainsOrderByWriteDatetimeDesc(String title, String content);
     
-    //  // 에러표시는 되지만 실제는 에러가 아님
-    @Query(value = """
-		select * from  board_list_view
-		 where title   like %?1%                 
-		    or content like %?1%
-      order by write_datetime    desc """, nativeQuery = true)     
-	List<BoardListViewEntity> getBoardTitleContentContains(String title);
+    // %?1% 에러표시는 되지만 실제는 에러가 아님(에러표시가 눈에 거슬려 주석처리함)
+//    @Query(value = """
+//		select * from  board_list_view
+//		 where title   like %?1%                 
+//		    or content like %?1%
+//      order by write_datetime    desc """, nativeQuery = true)     
+//	List<BoardListViewEntity> getBoardTitleContentContains(String title);
 
+    List<BoardListViewEntity> findByWriterEmailOrderByWriteDatetimeDesc(String writerEmail);
 	
 }

@@ -46,8 +46,8 @@ export default function BoardWrite() {
     if(code === 'NB') alert('존재하지 않는 게시물 입니다!!');
     if(code === 'DBE') alert('데이터베이스 오류 입니다!!');
     if(code !== 'SU') {navigate(MAIN_PATH());
-      return;
-    }
+    return;
+   }
 
     const { title, content, boardImageList, writerEmail } = responseBody as GetBoardResponseDto;
     setTitle(title);

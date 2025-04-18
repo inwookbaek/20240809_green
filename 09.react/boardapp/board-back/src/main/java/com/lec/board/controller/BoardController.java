@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.lec.board.BoardBackApplication;
 import com.lec.board.dto.request.board.PatchBoardRequestDto;
 import com.lec.board.dto.request.board.PostBoardRequestDto;
 import com.lec.board.dto.request.board.PostCommentRequestDto;
@@ -22,6 +22,7 @@ import com.lec.board.dto.response.board.GetFavoriteListResponseDto;
 import com.lec.board.dto.response.board.GetLatestBoardListResponseDto;
 import com.lec.board.dto.response.board.GetSearchBoardListResponseDto;
 import com.lec.board.dto.response.board.GetTop3BoardListResponseDto;
+import com.lec.board.dto.response.board.GetUserBoardListRestponseDto;
 import com.lec.board.dto.response.board.IncreaseViewCountResponseDto;
 import com.lec.board.dto.response.board.PatchBoardResponseDto;
 import com.lec.board.dto.response.board.PostBoardResponseDto;
@@ -143,6 +144,15 @@ public class BoardController {
 			@PathVariable("searchWord") String searchWord,
 			@PathVariable(value="preSearchWord", required = false) String preSearchWord) {				
 		ResponseEntity<? super GetSearchBoardListResponseDto> response = boardService.getSearchBoardList(searchWord, preSearchWord);
+		return response;
+	}
+	
+	
+	@GetMapping("/user-board-list/{email}")
+	public ResponseEntity<? super GetUserBoardListRestponseDto> getUserBoardList(
+			@PathVariable("email") String email) {		
+		log.info("email ===> " + email);
+		ResponseEntity<? super GetUserBoardListRestponseDto> response = boardService.getUserBoardList(email);
 		return response;
 	}
 	
