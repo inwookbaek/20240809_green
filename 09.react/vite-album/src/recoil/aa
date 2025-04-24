@@ -1,0 +1,146 @@
+
+// 1. pageState
+import { atom } from 'recoil'
+
+export const pageState = atom<number>({
+    key: 'pageState',
+    default: 1,
+})
+
+// 2. searchState
+import { atom } from 'recoil'
+
+export const searchState = atom<string>({
+    key: 'searchState',
+    default: 'Korea',
+})
+
+// 3. imageSelector
+import { selector } from 'recoil'
+import { searchState } from '../atoms/searchState'
+import { pageState } from '../atoms/pageState'
+import axios from 'axios'
+import { CardDTO } from '@/pages/index/types/card'
+
+
+const API_URL = 'https://api.unsplash.com/search/photos'
+const API_KEY = 'L6kOuGkX0fMbu0tzoPNH0K7eluMAT3hRuAbtIGf5KJE'
+const PER_PAGE = 30
+
+export const imageData = selector({
+    key: 'imageData',
+    get: async ({ get }) => {
+        const searchValue = get(searchState)
+        const pageValue = get(pageState)
+
+        // API 호출
+        try {
+            const res = await axios.get<{ results: CardDTO[] }>(
+                `${API_URL}?query=${searchValue}&client_id=${API_KEY}&page=${pageValue}&per_page=${PER_PAGE}`)
+            return res.data;
+        } catch (error) {
+            console.log(error)
+            return [] // 에러 시 빈 배열 반환
+        }
+    },
+})
+
+// 4. index
+
+import styles from './styles/index.module.scss'
+import CommonHeader from '@/components/common/header/CommonHeader'
+import CommonNav from '@/components/common/navigation/CommonNav'
+import CommonSearchBar from '@/components/common/searchBar/CommonSearchBar'
+import Card from './components/Card'
+// import axios from 'axios'
+import { CardDTO } from './types/card'
+import { useRecoilValueLoadable } from 'recoil'
+
+import CommonFooter from '@/components/common/footer/CommonFooter'
+import DetailDialog from '@/components/common/dialog/DetailDialog'
+import { useMemo, useState } from 'react'
+import { imageData } from '@/recoil/selectors/imageSelector'
+import Loading from './components/Loading'
+
+
+function Index() {
+
+  const [imgData, setImgData] = useState<CardDTO>();
+  const [open, setOpen] = useState<boolean>(false); // 이미지 상세 다이얼로그 발생(관리) State
+
+  const imageSelector = useRecoilValueLoadable(imageData)
+  const CARD_LIST = useMemo(() => {
+    console.log(imageSelector);
+    if(imageSelector.state === 'hasValue') {
+        const result = imageSelector.contents.results.map((card: CardDTO) => {
+          return <Card key={card.id} data={card} handleDiglog={setOpen} handleSetData={setImgData} /> 
+        })
+        return result
+    } else {
+      // return <div>Loading...</div>
+      return <Loading />
+    }
+  }, [imageSelector])
+  
+  return (
+    <div className={styles.page}>
+      {/* 공통 헤더 UI 부분 */}
+      <CommonHeader />
+      {/* 공통 네비게이션 UI 부분 */}
+      <CommonNav />
+      <div className={styles.page__contents}>
+        <div className={styles.page__contents__introBox}>
+          <div className={styles.wrapper}>
+              <span className={styles.wrapper__title}>GILCNS Photo Splash</span>
+              <span className={styles.wrapper__desc}>
+                  인터넷의 시각 자료 출처입니다. <br />
+                  모든 지역에 있는 크리에이터들의 지원을 받습니다.
+              </span>
+              {/* 검색창 UI 부분 */}
+              <CommonSearchBar />
+          </div>
+        </div>
+        <div className={styles.page__contents__imageBox}>{CARD_LIST}</div>
+      </div>
+      {/* 공통 푸터 UI 부분 */}
+      <CommonFooter />
+      {open && <DetailDialog data={imgData} handleDialog={setOpen} /> }
+    </div>
+  )
+}
+
+export default Index
+
+// 5. App
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import MainPage from '@/pages/index/index'
+import BookmarkPage from '@pages/bookmark/index'
+import AboutPage from '@pages/about'
+import { RecoilRoot } from 'recoil';
+
+function App() {
+  return (
+    <RecoilRoot>
+      <BrowserRouter>
+        <Routes>
+          {/* index 는 React Router v6에서 도입된 속성으로, 부모 경로와 정확히 일치할 때 렌더링되는 기본 라우트를 의미 
+              * :id (필수 파라미터)
+                /about/123 → 매칭됨 (useParams().id는 "123")
+                /about → 매칭되지 않음
+              * :id? (선택적 파라미터)
+                /about/123 → 매칭됨 (useParams().id는 "123")
+                /about → 매칭됨 (useParams().id는 undefined)
+          */}
+          <Route index path="/" element={<MainPage />} /> 
+          <Route index path="/search/:id" element={<MainPage />} /> 
+          <Route path="/bookmark" element={<BookmarkPage />}></Route>
+          <Route path="/" element={<AboutPage />} /> 
+        </Routes>
+      </BrowserRouter>
+    </RecoilRoot>
+  )
+}
+
+export default App
+
+제시된 소스에서 Recoil대신에 Zustand와 useStore중에 최적의 방법을 적용해서 로직을 수정해 줘
