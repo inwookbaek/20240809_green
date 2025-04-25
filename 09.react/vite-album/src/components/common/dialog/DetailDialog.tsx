@@ -3,12 +3,12 @@ import styles from './DetailDialog.module.scss'
 import { useState, useEffect } from 'react'
 
 import toast, { toastConfig } from 'react-simple-toasts'
-import 'react-simple-toasts/dist/theme/dark.css'
-
+import 'react-simple-toasts/dist/style.css';
+import 'react-simple-toasts/dist/theme/dark.css';
 toastConfig({ 
   theme: 'dark',
-  position: 'top-right',
-  duration: 2000,
+  position: 'top-center',
+  duration: 1000,
 })
 
 interface Props {

@@ -5,8 +5,8 @@
 * windows powershell or cmd 에서 실행할 것
 
 ```bash
-apt update
-apt install -y curl gnupg2 ca-certivicates lsb-release debian-archive-keyring
+$ apt update
+$ apt install -y curl gnupg2 ca-certivicates lsb-release debian-archive-keyring
 ```
 ###### Ubuntu 또는 Debian 계열 리눅스에서 NGINX 설치를 준비하기 위한 기초 패키지들을 설치
 | 패키지명                 | 설명 |
@@ -23,13 +23,13 @@ apt install -y curl gnupg2 ca-certivicates lsb-release debian-archive-keyring
 
 ```bash
 # gpg, sud 설치
-apt update
-apt install -y gnupg sudo
-apt install -y curl
-apt install -y lsb-release
+$ apt update
+$ apt install -y gnupg sudo
+$ apt install -y curl
+$ apt install -y lsb-release
 
 # gpg, sudo 설치후 실행
-curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
+$ curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
 | tee /usr/share/keyrings/nginx-archive-keyring.gpg > /dev/null
 
 ```
@@ -48,11 +48,11 @@ curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
 # sb_release -is	리눅스 배포판의 이름(예: Ubuntu, Debian 등)을 출력
 # tr '[:upper:]' '[:lower:]'	대문자를 소문자로 변환
 # ( ... )	명령어 치환 (결과를 변수 OS에 저장)
-OS=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
+$ OS=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
 
 # sb_release -cs	현재 리눅스 배포판의 codename을 출력 (예: focal, buster, bullseye 등)
 # $( ... )	명령어 치환으로 결과를 변수 RELEASE에 저장
-RELEASE=$(lsb_release -cs)
+$ RELEASE=$(lsb_release -cs)
 
 # GINX 공식 저장소를 APT 소스 목록에 추가하는 작업을 수행합니다. (주로 Debian/Ubuntu 계열에서 사용)
 # echo :문자열을 출력하는 명령어로, 여기서는 NGINX 저장소 정보를 생성합니다.
@@ -75,6 +75,38 @@ $ echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
 $ apt update
 $ apt install -y nginx # 5. Asia / 68.seoul
 
+# vim 편집기 설치
+$ apt install vim
+$ vi --version
+
+# 환경설정
+$ vi /etc/wsl.conf
+# [boot]
+# systemd=true
+$ cat /etc/wsl.conf
+
+# systemctl은 systemd 시스템 관리 도구의 일부로 제공됩니다. systemctl을 사용하기 위해서는 먼저 systemd를 설치해야 한다.
+# systemd 사용여부확인
+$ ps -p 1 -o comm=       
+$ apt install -y systemd
+$ systemctl --version
+# systemctl 위치 찾기
+$ which systemctl || whereis systemctl
+# PATH에 추가 (예: /usr/bin/systemctl)
+$ export PATH=$PATH:/usr/bin
+
+# 도커 reboot
+$ exit
+# 윈도우 cmd
+# docker stop 도커ID
+# docker start 도커ID
+# docker exec -it 도커ID /bin/bash
+
+
+# nginx 실행
 $ systemctl enable nginx
-$ nginx
+$ nginx -v
+
+# nginx 실행확인인
+$ ps -ef | grep nginx
 ```
