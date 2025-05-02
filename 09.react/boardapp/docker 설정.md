@@ -139,6 +139,24 @@ EXPOSE 8090
 ENTRYPOINT ["java", "-jar", "/home/app/app.jar"]
 ```
 
+```bash
+# 1. 이미지빌드드
+docker build \
+  -f Dockerfile.backend \
+  -t board-backend:latest \
+  .
+
+# 2. 컨테이너실행
+docker run -d \
+  --name backend-container \
+  --network fullstack-network \
+  -p 8090:8090 \
+  -e SPRING_DATASOURCE_URL="jdbc:mysql://mysql-container:3306/boarddb?createDatabaseIfNotExist=true" \
+  -e SPRING_DATASOURCE_USERNAME="root" \
+  -e SPRING_DATASOURCE_PASSWORD="12345" \
+  board-backend:latest
+```
+
 ---
 
 ### Dockerfile for Frontend (nginx)
@@ -156,6 +174,22 @@ COPY build/. /usr/share/nginx/html
 EXPOSE 80
 ```
 
+```bash
+# 1. 이미지빌드드
+docker build \
+  -f Dockerfile.frontend \
+  -t board-frontend:latest \
+  .
+
+
+# 2. 컨테이너시행
+docker run -d \
+  --name frontend-container \
+  --network fullstack-network \
+  -p 80:80 \
+  board-frontend:latest
+
+```
 
 ## 3. docker compose
 * 전체 프로젝트 루트에 아래 파일들을 배치:
@@ -219,6 +253,34 @@ services:
       - "80:80"
     depends_on:
       - backend
+```
+
+```bash
+# 1. 빌드+실행 (백그라운드)
+docker-compose up --build -d
+
+# --build : 변경된 Dockerfile 이나 소스가 있으면 이미지를 다시 빌드
+# -d : 백그라운드(Detached) 모드로 실행
+
+# 2. 로그 확인
+docker-compose logs -f
+
+# -f : 실시간(팔로우) 로그 출력
+
+# 3. 특정 서비스만 보고 싶으면:
+
+docker-compose logs -f backend
+docker-compose logs -f frontend
+docker-compose logs -f mysql
+
+# 4. 중지 및 정리
+
+docker-compose down
+
+# 실행 중인 컨테이너를 중지하고 네트워크, 익명 볼륨도 함께 삭제
+# 필요한 옵션:
+# docker-compose down --volumes : 볼륨까지 삭제
+# docker-compose down --rmi all : 사용된 이미지까지 삭제
 ```
 
 > **Usage:**
