@@ -47,3 +47,13 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+
+// jar와 tasks.named("jar") 차이 : https://cowboysj.tistory.com/72
+// tasks.named("jar")가 작업의 실행 시점에 설정이 적용되기 때문에 성능 최적화 측면에서 더 좋다.
+//jar{
+//	enabled = false
+//}
+tasks.named("jar") {
+	enabled = false
+}

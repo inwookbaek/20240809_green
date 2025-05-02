@@ -1,3 +1,4 @@
+#### 참고사이트 : https://www.youtube.com/watch?v=9t9Mp0BGnyI
 # 1. Basic
 ## 1.1 installing
 ### docker run -it --name ubuntu-nginx ubuntu /bin/bash
@@ -108,5 +109,5 @@ $ systemctl enable nginx
 $ nginx -v
 
 # nginx 실행확인인
-$ ps -ef | grep nginx
 ```
+$ ps -ef | grep nginx
