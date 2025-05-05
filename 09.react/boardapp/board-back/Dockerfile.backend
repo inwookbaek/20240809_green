@@ -1,0 +1,5 @@
+FROM openjdk:17-jdk-slim
+WORKDIR /home/app
+COPY ./build/libs/board-back-0.0.1-SNAPSHOT.jar ./app.jar
+EXPOSE 8090
+ENTRYPOINT ["java", "-jar", "/home/app/app.jar"]

@@ -1,0 +1,65 @@
+version: 
+  '3.9'
+
+networks:
+  board-network:
+    name: board-network
+    driver: bridge
+
+volumes:
+  board-volume:
+    name: board-volume
+    # driver: local
+    # driver_opts:
+    #   type: none
+    #   o: bind
+    # device에는 호스트 절대 경로(Windows 스타일)만 지정해야 되지만 
+    # 윈도우폴더명이 linux(도커내부에 경로로 변환)폴더명으로 인식되기 때문에
+    # 에러가 발생한다. 자료준비시점에서는 해결을 못해서 나중에 해결할 것
+    # 정의된 볼륨은 도커 Docker Desktop (WSL 2 백엔드)이있는 Windows 11에서는 
+    # 이름이 지정된 volume의 데이터가 실제로 포함 된 WSL2 VM 내부 
+    # "C:\Users\gilba\AppData\Local\Docker\wsl\disk\docker_data.vhdx"에 있다.
+    # docker volume inspect board-volume로 확인("Mountpoint": "/var/lib/docker/volumes/board-volume/_data")
+    # device: "${PWD_WIN}/mysql/boarddb"     
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    networks:
+      - board-network
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "12345"
+    volumes:
+      - board-volume:/var/lib/mysql
+    restart: always
+
+  backend:
+    build:
+      context: ./board-back
+      dockerfile: Dockerfile.backend
+    container_name: backend-container
+    networks:
+      - board-network
+    ports:
+      - "8090:8090"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://mysql-container:3306/boarddb?createDatabaseIfNotExist=true"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "12345"
+
+  frontend:
+    build:
+      context: ./board-front
+      dockerfile: Dockerfile.frontend
+    container_name: frontend-container
+    networks:
+      - board-network
+    ports:
+      - "80:80"
+    depends_on:
+      - backend 
